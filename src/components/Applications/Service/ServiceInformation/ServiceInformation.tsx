@@ -1,13 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './ServiceInformation.css';
-import { ServiceInterface } from '../../../../resources/interfaces';
+// Request
+import { getServiceInfo} from '../../../../resources/requests';
 
 interface Props {
-  service: ServiceInterface | {};
+  appName: string;
+  serviceName: string;
 }
 
 export default function ServiceInformation(props: Props): JSX.Element {
-  const { service } = props;
+  // State
+  const [ service, setService ] = useState({});
+  const [ loading, setLoading ] = useState(true);
+
+  useEffect(() => {
+    getServiceInfo(props.serviceName, props.serviceName).then(res => {
+      if(res) {
+        setService(res);
+        setLoading(false);
+      }
+    });
+  }, []);
 
   /*
   TODO:
@@ -16,8 +29,8 @@ export default function ServiceInformation(props: Props): JSX.Element {
   */
 
   // If Loading
-  if (service === {}) {
-    return <p>Service Information</p>;
+  if (loading) {
+    return <p>Not loaded</p>;
   } else {
     return (
       <>
