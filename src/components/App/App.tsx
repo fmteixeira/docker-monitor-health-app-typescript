@@ -16,14 +16,16 @@ function App(props: Props): JSX.Element {
   //keycloak.logout();  
 
   const logout = () => {
-
+    console.log(props.kc.logout())
   }
 
   return (
     <>
-      <Header name="Afonso" 
-      status={firstLetterToUpperCase(props.kc.tokenParsed.preferred_username)
-      }/>
+      <Header 
+      name="Afonso" 
+      status={firstLetterToUpperCase(props.kc.tokenParsed.preferred_username)}
+      logout={logout}
+      />
       <Navigation />
     </>
   );

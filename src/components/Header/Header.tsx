@@ -4,14 +4,28 @@ import './Header.css';
 // Material-UI
 import Grid from '@material-ui/core/Grid';
 import Avatar from '@material-ui/core/Avatar';
+import IconButton from '@material-ui/core/IconButton';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
 
 interface Props {
     name: string,
-    status: string
+    status: string,
+    logout: any
 }
 
 
 export default function Header(props: Props): JSX.Element {
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event: any) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <div className="header">
@@ -26,7 +40,18 @@ export default function Header(props: Props): JSX.Element {
         <Grid item xs={10} >
           <Grid container justify="flex-end" >
             <Grid item>
-              <Avatar src="./afonso.jpeg" className="photo"></Avatar>
+              <IconButton onClick={handleClick}>
+                <Avatar src="./afonso.jpeg" className="photo" />
+              </IconButton>
+              <Menu
+                  id="simple-menu"
+                  anchorEl={anchorEl}
+                  keepMounted
+                  open={Boolean(anchorEl)}
+                  onClose={handleClose}
+                >
+                <MenuItem onClick={props.logout}>Logout</MenuItem>
+              </Menu>
             </Grid>
             <Grid item>
               <h6>{props.name}</h6>
