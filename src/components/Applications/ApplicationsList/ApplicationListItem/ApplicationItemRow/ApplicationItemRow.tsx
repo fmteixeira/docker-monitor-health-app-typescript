@@ -14,7 +14,7 @@ interface Props {
 export default function ApplicationItemRow(props: Props): JSX.Element {
   return (
     <>
-      <Grid item xs={6}>
+      <Grid item xs={6} className="name">
         {firstLetterToUpperCase(props.name)}
       </Grid>
       <Grid
