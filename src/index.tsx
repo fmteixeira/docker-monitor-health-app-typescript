@@ -47,7 +47,7 @@ kc.init({ promiseType: 'native', onLoad: 'login-required' }).then(
 
       ReactDOM.render(
         <Provider store={store}>
-          <App />
+          <App kc={kc}/>
         </Provider>,
         document.getElementById('root')
       );
