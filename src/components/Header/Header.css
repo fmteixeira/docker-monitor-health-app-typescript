@@ -1,25 +1,20 @@
 .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    padding: 2rem;
     background-color: rgb(42, 55, 73);
 }
 
-.app-name {
-    padding: 2rem;
-  }
+.app-name{
+    text-shadow: 1px 1px 2px rgb(15, 40, 61);
+}
 
-
-  .photo{
-      height: 50px;
-      border-radius: 100%;
-  }
-
-  .text{
-    margin: 2rem 4rem 0 0;
-
-  }
-  p{
+p {
     font-size: 0.8rem;
-  }
+}
 
+h6{
+    margin: 1rem 0 0 0;
+}
+
+.photo{
+    margin-left: 3rem;
+}

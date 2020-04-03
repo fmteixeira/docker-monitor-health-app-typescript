@@ -21,7 +21,7 @@ export default function ApplicationsList(props: Props): JSX.Element {
 
   return (
     <>
-      <h2 className="title">Applications</h2>
+      <h4 className="title">Applications</h4>
       <Grid container spacing={1}>
         {props.applications.map((application: ApplicationInterface) => {
           const shouldOpen = (openAppName === application.name) ? true : false;

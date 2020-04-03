@@ -12,7 +12,7 @@ function App(): JSX.Element {
 
   return (
     <>
-      <Header/>
+      <Header name="Afonso" status="Admin"/>
       <Navigation />
     </>
   );
