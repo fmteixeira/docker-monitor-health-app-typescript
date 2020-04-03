@@ -3,6 +3,7 @@ import React from 'react';
 import './App.css';
 // Components
 import Navigation from '../Navigation/Navigation';
+import Header from '../Header/Header';
 
 function App(): JSX.Element {
   // Redux
@@ -11,7 +12,7 @@ function App(): JSX.Element {
 
   return (
     <>
-      <h1>Monitoring App</h1>
+      <Header/>
       <Navigation />
     </>
   );

@@ -21,18 +21,14 @@ export default function ApplicationsList(props: Props): JSX.Element {
 
   return (
     <>
-      <h2>Applications</h2>
+      <h2 className="title">Applications</h2>
       <Grid container spacing={1}>
         {props.applications.map((application: ApplicationInterface) => {
-          const shouldOpen = openAppName === application.name ? true : false;
+          const shouldOpen = (openAppName === application.name) ? true : false;
           return (
+
             <Grid key={`${application.name}`} item xs={12}>
-              <ApplicationListItem
-                application={application}
-                open={shouldOpen}
-                handleApplicationClick={handleApplicationClick}
-                handleServiceClick={props.handleServiceClick}
-              />
+              <ApplicationListItem application={application} open={shouldOpen} handleApplicationClick={handleApplicationClick} handleServiceClick={props.handleServiceClick}/>
             </Grid>
           );
         })}
