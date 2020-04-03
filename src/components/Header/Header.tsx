@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Header.css';
 // Material-UI
 
@@ -15,25 +15,26 @@ export default function Header(props: Props): JSX.Element {
 
   return (
     <div className="header">
-    <Grid container 
-    direction="row"
-    justify="flex-start"
-    alignItems="center"
-    >
-  
-     <Grid item xs={10}>
-        <h3 className="app-name">Monitoring App</h3>
-     </Grid>
-
-      <Grid item xs={1}>
-        <Avatar src="./afonso.jpeg" className="photo"></Avatar>
+      <Grid container 
+        direction="row"
+        justify="flex-start"
+        alignItems="center"
+      >
+        <Grid item xs={2}>
+          <h3 className="app-name">Monitoring App</h3>
+        </Grid>
+        <Grid item xs={10} >
+          <Grid container justify="flex-end" >
+            <Grid item>
+              <Avatar src="./afonso.jpeg" className="photo"></Avatar>
+            </Grid>
+            <Grid item>
+              <h6>{props.name}</h6>
+              <p>{props.status}</p>
+            </Grid>
+          </Grid>
+        </Grid>
       </Grid>
-
-      <Grid item xs={1}>
-         <h6>{props.name}</h6>
-         <p>{props.status}</p>
-      </Grid>
-    </Grid>
-  </div>
+    </div>
   );
 }
