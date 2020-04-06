@@ -16,6 +16,10 @@ interface Props {
     logout: any
 }
 
+const style = {
+  color: '#F50057',
+};
+
 export default function Header(props: Props): JSX.Element {
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -49,7 +53,7 @@ export default function Header(props: Props): JSX.Element {
                   open={Boolean(anchorEl)}
                   onClose={handleClose}
                 >
-                  <MenuItem onClick={props.logout}><ExitToAppIcon className="exit-icon"></ExitToAppIcon>Logout</MenuItem>
+                  <MenuItem style={style} onClick={props.logout}><ExitToAppIcon className="exit-icon"></ExitToAppIcon>Logout</MenuItem>
               </Menu>
             </Grid>
             <Grid item>
