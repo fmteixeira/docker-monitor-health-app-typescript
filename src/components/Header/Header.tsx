@@ -1,5 +1,6 @@
 import React from 'react';
 import './Header.css';
+import { firstLetterToUpperCase } from '../../resources/scripts';
 
 // Material-UI
 import Grid from '@material-ui/core/Grid';
@@ -11,9 +12,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { withStyles } from '@material-ui/core/styles';
 
 interface Props {
-    name: string,
-    status: string,
-    logout: any
+    kc: any
 }
 
 const style = {
@@ -53,12 +52,12 @@ export default function Header(props: Props): JSX.Element {
                   open={Boolean(anchorEl)}
                   onClose={handleClose}
                 >
-                  <MenuItem style={style} onClick={props.logout}><ExitToAppIcon className="exit-icon"></ExitToAppIcon>Logout</MenuItem>
+                  <MenuItem style={style} onClick={props.kc.logout}><ExitToAppIcon className="exit-icon"></ExitToAppIcon>Logout</MenuItem>
               </Menu>
             </Grid>
             <Grid item>
-              <h6>{props.name}</h6>
-              <p>{props.status}</p>
+              <h6>Afonso</h6>
+              <p>{firstLetterToUpperCase(props.kc.tokenParsed.preferred_username)}</p>
             </Grid>
           </Grid>
         </Grid>
