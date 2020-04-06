@@ -16,6 +16,9 @@ import Box from "@material-ui/core/Box";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import IconButton from '@material-ui/core/IconButton';
 import { Grid } from '@material-ui/core';
+import blue from '@material-ui/core/colors/purple';
+
+const white = blue[50]; // #F44336
 
 interface Props {
   appName: string;
@@ -25,8 +28,13 @@ interface Props {
 const useStyles = makeStyles({
   root: {
     flexGrow: 1,
-  }
+    backgroundColor: '#455c78',
+  },
 });
+
+const style = {
+   color: white,
+};
 
 function TabPanel(props: any) {
   const { children, value, index, ...other } = props;
@@ -80,31 +88,31 @@ export default function Service(props: Props): JSX.Element {
   return view ? (<Applications />) : (
     <div>
       <Paper className={classes.root}>
-        <Grid container>
+        <Grid container >
           <Grid item xs={1}>
             <IconButton onClick={() => handleClick()}>
-              <ArrowBackIcon />
+              <ArrowBackIcon style={style}/>
             </IconButton>
           </Grid>
           <Grid item xs={10}>
-            <Tabs
+            <Tabs 
               value={value}
               onChange={handleChange}
-              indicatorColor="primary"
+              indicatorColor="secondary"
               textColor="primary"
               orientation="horizontal"
               centered
             >
-              <Tab label="Containers" {...a11yProps(0)} />
-              <Tab label="History" {...a11yProps(1)} />
+              <Tab style={style} label="Containers" {...a11yProps(0)} />
+              <Tab style={style} label="History" {...a11yProps(1)} />
             </Tabs>
           </Grid>
         </Grid>
       </Paper>
-      <h2>
+      <h4 className="application-name">
         {firstLetterToUpperCase(props.appName)} -{' '}
         <span>{firstLetterToUpperCase(props.serviceName)}</span>
-      </h2>
+      </h4>
       <TabPanel value={value} index={0}  >
         <ServiceInformation
         appName={props.appName} serviceName={props.serviceName}
