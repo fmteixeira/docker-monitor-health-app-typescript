@@ -17,6 +17,7 @@ interface Props {
 
 const style = {
   color: '#F50057',
+  padding: '0 1rem',
 };
 
 export default function Header(props: Props): JSX.Element {
