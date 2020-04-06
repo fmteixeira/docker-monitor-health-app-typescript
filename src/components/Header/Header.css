@@ -16,5 +16,11 @@ h6{
 }
 
 .photo {
+    cursor: pointer;
     margin: 1rem;
+}
+
+.exit-icon{
+    padding: 0.1rem;
+    color: rgb(158, 6, 6);
 }

@@ -7,13 +7,14 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { withStyles } from '@material-ui/core/styles';
 
 interface Props {
     name: string,
     status: string,
     logout: any
 }
-
 
 export default function Header(props: Props): JSX.Element {
 
@@ -40,9 +41,7 @@ export default function Header(props: Props): JSX.Element {
         <Grid item xs={10} >
           <Grid container justify="flex-end" >
             <Grid item>
-              <IconButton onClick={handleClick}>
-                <Avatar src="./afonso.jpeg" className="photo" />
-              </IconButton>
+                <Avatar src="./afonso.jpeg" className="photo" onClick={handleClick} />
               <Menu
                   id="simple-menu"
                   anchorEl={anchorEl}
@@ -50,7 +49,7 @@ export default function Header(props: Props): JSX.Element {
                   open={Boolean(anchorEl)}
                   onClose={handleClose}
                 >
-                <MenuItem onClick={props.logout}>Logout</MenuItem>
+                  <MenuItem onClick={props.logout}><ExitToAppIcon className="exit-icon"></ExitToAppIcon>Logout</MenuItem>
               </Menu>
             </Grid>
             <Grid item>
