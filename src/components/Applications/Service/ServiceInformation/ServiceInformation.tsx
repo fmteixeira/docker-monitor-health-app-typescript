@@ -40,6 +40,9 @@ export default function ServiceInformation(props: Props): JSX.Element {
   }, []);
 
   /*
+  NOTA:
+  *Código precisa de melhorias dado que os atributos vão ser dinâmicos. 
+  O único atributo que pode ser dado como certo é o dos containers.*
   TODO:
   - Mostrada a data de forma legível (adicionar css)
   - Mostrar cada os componentes de forma semelhante à lista de aplicações
