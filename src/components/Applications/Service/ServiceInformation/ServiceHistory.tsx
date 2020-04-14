@@ -1,0 +1,96 @@
+import React, { useState, useEffect } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+// Request
+import { getServiceHistory } from '../../../../resources/requests';
+// Scripts
+import { firstLetterToUpperCase } from '../../../../resources/scripts';
+// Components
+import Applications from '../../Applications';
+import ServiceInformation from './ServiceInformation';
+// Material-UI
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import { ServiceInterface } from '../../../../resources/interfaces';
+import blue from '@material-ui/core/colors/purple';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import IconButton from '@material-ui/core/IconButton';
+
+const white = blue[50]; // #F44336
+
+interface Props {
+  appName: string;
+  serviceName: string;
+}
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+    backgroundColor: '#455c78',
+  },
+  paper: {
+    padding: theme.spacing(2),
+    margin: '0.5rem',
+  },
+}));
+
+const style = {
+  color: white,
+};
+
+export default function ServiceHistory(props: Props): JSX.Element {
+  // State
+  const [ service, setService ] = useState<Array<ServiceInterface> | any>([]);
+  const [ loading, setLoading ] = useState(true);
+  const [ view, setView ] = useState(false);
+  const [ serv, setServ ] = useState<ServiceInterface | any>();
+  const [ messageView, setMessageView ] = useState(false);
+
+  useEffect(() => {
+    getServiceHistory(props.serviceName, props.serviceName).then(res => {
+      if(res) {
+        setService(res);
+        setLoading(false);
+      }
+    });
+  }, []);
+
+  const response = JSON.stringify(service, undefined, 2);
+
+  const classes = useStyles();
+
+
+  let obj = JSON.parse(response);
+
+  const handleClick = () => {
+    setView(true);
+  }
+
+  const handleMessageClick = (service: ServiceInterface) => {
+    setServ(service);
+    setMessageView(true);
+  }
+  
+  return view ? <Applications /> : messageView ? (<ServiceInformation serviceName={props.serviceName} appName={props.appName} service={serv}/>) : ( loading ? <p>Not loaded</p> :
+    <>
+      <Paper className={classes.root}>
+        <Grid container >
+          <Grid item xs={1}>
+            <IconButton onClick={() => handleClick()}>
+              <ArrowBackIcon style={style}/>
+            </IconButton>
+          </Grid>
+        </Grid>
+      </Paper>
+
+      <h5 className="containers">{`${firstLetterToUpperCase(props.appName)} ${firstLetterToUpperCase(props.serviceName)} history:`}</h5>
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          {obj.map((service: ServiceInterface) => (
+            <Paper key={service.created} className={classes.paper} onClick={() => handleMessageClick(service)}>
+              {service.created}
+            </Paper>
+          ))} 
+        </Grid>
+      </Grid>
+    </>
+  )
+}
