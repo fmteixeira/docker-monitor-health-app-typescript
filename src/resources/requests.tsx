@@ -102,3 +102,46 @@ export async function getServiceInfo(
       console.log('getApplicationNamesList Error: ', error);
     });
 }
+
+export async function getServiceHistory(
+  appName: string,
+  serverName: string
+): Promise<Array<ServiceInterface> | void> {
+  /* develblock:start */
+  // Mock
+  if (process.env.NODE_ENV !== 'production') {
+    return allMocks.getServiceHistory(appName, serverName);
+  }
+  /* develblock:end */
+  // Fetch
+  return await axios
+    .get(`/api/message/readInterval?appName=${appName}&serverName=${serverName}&from=0&to=2629746`)
+    .then((response) => {
+      const serviceHistory: Array<ServiceInterface> | any = [];
+      response.data.map((service: ServiceInterface) => {
+        let serv = {
+          serverName: service.serverName,
+          appName: service.appName,
+          created: service.created,
+          expires: service.expires,
+          containers: service.containers.map(
+            (container: ContainerInterface) => {
+              return {
+                id: container.Id,
+                names: container.Names,
+                image: container.Image,
+                ImageID: container.ImageID,
+                createdTimestamp: container.Created,
+                healthy: container._Healthy,
+              };
+            }
+          ),
+        };
+        serviceHistory.push(serv);
+      })
+      return serviceHistory;
+    })
+    .catch((error) => {
+      console.log('getApplicationNamesList Error: ', error);
+    });
+}

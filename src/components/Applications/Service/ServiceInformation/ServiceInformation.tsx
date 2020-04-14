@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import './ServiceInformation.css';
 import { firstLetterToUpperCase } from '../../../../resources/scripts';
 // Request
-import { getServiceInfo} from '../../../../resources/requests';
+import { getServiceInfo } from '../../../../resources/requests';
 // Material-UI
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -58,30 +58,28 @@ export default function ServiceInformation(props: Props): JSX.Element {
       <div>
         <h5>Service Information</h5>
         <Grid container spacing={3}>
-            <Grid item xs={12}>
-                    <Paper className={classes.paper}><b>Server Name:</b> {firstLetterToUpperCase(obj.serverName)}
-                    <br></br> 
-                    <hr></hr>
-                    <b>Expires:</b> {obj.expires}
-                    <br></br>
-                    <hr></hr>
-                    <b>Created:</b> {obj.created}</Paper>
-              </Grid>
-          </Grid>   
+          <Grid item xs={12}>
+            <Paper className={classes.paper}><b>Server Name:</b> {firstLetterToUpperCase(obj.serverName)}
+              <br></br> 
+              <hr></hr>
+              <b>Expires:</b> {obj.expires}
+              <br></br>
+              <hr></hr>
+              <b>Created:</b> {obj.created}
+            </Paper>
+          </Grid>
+        </Grid>   
         <div>
           <h5 className="containers">Containers</h5>
           <Grid container spacing={3}>
             <Grid item xs={12}>
               {containersArray.map((container:any) => (
-                    <Paper className={classes.paper}>{container.names}</Paper>
-                  ))} 
-              </Grid>
+                <Paper key={container.names} className={classes.paper}>{container.names}</Paper>
+              ))} 
+            </Grid>
           </Grid>
-         </div>
+        </div>
       </div>
     );
   }
 }
-
-
-   
