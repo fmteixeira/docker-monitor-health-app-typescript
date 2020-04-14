@@ -23,7 +23,7 @@ export default function Header(props: Props): JSX.Element {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event: any) => {
-    console.log("email is: " + props.kc.tokenParsed.email);
+    console.log(props.kc);
     setAnchorEl(event.currentTarget);
   };
 
@@ -44,7 +44,7 @@ export default function Header(props: Props): JSX.Element {
         <Grid item xs={10} >
           <Grid container justify="flex-end" >
             <Grid item>
-                <Gravatar email={props.kc.tokenParsed.email} default="monsterid" size={40} className="photo" onClick={handleClick} />
+                <Gravatar email={props.kc.tokenParsed.preferred_username} default="monsterid" size={40} className="photo" onClick={handleClick} />
               <Menu
                   id="simple-menu"
                   anchorEl={anchorEl}
@@ -56,7 +56,7 @@ export default function Header(props: Props): JSX.Element {
               </Menu>
             </Grid>
             <Grid item>
-              <h6>{props.kc.tokenParsed.email || "User"}</h6>
+              <h6>{firstLetterToUpperCase(props.kc.tokenParsed.preferred_username)}</h6>
               <p>{firstLetterToUpperCase(props.kc.tokenParsed.preferred_username)}</p>
             </Grid>
           </Grid>
