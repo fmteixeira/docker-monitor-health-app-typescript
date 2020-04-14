@@ -1,15 +1,13 @@
 import React from 'react';
+import Gravatar from 'react-gravatar';
 import './Header.css';
 import { firstLetterToUpperCase } from '../../resources/scripts';
 
 // Material-UI
 import Grid from '@material-ui/core/Grid';
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import { withStyles } from '@material-ui/core/styles';
 
 interface Props {
     kc: any
@@ -25,6 +23,7 @@ export default function Header(props: Props): JSX.Element {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event: any) => {
+    console.log("email is: " + props.kc.tokenParsed.email);
     setAnchorEl(event.currentTarget);
   };
 
@@ -45,7 +44,7 @@ export default function Header(props: Props): JSX.Element {
         <Grid item xs={10} >
           <Grid container justify="flex-end" >
             <Grid item>
-                <Avatar src="./afonso.jpeg" className="photo" onClick={handleClick} />
+                <Gravatar email={props.kc.tokenParsed.email} default="monsterid" size={40} className="photo" onClick={handleClick} />
               <Menu
                   id="simple-menu"
                   anchorEl={anchorEl}
@@ -57,7 +56,7 @@ export default function Header(props: Props): JSX.Element {
               </Menu>
             </Grid>
             <Grid item>
-              <h6>Afonso</h6>
+              <h6>{props.kc.tokenParsed.email || "User"}</h6>
               <p>{firstLetterToUpperCase(props.kc.tokenParsed.preferred_username)}</p>
             </Grid>
           </Grid>
