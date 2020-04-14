@@ -68,9 +68,41 @@ export async function getServiceStatus(
   return service;
 }
 
+export async function getServiceHistory(
+  appName: string,
+  serverName: string
+): Promise<Array<ServiceInterface> | void> {
+  // Get the data from the Mock Response
+  const response = require('./responses/serviceStateHistory.json').data;
+  const serviceHistory: Array<ServiceInterface> | any = [];
+
+  response.map((service: ServiceInterface) => {
+    let serv = {
+      serverName: serverName,
+      appName: appName,
+      created: service.created,
+      expires: service.expires,
+      containers: service.containers.map((container: ContainerInterface) => {
+        return {
+          id: container.Id,
+          names: container.Names,
+          image: container.Image,
+          ImageID: container.ImageID,
+          createdTimestamp: container.Created,
+          healthy: container._Healthy,
+        };
+      }),
+    };
+    serviceHistory.push(serv);
+  })
+  return serviceHistory;
+}
+
+
 const allMocks = {
   getApplicationStatus,
   getServiceStatus,
+  getServiceHistory
 };
 
 export default allMocks;
