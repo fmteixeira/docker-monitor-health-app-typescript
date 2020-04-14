@@ -16,6 +16,7 @@ export default function Applications(): JSX.Element {
     (state: { application: { list: Array<ApplicationInterface> } }) =>
       state.application.list
   );
+  
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -25,6 +26,7 @@ export default function Applications(): JSX.Element {
     ): void => {
       dispatch(allActions.applicationActions.addApplication(applications));
     };
+    
     // Get Applications every 10 seconds
     const interval = setInterval(
       (function fetchApplications(): TimerHandler {
@@ -37,8 +39,8 @@ export default function Applications(): JSX.Element {
         return fetchApplications;
       })(),
       10000
-    );
-
+      );
+    
     return (): void => {
       clearInterval(interval);
     };
@@ -55,9 +57,12 @@ export default function Applications(): JSX.Element {
   return service.length ? (
     <Service appName={service[0]} serviceName={service[1]} />
   ) : (
+    <div> 
     <ApplicationsList
       applications={applications}
       handleServiceClick={handleServiceClick}
     />
+    </div>
   );
 }
+

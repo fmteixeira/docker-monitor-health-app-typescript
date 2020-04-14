@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './ApplicationListItem.css';
 // Interfaces
 import {
@@ -28,8 +28,10 @@ export default function ApplicationListItem(props: Props): JSX.Element {
     }
   };
 
+
   return (
     <>
+    
       <Paper className="application">
         <Grid
           container
@@ -82,3 +84,4 @@ export default function ApplicationListItem(props: Props): JSX.Element {
     </>
   );
 }
+
