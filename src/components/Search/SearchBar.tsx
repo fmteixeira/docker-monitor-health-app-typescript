@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
       minWidth: 120,
     },
     inputField: {
-      color: 'white',
+      color: 'secondary',
     },
     selectEmpty: {
       marginTop: theme.spacing(2),
@@ -121,7 +121,6 @@ export default function SearchBar(props:any): JSX.Element {
                 id: 'status-native-simple',
               }}
             >
-              <option aria-label="None" value="" />
               <option value={'all'}>All</option>
               <option value={'healthy'}>Healthy</option>
               <option value={'unhealthy'}>Unhealthy</option>
