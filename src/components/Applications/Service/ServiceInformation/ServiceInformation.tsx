@@ -11,9 +11,10 @@ import ServiceHistory from './ServiceHistory';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import IconButton from '@material-ui/core/IconButton';
 import blue from '@material-ui/core/colors/purple';
-import { ServiceInterface, ContainerInterface } from '../../../../resources/interfaces';
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import CancelIcon from '@material-ui/icons/Cancel';
+import { ServiceInterface} from '../../../../resources/interfaces';
+
+//Components 
+import ApplicationItemRow from '../../ApplicationsList/ApplicationListItem/ApplicationItemRow/ApplicationItemRow';
 
 const white = blue[50]; // #F44336
 
@@ -29,8 +30,9 @@ const useStyles = makeStyles({
     backgroundColor: '#455c78',
   },
   paper: {
-    padding: '0.5rem 1rem',
-    margin: '1rem 0',
+    borderRadius: '0.3rem',
+    backgroundColor: 'white',
+    margin: '0.5rem 0',
   },
   info: {
     padding: '1rem',
@@ -64,6 +66,7 @@ export default function ServiceInformation(props: Props): JSX.Element {
         </Grid>
       </Grid>
       </Paper>
+
       <h5>Service Information</h5>
       <Grid container spacing={3}>    
         <Grid item xs={12}>
@@ -75,21 +78,11 @@ export default function ServiceInformation(props: Props): JSX.Element {
         </Grid>
       </Grid>
       <h5>Containers</h5>
-      <Grid container spacing={3}>
-      <Grid item xs={12}>
       {props.service.containers.map((container:any) => {
-         return <Paper className={classes.paper}>{firstLetterToUpperCase(container.names.toString().substring(1,50))}
-         {container.healthy ? 
-         (<IconButton aria-label="delete" className="green-color">
-         <CheckCircleIcon fontSize="small" />
-         </IconButton>) : 
-         (<IconButton aria-label="delete" className="red-color">
-         <CancelIcon fontSize="small" />
-         </IconButton>)
-       }</Paper>
+      return <Grid container className={classes.paper}><ApplicationItemRow name={firstLetterToUpperCase(container.names.toString().substring(1,50))}
+             healthy={container.healthy}/>
+             </Grid>
       })}
-       </Grid>
-      </Grid>
     </>
   )
 }
