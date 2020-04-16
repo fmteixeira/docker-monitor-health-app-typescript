@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import './ServiceInformation.css';
 import { firstLetterToUpperCase } from '../../../../resources/scripts';
+
 // Request
 import { getServiceInfo } from '../../../../resources/requests';
 // Material-UI
@@ -62,6 +63,7 @@ export default function ServiceInformation(props: Props): JSX.Element {
             </Paper>
         </Grid>
       </Grid>
+
       <h5>Containers</h5>
       {props.service.containers.map((container:any) => {
       return <Grid container className={classes.paper}><ApplicationItemRow name={firstLetterToUpperCase(container.names.toString().substring(1,50))}
