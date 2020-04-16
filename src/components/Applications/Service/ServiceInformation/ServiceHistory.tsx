@@ -7,17 +7,17 @@ import { firstLetterToUpperCase } from '../../../../resources/scripts';
 // Components
 import Applications from '../../Applications';
 import ServiceInformation from './ServiceInformation';
+import SearchBar from '../../../Search/SearchBar';
+import NavigationBar from '../../../Navigation/NavigationBar/NavigationBar';
+
 // Material-UI
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { ServiceInterface, ContainerInterface } from '../../../../resources/interfaces';
-import blue from '@material-ui/core/colors/purple';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import IconButton from '@material-ui/core/IconButton';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import CancelIcon from '@material-ui/icons/Cancel';
 
-const white = blue[50]; // #F44336
 
 interface Props {
   appName: string;
@@ -35,9 +35,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const style = {
-  color: white,
-};
 
 export default function ServiceHistory(props: Props): JSX.Element {
   // State
@@ -59,7 +56,6 @@ export default function ServiceHistory(props: Props): JSX.Element {
   const response = JSON.stringify(service, undefined, 2);
 
   const classes = useStyles();
-
 
   let obj = JSON.parse(response);
 
@@ -84,16 +80,7 @@ export default function ServiceHistory(props: Props): JSX.Element {
   
   return view ? <Applications /> : messageView ? (<ServiceInformation serviceName={props.serviceName} appName={props.appName} service={serv}/>) : ( loading ? <p>Not loaded</p> :
     <>
-      <Paper className={classes.root}>
-        <Grid container >
-          <Grid item xs={1}>
-            <IconButton onClick={() => handleClick()}>
-              <ArrowBackIcon style={style}/>
-            </IconButton>
-          </Grid>
-        </Grid>
-      </Paper>
-
+      <NavigationBar click={handleClick}/>
       <h5 className="containers">{`${firstLetterToUpperCase(props.appName)} ${firstLetterToUpperCase(props.serviceName)} history:`}</h5>
       <Grid container spacing={3}>
         <Grid item xs={12}>
