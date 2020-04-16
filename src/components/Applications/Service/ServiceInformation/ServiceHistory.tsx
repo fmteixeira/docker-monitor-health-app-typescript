@@ -10,10 +10,12 @@ import ServiceInformation from './ServiceInformation';
 // Material-UI
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import { ServiceInterface } from '../../../../resources/interfaces';
+import { ServiceInterface, ContainerInterface } from '../../../../resources/interfaces';
 import blue from '@material-ui/core/colors/purple';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import IconButton from '@material-ui/core/IconButton';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import CancelIcon from '@material-ui/icons/Cancel';
 
 const white = blue[50]; // #F44336
 
@@ -68,6 +70,16 @@ export default function ServiceHistory(props: Props): JSX.Element {
     setServ(service);
     setMessageView(true);
   }
+
+  const checkServiceStatus = (containers: Array<ContainerInterface>) => {
+    for (let i = 0; i < containers.length; i++) {
+      console.log(JSON.parse(JSON.stringify(containers[i])).healthy);
+      if(!JSON.parse(JSON.stringify(containers[i])).healthy) {
+        return false;
+      };
+    };
+    return true;
+  }
   
   return view ? <Applications /> : messageView ? (<ServiceInformation serviceName={props.serviceName} appName={props.appName} service={serv}/>) : ( loading ? <p>Not loaded</p> :
     <>
@@ -87,6 +99,15 @@ export default function ServiceHistory(props: Props): JSX.Element {
           {obj.map((service: ServiceInterface) => (
             <Paper key={service.created} className={classes.paper} onClick={() => handleMessageClick(service)}>
               {service.created}
+              {checkServiceStatus(service.containers) ? (
+                <IconButton aria-label="delete" className="green-color">
+                  <CheckCircleIcon fontSize="small" />
+                </IconButton>
+              ) : (
+                <IconButton aria-label="delete" className="red-color">
+                  <CancelIcon fontSize="small" />
+                </IconButton>
+              )}
             </Paper>
           ))} 
         </Grid>
