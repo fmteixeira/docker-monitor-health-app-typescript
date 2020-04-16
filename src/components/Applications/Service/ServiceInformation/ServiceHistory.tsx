@@ -29,7 +29,8 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#455c78',
   },
   paper: {
-    padding: theme.spacing(2),
+    cursor: 'pointer',
+    padding: theme.spacing(1),
     margin: '0.5rem',
   },
 }));
@@ -98,7 +99,6 @@ export default function ServiceHistory(props: Props): JSX.Element {
         <Grid item xs={12}>
           {obj.map((service: ServiceInterface) => (
             <Paper key={service.created} className={classes.paper} onClick={() => handleMessageClick(service)}>
-              {service.created}
               {checkServiceStatus(service.containers) ? (
                 <IconButton aria-label="delete" className="green-color">
                   <CheckCircleIcon fontSize="small" />
@@ -108,6 +108,8 @@ export default function ServiceHistory(props: Props): JSX.Element {
                   <CancelIcon fontSize="small" />
                 </IconButton>
               )}
+              {service.created}
+              {" | Containers: " + service.containers.length}
             </Paper>
           ))} 
         </Grid>
