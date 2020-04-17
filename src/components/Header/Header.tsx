@@ -1,7 +1,12 @@
 import React, { useState, MouseEvent } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import "./Header.css";
 import Gravatar from "react-gravatar";
 import { firstLetterToUpperCase } from "../../resources/scripts";
+// Interfaces
+import { NotificationStatusInterface } from "../../resources/interfaces";
+// Redux
+import allActions from "../../redux/actions";
 // Material-UI
 import Grid from "@material-ui/core/Grid";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -28,7 +33,23 @@ export default function Header(props: Props): JSX.Element {
   };
 
   // Global Subscription
-  const [globalSubscription, setGlobalSubscription] = useState(false);
+  //const [globalSubscription, setGlobalSubscription] = useState(false);
+  // Redux
+  const notificationStatus = useSelector(
+    (state: {
+      application: { notificationStatus: NotificationStatusInterface };
+    }) => state.application.notificationStatus
+  );
+  const dispatch = useDispatch();
+
+  // Set Fetched Notification Status
+  const setNotificationStatus = (
+    notificationStatus: NotificationStatusInterface
+  ): void => {
+    dispatch(
+      allActions.applicationActions.addNotificationStatus(notificationStatus)
+    );
+  };
 
   return (
     <div className="header">
@@ -55,9 +76,14 @@ export default function Header(props: Props): JSX.Element {
               >
                 <MenuItem
                   className="user-menu-item global-button"
-                  onClick={() => setGlobalSubscription(!globalSubscription)}
+                  onClick={() =>
+                    setNotificationStatus({
+                      global: !notificationStatus.global,
+                      apps: notificationStatus.apps,
+                    })
+                  }
                 >
-                  {globalSubscription ? (
+                  {notificationStatus.global ? (
                     <NotificationsActiveIcon className="active" />
                   ) : (
                     <NotificationsOffIcon />
