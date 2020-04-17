@@ -1,13 +1,15 @@
-import axios from 'axios';
+import axios from "axios";
 // TypeScript
 import {
   ApplicationInterface,
   ServerInterface,
   ServiceInterface,
   ContainerInterface,
-} from './interfaces';
+  NotificationStatusInterface,
+  NotificationAppStatusInterface,
+} from "./interfaces";
 /* develblock:start */
-import allMocks from '../mocks/mockResponses';
+import allMocks from "../mocks/mockResponses";
 /* develblock:end */
 
 export async function getApplicationNamesList(): Promise<Array<
@@ -15,13 +17,13 @@ export async function getApplicationNamesList(): Promise<Array<
 > | void> {
   /* develblock:start */
   // Mock
-  if (process.env.NODE_ENV !== 'production') {
+  if (process.env.NODE_ENV !== "production") {
     return allMocks.getApplicationStatus();
   }
   /* develblock:end */
   // Fetch
   return await axios
-    .get('/api/status/readLast')
+    .get("/api/status/readLast")
     .then((response) => {
       // Define the recieved data format
       interface Data {
@@ -60,7 +62,7 @@ export async function getApplicationNamesList(): Promise<Array<
       return apps;
     })
     .catch((error) => {
-      console.log('getApplicationNamesList Error: ', error);
+      console.log("getApplicationNamesList Error: ", error);
     });
 }
 
@@ -70,7 +72,7 @@ export async function getServiceInfo(
 ): Promise<ServiceInterface | void> {
   /* develblock:start */
   // Mock
-  if (process.env.NODE_ENV !== 'production') {
+  if (process.env.NODE_ENV !== "production") {
     return allMocks.getServiceStatus(appName, serverName);
   }
   /* develblock:end */
@@ -99,7 +101,7 @@ export async function getServiceInfo(
       return data;
     })
     .catch((error) => {
-      console.log('getApplicationNamesList Error: ', error);
+      console.log("getApplicationNamesList Error: ", error);
     });
 }
 
@@ -109,13 +111,15 @@ export async function getServiceHistory(
 ): Promise<Array<ServiceInterface> | void> {
   /* develblock:start */
   // Mock
-  if (process.env.NODE_ENV !== 'production') {
+  if (process.env.NODE_ENV !== "production") {
     return allMocks.getServiceHistory(appName, serverName);
   }
   /* develblock:end */
   // Fetch
   return await axios
-    .get(`/api/message/readInterval?appName=${appName}&serverName=${serverName}&from=0&to=2629746`)
+    .get(
+      `/api/message/readInterval?appName=${appName}&serverName=${serverName}&from=0&to=2629746`
+    )
     .then((response) => {
       const serviceHistory: Array<ServiceInterface> | any = [];
       response.data.map((service: ServiceInterface) => {
@@ -138,10 +142,32 @@ export async function getServiceHistory(
           ),
         };
         serviceHistory.push(serv);
-      })
+      });
       return serviceHistory;
     })
     .catch((error) => {
-      console.log('getApplicationNamesList Error: ', error);
+      console.log("getApplicationNamesList Error: ", error);
+    });
+}
+
+export async function getNotificationInfo(): Promise<NotificationStatusInterface | void> {
+  /* develblock:start */
+  // Mock
+  if (process.env.NODE_ENV !== "production") {
+    return allMocks.getNotificationStatus();
+  }
+  /* develblock:end */
+  // Fetch
+  return await axios
+    .get("/api/notifications/getStatus")
+    .then((response) => {
+      const data = {
+        global: response.data.global,
+        apps: response.data.apps,
+      };
+      return data;
+    })
+    .catch((error) => {
+      console.log("getNotificationInfo Error: ", error);
     });
 }

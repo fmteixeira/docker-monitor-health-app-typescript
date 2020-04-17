@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 // Requests
-import { getApplicationNamesList } from '../../resources/requests';
+import { getApplicationNamesList, getNotificationInfo } from '../../resources/requests';
 // Components
 import ApplicationsList from './ApplicationsList/ApplicationsList';
 import Service from './Service/Service';
 // Redux
 import allActions from '../../redux/actions';
 // Interfaces
-import { ApplicationInterface } from '../../resources/interfaces';
+import { ApplicationInterface, NotificationStatusInterface } from '../../resources/interfaces';
 
 export default function Applications(): JSX.Element {
+  /* Applications */
+
   // Redux
   const applications = useSelector(
     (state: { application: { list: Array<ApplicationInterface> } }) =>
       state.application.list
   );
-  
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -26,9 +27,9 @@ export default function Applications(): JSX.Element {
     ): void => {
       dispatch(allActions.applicationActions.addApplication(applications));
     };
-    
+
     // Get Applications every 10 seconds
-    const interval = setInterval(
+    const appInterval = setInterval(
       (function fetchApplications(): TimerHandler {
         getApplicationNamesList().then((res) => {
           console.log('Fetched Apps: ', res);
@@ -39,12 +40,36 @@ export default function Applications(): JSX.Element {
         return fetchApplications;
       })(),
       10000
-      );
-    
+    );
+
     return (): void => {
-      clearInterval(interval);
+      clearInterval(appInterval);
     };
   }, [dispatch]);
+
+  /* Notifications */
+  // State
+  const [notificationState, setNotificationState] = useState<NotificationStatusInterface>({ global: false, apps: [] })
+
+  useEffect(() => {
+    // Get Notification state every 10 seconds
+    const notificationInterval = setInterval(
+      (function fetchNotificationInfo(): TimerHandler {
+        getNotificationInfo().then((res) => {
+          console.log('Fetched Notification Status: ', res);
+          if (res) {
+            setNotificationState(res);
+          }
+        });
+        return fetchNotificationInfo;
+      })(),
+      10000
+    );
+
+    return (): void => {
+      clearInterval(notificationInterval);
+    };
+  }, [])
 
   // State
   const defaultServiceState: Array<string> = [];
@@ -57,12 +82,13 @@ export default function Applications(): JSX.Element {
   return service.length ? (
     <Service appName={service[0]} serviceName={service[1]} />
   ) : (
-    <div> 
-    <ApplicationsList
-      applications={applications}
-      handleServiceClick={handleServiceClick}
-    />
-    </div>
-  );
+      <div>
+        <ApplicationsList
+          applications={applications}
+          notificationState={notificationState}
+          handleServiceClick={handleServiceClick}
+        />
+      </div>
+    );
 }
 

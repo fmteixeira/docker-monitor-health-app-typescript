@@ -34,3 +34,13 @@ export interface ContainerInterface {
 export interface ApplicationKeyInterface {
   key: string;
 }
+
+export interface NotificationStatusInterface {
+  global: boolean;
+  apps: Array<NotificationAppStatusInterface>;
+}
+
+export interface NotificationAppStatusInterface {
+  appName: string;
+  isSubscribed: boolean;
+}

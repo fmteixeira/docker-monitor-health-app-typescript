@@ -1,27 +1,45 @@
 .header {
-    padding: 0 2rem;
-    background-color: rgb(42, 55, 73);
+  padding: 0 2rem;
+  background-color: rgb(42, 55, 73);
 }
 
-.app-name{
-    text-shadow: 3px 3px 3px rgb(15, 40, 61);
+.app-name {
+  text-shadow: 3px 3px 3px rgb(15, 40, 61);
 }
 
 p {
-    font-size: 0.8rem;
+  font-size: 0.8rem;
 }
 
-h6{
-    margin: 1rem 0 0 0;
+h6 {
+  margin: 1rem 0 0 0;
 }
 
 .photo {
-    border-radius: 100px;
-    cursor: pointer;
-    margin: 1rem;
+  border-radius: 100px;
+  cursor: pointer;
+  margin: 1rem;
 }
 
-.exit-icon{
-    padding: 0.1rem;
-    color: #F50057
+.exit-icon {
+  padding: 0.1rem;
+  color: #f50057;
+}
+
+/* Icons */
+
+.user-menu-item a {
+  margin-left: 5px;
+}
+
+.logout-button svg {
+  color: #f50057 !important;
+}
+
+.global-button svg.active {
+  color: rgb(214, 171, 52);
+}
+
+.global-button svg {
+  color: rgb(104, 104, 104);
 }

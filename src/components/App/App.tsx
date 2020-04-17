@@ -1,27 +1,27 @@
-import React from 'react';
-
+import React from "react";
+import { SnackbarProvider } from "notistack";
 //import { useSelector } from "react-redux";
-import './App.css';
+import "./App.css";
 // Components
-import Navigation from '../Navigation/Navigation';
-import Header from '../Header/Header';
+import Navigation from "../Navigation/Navigation";
+import Header from "../Header/Header";
 
 interface Props {
-  kc: any
+  kc: any;
 }
 
 function App(props: Props): JSX.Element {
   // Redux
   //const keycloak = useSelector(state => state.keycloak);
-  //keycloak.logout();  
+  //keycloak.logout();
 
   return (
-    <>
-      <Header 
-      kc={props.kc} 
-      />
-      <Navigation />
-    </>
+    <SnackbarProvider maxSnack={3}>
+      <>
+        <Header kc={props.kc} />
+        <Navigation />
+      </>
+    </SnackbarProvider>
   );
 }
 

@@ -1,58 +1,64 @@
-import React, {useState} from 'react';
-import './ApplicationListItem.css';
+import React, { useState } from "react";
+import "./ApplicationListItem.css";
 // Interfaces
 import {
   ApplicationInterface,
   ServerInterface,
-} from '../../../../resources/interfaces';
+} from "../../../../resources/interfaces";
 // Material-UI
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Collapse from '@material-ui/core/Collapse';
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
+import Collapse from "@material-ui/core/Collapse";
 // Components
-import ApplicationItemRow from './ApplicationItemRow/ApplicationItemRow';
+import ApplicationItemRow from "./ApplicationItemRow/ApplicationItemRow";
 
 interface Props {
   application: ApplicationInterface;
   open: boolean;
+  notificationEnabled: boolean;
+  notificationGlobalEnabled: boolean;
   handleApplicationClick: (name: string) => void;
   handleServiceClick: (app: string, service: string) => void;
 }
 
 export default function ApplicationListItem(props: Props): JSX.Element {
+  const {
+    application,
+    open,
+    notificationEnabled,
+    notificationGlobalEnabled,
+    handleApplicationClick,
+    handleServiceClick,
+  } = props;
+
   const handleRowClick = (name: string): void => {
-    if (name === props.application.name) {
-      props.handleApplicationClick(props.application.name);
+    if (name === application.name) {
+      handleApplicationClick(application.name);
     } else {
-      props.handleServiceClick(props.application.name, name);
+      handleServiceClick(application.name, name);
     }
   };
 
-
   return (
     <>
-    
       <Paper className="application">
         <Grid
           container
           direction="row"
           justify="center"
           alignItems="center"
-          className={`server-item max-width ${props.open ? 'active' : ''}`}
-          onClick={(): void => handleRowClick(props.application.name)}
+          className={`server-item max-width ${open ? "active" : ""}`}
+          onClick={(): void => handleRowClick(application.name)}
         >
           <ApplicationItemRow
-            name={props.application.name}
-            healthy={props.application.healthy}
+            name={application.name}
+            healthy={application.healthy}
+            notificationEnabled={notificationEnabled}
+            notificationGlobalEnabled={notificationGlobalEnabled}
           />
         </Grid>
 
-        <Collapse
-          in={props.open}
-          timeout="auto"
-          unmountOnExit
-          className="max-width"
-        >
+        <Collapse in={open} timeout="auto" unmountOnExit className="max-width">
           <Grid
             container
             direction="column"
@@ -60,9 +66,9 @@ export default function ApplicationListItem(props: Props): JSX.Element {
             alignItems="flex-start"
             item
             xs={12}
-            className={'applications-services max-width'}
+            className={"applications-services max-width"}
           >
-            {props.application.servers.map((server: ServerInterface) => (
+            {application.servers.map((server: ServerInterface) => (
               <Grid
                 key={`${server.name}`}
                 container
@@ -75,6 +81,7 @@ export default function ApplicationListItem(props: Props): JSX.Element {
                 <ApplicationItemRow
                   name={server.name}
                   healthy={server.status.healthy}
+                  notificationGlobalEnabled={notificationGlobalEnabled}
                 />
               </Grid>
             ))}
@@ -84,4 +91,3 @@ export default function ApplicationListItem(props: Props): JSX.Element {
     </>
   );
 }
-

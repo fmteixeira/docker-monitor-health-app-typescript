@@ -1,7 +1,5 @@
 import React from "react";
 import { firstLetterToUpperCase } from "../../../../../resources/scripts";
-// Components
-import NotificationBell from "../../../../Notifications/NotificationBell/NotificationBell";
 // Material-UI
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
@@ -11,17 +9,10 @@ import CancelIcon from "@material-ui/icons/Cancel";
 interface Props {
   name: string;
   healthy: boolean;
-  notificationEnabled?: boolean;
-  notificationGlobalEnabled: boolean;
 }
 
 export default function ApplicationItemRow(props: Props): JSX.Element {
-  const {
-    name,
-    healthy,
-    notificationEnabled,
-    notificationGlobalEnabled,
-  } = props;
+  const { name, healthy } = props;
   return (
     <>
       <Grid item xs={6} className="name">
@@ -35,19 +26,6 @@ export default function ApplicationItemRow(props: Props): JSX.Element {
         item
         xs={6}
       >
-        {notificationGlobalEnabled ? (
-          <NotificationBell
-            applicationName={name}
-            notificationEnabled={true}
-            notificationGlobalEnabled={notificationGlobalEnabled}
-          />
-        ) : notificationEnabled !== undefined ? (
-          <NotificationBell
-            applicationName={name}
-            notificationEnabled={notificationEnabled}
-            notificationGlobalEnabled={notificationGlobalEnabled}
-          />
-        ) : null}
         {healthy ? (
           <IconButton aria-label="health" className="green-color">
             <CheckCircleIcon fontSize="small" />

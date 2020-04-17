@@ -3,7 +3,8 @@ import {
   ServerInterface,
   ServiceInterface,
   ContainerInterface,
-} from '../resources/interfaces';
+  NotificationStatusInterface,
+} from "../resources/interfaces";
 
 export async function getApplicationStatus(): Promise<Array<
   ApplicationInterface
@@ -18,7 +19,7 @@ export async function getApplicationStatus(): Promise<Array<
     };
   }
   // Get the data from the Mock Response
-  const data: Data = require('./responses/appState.json').data;
+  const data: Data = require("./responses/appState.json").data;
   // Create an Array with ApplicationInterface Objects
   const apps: Array<ApplicationInterface> = [];
   for (const [key, value] of Object.entries(data)) {
@@ -48,7 +49,7 @@ export async function getServiceStatus(
   serverName: string
 ): Promise<ServiceInterface | void> {
   // Get the data from the Mock Response
-  const response = require('./responses/serviceState.json').data;
+  const response = require("./responses/serviceState.json").data;
   const service = {
     serverName: serverName,
     appName: appName,
@@ -73,7 +74,7 @@ export async function getServiceHistory(
   serverName: string
 ): Promise<Array<ServiceInterface> | void> {
   // Get the data from the Mock Response
-  const response = require('./responses/serviceStateHistory.json').data;
+  const response = require("./responses/serviceStateHistory.json").data;
   const serviceHistory: Array<ServiceInterface> | any = [];
 
   response.map((service: ServiceInterface) => {
@@ -94,15 +95,22 @@ export async function getServiceHistory(
       }),
     };
     serviceHistory.push(serv);
-  })
+  });
   return serviceHistory;
 }
 
+export async function getNotificationStatus(): Promise<NotificationStatusInterface | void> {
+  // Get the data from the Mock Response
+  const data: NotificationStatusInterface = require("./responses/notificationState.json")
+    .data;
+  return data;
+}
 
 const allMocks = {
   getApplicationStatus,
   getServiceStatus,
-  getServiceHistory
+  getServiceHistory,
+  getNotificationStatus,
 };
 
 export default allMocks;
