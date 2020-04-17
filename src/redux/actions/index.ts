@@ -1,4 +1,4 @@
-import applicationActions from './applicationActions';
+import applicationActions from "./applicationActions";
 
 const allActions = {
   applicationActions,
