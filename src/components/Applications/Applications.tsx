@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 // Requests
 import {
@@ -7,7 +7,6 @@ import {
 } from "../../resources/requests";
 // Components
 import ApplicationsList from "./ApplicationsList/ApplicationsList";
-import Service from "./Service/Service";
 // Redux
 import allActions from "../../redux/actions";
 // Interfaces
@@ -16,7 +15,13 @@ import {
   NotificationStatusInterface,
 } from "../../resources/interfaces";
 
-export default function Applications(): JSX.Element {
+interface Props {
+  handleServiceClick: (app: string, service: string) => void;
+}
+
+export default function Applications(props: Props): JSX.Element {
+  //State 
+  const { handleServiceClick } = props;
   /* Applications */
 
   // Redux
@@ -88,17 +93,7 @@ export default function Applications(): JSX.Element {
     };
   }, [dispatch]);
 
-  // State
-  const defaultServiceState: Array<string> = [];
-  const [service, setService] = useState(defaultServiceState);
-
-  const handleServiceClick = (app: string, service: string): void => {
-    setService([app, service]);
-  };
-
-  return service.length ? (
-    <Service appName={service[0]} serviceName={service[1]} />
-  ) : (
+  return (
     <div>
       <ApplicationsList
         applications={applications}
