@@ -2,9 +2,6 @@ import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import "./ServiceInformation.css";
 import { firstLetterToUpperCase } from "../../../../resources/scripts";
-
-// Request
-import { getServiceInfo } from "../../../../resources/requests";
 // Material-UI
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";

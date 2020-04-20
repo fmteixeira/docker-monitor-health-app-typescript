@@ -81,6 +81,9 @@ export default function ServiceHistory(props: Props): JSX.Element {
       )} ${firstLetterToUpperCase(props.serviceName)} history:`}</h5>
 
       {obj.map((service: ServiceInterface) => {
+        let date: string =
+          service.created.substr(0, 10) + " " + service.created.substr(11, 8);
+        let createdDate = new Date(date);
         return (
           <Grid
             container
@@ -89,7 +92,9 @@ export default function ServiceHistory(props: Props): JSX.Element {
           >
             <ServiceItemRow
               name={
-                service.created + " | Containers: " + service.containers.length
+                createdDate.toLocaleString() +
+                " | Containers: " +
+                service.containers.length
               }
               healthy={checkServiceStatus(service.containers)}
             />
