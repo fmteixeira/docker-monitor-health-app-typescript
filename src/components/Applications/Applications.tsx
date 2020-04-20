@@ -16,7 +16,7 @@ import {
 } from "../../resources/interfaces";
 
 interface Props {
-  handleServiceClick: (app: string, service: string) => void;
+  handleServiceClick: () => void;
 }
 
 export default function Applications(props: Props): JSX.Element {
