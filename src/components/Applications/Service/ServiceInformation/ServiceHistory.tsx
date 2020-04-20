@@ -56,7 +56,6 @@ export default function ServiceHistory(props: Props): JSX.Element {
     }
   });
 
-
   const checkServiceStatus = (containers: Array<ContainerInterface>) => {
     for (let i = 0; i < containers.length; i++) {
       console.log(JSON.parse(JSON.stringify(containers[i])).healthy);
