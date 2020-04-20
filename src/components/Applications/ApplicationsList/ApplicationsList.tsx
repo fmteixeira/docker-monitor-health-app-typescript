@@ -31,30 +31,17 @@ export default function ApplicationsList(props: Props): JSX.Element {
     setSearch(event.target.value);
   }
 
-  const [state, setState] = React.useState<{
-    status: string | number;
-    name: string;
-  }>({
-    status: "",
-    name: "hai",
-  });
+  const [status, setStatus] = useState("");
 
-  const handleSelect = (
-    event: React.ChangeEvent<{ name?: string; value: unknown }>
-  ) => {
-    const name = event.target.name as keyof typeof state;
-    setState({
-      ...state,
-      [name]: event.target.value,
-    });
-    console.log(event.target.value);
+  const handleSelect = (event: any) => {
+    setStatus(event.target.value)
   };
 
   let filteredApplications;
   filteredApplications = applications.filter(function (
     item: ApplicationInterface
   ) {
-    switch (state.status) {
+    switch (status) {
       case "":
         return item.name.toLowerCase().includes(search.toLowerCase());
         break;
