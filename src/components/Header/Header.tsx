@@ -32,8 +32,6 @@ export default function Header(props: Props): JSX.Element {
     setAnchorEl(null);
   };
 
-  // Global Subscription
-  //const [globalSubscription, setGlobalSubscription] = useState(false);
   // Redux
   const notificationStatus = useSelector(
     (state: {
@@ -42,7 +40,7 @@ export default function Header(props: Props): JSX.Element {
   );
   const dispatch = useDispatch();
 
-  // Set Fetched Notification Status
+  // Set Notification Status
   const setNotificationStatus = (
     notificationStatus: NotificationStatusInterface
   ): void => {
@@ -88,14 +86,14 @@ export default function Header(props: Props): JSX.Element {
                   ) : (
                     <NotificationsOffIcon />
                   )}
-                  <a>Subscrição Global</a>
+                  <button>Subscrição Global</button>
                 </MenuItem>
                 <MenuItem
                   className="user-menu-item logout-button"
                   onClick={props.kc.logout}
                 >
                   <ExitToAppIcon />
-                  <a>Logout</a>
+                  <button>Logout</button>
                 </MenuItem>
               </Menu>
             </Grid>

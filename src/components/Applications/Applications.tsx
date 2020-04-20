@@ -59,9 +59,6 @@ export default function Applications(): JSX.Element {
   }, [dispatch]);
 
   /* Notifications */
-  // State
-  //const [notificationState, setNotificationState] = useState<NotificationStatusInterface>({ global: false, apps: [] })
-
   useEffect(() => {
     // Set Fetched Notification Status
     const setNotificationStatus = (
