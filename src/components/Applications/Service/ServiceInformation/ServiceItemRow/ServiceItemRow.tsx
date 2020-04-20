@@ -3,8 +3,8 @@ import { firstLetterToUpperCase } from "../../../../../resources/scripts";
 // Material-UI
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
-import CheckCircleIcon from "@material-ui/icons/CheckCircle";
-import CancelIcon from "@material-ui/icons/Cancel";
+import CheckIcon from '@material-ui/icons/Check';
+import PriorityHighIcon from '@material-ui/icons/PriorityHigh';
 
 interface Props {
   name: string;
@@ -28,11 +28,11 @@ export default function ApplicationItemRow(props: Props): JSX.Element {
       >
         {healthy ? (
           <IconButton aria-label="health" className="green-color">
-            <CheckCircleIcon fontSize="small" />
+            <CheckIcon fontSize="small" />
           </IconButton>
         ) : (
           <IconButton aria-label="health" className="red-color">
-            <CancelIcon fontSize="small" />
+            <PriorityHighIcon fontSize="small" />
           </IconButton>
         )}
       </Grid>
