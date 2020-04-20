@@ -1,11 +1,11 @@
 import React, { useState } from "react";
+import "./DateSearchBar.css";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
-        marginTop: "2rem",
         display: "flex",
         flexWrap: "wrap",
         justifyContent: "flex-start",
@@ -27,6 +27,7 @@ export default function DateAndTimePickers(props: Props): JSX.Element {
 
   
   return (
+    <div className="datePicker">
     <form className={classes.container} noValidate>
       <TextField
         onChange={props.change}
@@ -40,5 +41,6 @@ export default function DateAndTimePickers(props: Props): JSX.Element {
         }}
       />
     </form>
+     </div>
   );
 }
