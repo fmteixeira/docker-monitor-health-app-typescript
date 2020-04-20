@@ -53,7 +53,7 @@ export default function Header(props: Props): JSX.Element {
     <div className="header">
       <Grid container direction="row" justify="flex-start" alignItems="center">
         <Grid item xs={2}>
-          <h3 className="app-name">Monitoring App</h3>
+          <h3 className="app-name">Applications</h3>
         </Grid>
         <Grid item xs={10}>
           <Grid container justify="flex-end">
