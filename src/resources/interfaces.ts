@@ -22,6 +22,11 @@ export interface ServiceInterface {
   containers: Array<ContainerInterface>;
 }
 
+export interface ServInterface {
+  serviceName: string;
+  appName: string
+}
+
 export interface ContainerInterface {
   Id: string;
   Names: Array<string>; //

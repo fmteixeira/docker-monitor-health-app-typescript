@@ -3,20 +3,18 @@ import React, { useState } from 'react';
 import ServiceHistory from './ServiceInformation/ServiceHistory';
 import ServiceInformation from './ServiceInformation/ServiceInformation';
 import NavigationBar from '../../Navigation/NavigationBar/NavigationBar';
-import Navigation from '../../Navigation/Navigation';
-import Applications from '../Applications';
 // Interface
 import { ServiceInterface } from '../../../resources/interfaces';
 
 interface Props {
   appName: string;
   serviceName: string;
+  handleBackButtonClick: () => void;
 }
 
 export default function Service(props: Props): JSX.Element {
-  const { appName, serviceName } = props;
+  const { appName, serviceName, handleBackButtonClick } = props;
   const [view, setView] = useState(false);
-  const [backButton, setBackButton] = useState(false);
   const [service, setService] = useState<ServiceInterface | any>();
 
   const handleMessageClick = (service: ServiceInterface): void => {
@@ -24,11 +22,7 @@ export default function Service(props: Props): JSX.Element {
     setView(true);
   };
 
-  const handleBackButtonClick = (): void => {
-    setBackButton(true);
-  }
-
-  return backButton ? <Navigation /> : view ? <ServiceInformation appName={appName} serviceName={serviceName} service={service} /> : (
+  return view ? <ServiceInformation appName={appName} serviceName={serviceName} service={service} handleBackButtonClick={handleBackButtonClick} /> : (
     <>
       <NavigationBar handleBackButtonClick={handleBackButtonClick} />
       <ServiceHistory appName={appName} serviceName={serviceName} handleMessageClick={handleMessageClick} />

@@ -4,24 +4,26 @@ import Applications from "../Applications/Applications";
 import Service from '../Applications/Service/Service';
 // Material-UI
 import Container from "@material-ui/core/Container";
+import { ServInterface } from "../../resources/interfaces";
 
 export default function Navigation(): JSX.Element {
-  const defaultServiceState: Array<string> = [];
-  const [service, setService] = useState(defaultServiceState);
+  const [service, setService] = useState<ServInterface>({ appName: "", serviceName: "" });
 
-  const handleServiceClick = (app: string, service: string): void => {
-    setService([app, service]);
+  const handleServiceClick = (app: string, serviceName: string): void => {
+    setService({ appName: app, serviceName: serviceName });
   };
 
-  return service.length ? (
+  const handleBackButtonClick = (): void => {
+    setService({ appName: "", serviceName: "" });
+  }
+
+  return service.serviceName != "" ? (
     <Container maxWidth="md">
-      <Service appName={service[0]} serviceName={service[1]} />
+      <Service appName={service.appName} serviceName={service.serviceName} handleBackButtonClick={handleBackButtonClick} />
     </Container>
   ) : (
-      <div>
-        <Container maxWidth="md">
-          <Applications handleServiceClick={handleServiceClick} />
-        </Container>
-      </div>
+      <Container maxWidth="md">
+        <Applications handleServiceClick={handleServiceClick} />
+      </Container>
     );
 }

@@ -8,7 +8,6 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 //Interface
 import { ServiceInterface } from "../../../../resources/interfaces";
-
 //Components
 import ServiceItemRow from "./ServiceItemRow/ServiceItemRow";
 import NavigationBar from "../../../Navigation/NavigationBar/NavigationBar";
@@ -18,6 +17,7 @@ interface Props {
   appName: string;
   serviceName: string;
   service: ServiceInterface;
+  handleBackButtonClick: () => void;
 }
 
 const useStyles = makeStyles({
@@ -47,7 +47,7 @@ export default function ServiceInformation(props: Props): JSX.Element {
     setBackButton(true);
   }
 
-  return backButton ? <Service appName={appName} serviceName={serviceName} /> : (
+  return backButton ? <Service appName={appName} serviceName={serviceName} handleBackButtonClick={props.handleBackButtonClick} /> : (
     <>
       <NavigationBar handleBackButtonClick={handleBackButtonClick} />
       <h5>Service Information</h5>
