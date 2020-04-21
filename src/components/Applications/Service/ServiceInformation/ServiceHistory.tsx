@@ -15,6 +15,7 @@ import {
   ServiceInterface,
   ContainerInterface,
 } from "../../../../resources/interfaces";
+import { MaterialUiPickersDate } from "@material-ui/pickers/typings/date";
 
 interface Props {
   appName: string;
@@ -24,7 +25,7 @@ interface Props {
 
 export default function ServiceHistory(props: Props): JSX.Element {
   // State
-  const { handleMessageClick } = props;
+  const { handleMessageClick, serviceName, appName } = props;
   const [service, setService] = useState<Array<ServiceInterface> | any>([]);
   const [loading, setLoading] = useState(true);
 
@@ -41,10 +42,10 @@ export default function ServiceHistory(props: Props): JSX.Element {
 
   let obj = JSON.parse(response);
 
-  
+
   const [status, setStatus] = useState("");
 
- 
+
   const handleSelect = (event: any) => {
     setStatus(event.target.value)
   };
@@ -55,7 +56,7 @@ export default function ServiceHistory(props: Props): JSX.Element {
 
   let filteredMessages;
   filteredMessages = obj.filter(function (item: ServiceInterface) {
-    switch(status){
+    switch (status) {
       case "":
         return item;
         break;
@@ -71,11 +72,11 @@ export default function ServiceHistory(props: Props): JSX.Element {
     }
   });
 
-  const [date, setDate] = useState(new Date());
-  const returnVariable = (date: Date) => { 
+  const [date, setDate] = useState<MaterialUiPickersDate>();
+  const returnVariable = (date: MaterialUiPickersDate, value?: string | null | undefined) => {
     setDate(date);
     console.log(date)
-    
+
   }
 
   // if(date){
@@ -83,7 +84,7 @@ export default function ServiceHistory(props: Props): JSX.Element {
   // } else {
   //   return item;
   // }
-  
+
 
   const checkServiceStatus = (containers: Array<ContainerInterface>) => {
     for (let i = 0; i < containers.length; i++) {
@@ -99,11 +100,11 @@ export default function ServiceHistory(props: Props): JSX.Element {
     <p>Not loaded</p>
   ) : (
       <>
-      <DateSearchBar onChange={handleSelect} returnVariable={returnVariable}/>
-      
+        <DateSearchBar onChange={handleSelect} returnVariable={returnVariable} />
+
         <h5 className="containers">{`${firstLetterToUpperCase(
-          props.appName
-        )} ${firstLetterToUpperCase(props.serviceName)} Messages:`}</h5>
+          appName
+        )} ${firstLetterToUpperCase(serviceName)} Messages:`}</h5>
         {filteredMessages.map((service: ServiceInterface) => {
           let date: string =
             service.created.substr(0, 10) + " " + service.created.substr(11, 8);
@@ -112,6 +113,7 @@ export default function ServiceHistory(props: Props): JSX.Element {
             <Grid
               container
               className="message"
+              key={service.created}
               onClick={() => handleMessageClick(service)}
             >
               <ServiceItemRow
