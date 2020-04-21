@@ -6,6 +6,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import 'date-fns';
 import Grid from '@material-ui/core/Grid';
 import MomentUtils from '@date-io/moment';
+import TextField from '@material-ui/core/TextField';
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
@@ -18,6 +19,9 @@ import { MaterialUiPickersDate } from "@material-ui/pickers/typings/date";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    formContainer: {
+      marginTop: '1rem',
+    },
     container: {
       display: "flex",
       flexWrap: "wrap",
@@ -40,7 +44,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface Props {
   onChange: (event: any) => void;
-  returnVariable: (date: MaterialUiPickersDate, value?: string | null | undefined) => void;
+  returnVariable: (date: any) => void;
+  handleDateChange: (date: any) => void;
 }
 
 export default function DateAndTimePickers(props: Props): JSX.Element {
@@ -53,13 +58,25 @@ export default function DateAndTimePickers(props: Props): JSX.Element {
 
   const handleDateChange = (date: any) => {
     setSelectedDate(date._d)
-    console.log("selected date is: " + date._d)
   };
 
   return (
     <div className="datePicker">
       <MuiPickersUtilsProvider utils={MomentUtils}>
         <Grid container justify="space-around">
+        <form className={classes.formContainer} noValidate>
+          <TextField
+            id="datetime-local"
+            label="Date Picker"
+            type="datetime-local"
+            defaultValue="2020-05-24T10:30"
+            className={classes.textField}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            onChange={props.handleDateChange}
+          />
+        </form>
           <KeyboardDatePicker
             margin="normal"
             id="date-picker-dialog"

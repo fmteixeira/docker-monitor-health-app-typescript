@@ -42,49 +42,30 @@ export default function ServiceHistory(props: Props): JSX.Element {
 
   let obj = JSON.parse(response);
 
-
   const [status, setStatus] = useState("");
-
-
   const handleSelect = (event: any) => {
     setStatus(event.target.value)
   };
 
-  const handleSubmit = (event: any) => {
-    console.log("EVENT IS: " + event.target.value)
-  }
-
-  let filteredMessages;
-  filteredMessages = obj.filter(function (item: ServiceInterface) {
-    switch (status) {
-      case "":
-        return item;
-        break;
-      case "healthy":
-        console.log(item)
-        return item;
-        break;
-      case "unhealthy":
-        return item;
-        break;
-      default:
-        return item;
-    }
-  });
-
   const [date, setDate] = useState<MaterialUiPickersDate>();
-  const returnVariable = (date: MaterialUiPickersDate, value?: string | null | undefined) => {
-    setDate(date);
+  const returnVariable = (date: any) => {
+    setDate(date._d.toLocaleString());
     console.log(date)
-
   }
 
-  // if(date){
-  //   return item.created.substr(0, 10) === date;
-  // } else {
-  //   return item;
-  // }
-
+  const [newDate, setNewDate] = useState();
+  const handleDateChange = (date: any ) =>{
+    setNewDate(date.target.value)
+  }
+  
+  let filteredMessages;
+  filteredMessages = obj.filter(function(item:ServiceInterface){
+    if(newDate){
+      return item.created.substr(0,10) === newDate.substr(0,10)
+    } else {
+      return item;
+    }
+  })
 
   const checkServiceStatus = (containers: Array<ContainerInterface>) => {
     for (let i = 0; i < containers.length; i++) {
@@ -100,7 +81,7 @@ export default function ServiceHistory(props: Props): JSX.Element {
     <p>Not loaded</p>
   ) : (
       <>
-        <DateSearchBar onChange={handleSelect} returnVariable={returnVariable} />
+        <DateSearchBar onChange={handleSelect} returnVariable={returnVariable} handleDateChange={handleDateChange}/>
 
         <h5 className="containers">{`${firstLetterToUpperCase(
           appName
