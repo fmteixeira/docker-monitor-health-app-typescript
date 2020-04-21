@@ -44,8 +44,9 @@ export default function ServiceHistory(props: Props): JSX.Element {
   const [date, setDate] = useState("");
 
   const handleChange = (event: any) => {
-    setDate(event.target.value.substr(0, 10));
+    console.log("event is: " + event.value)
   };
+
 
   let filteredMessages;
   filteredMessages = obj.filter(function (item: ServiceInterface) {
@@ -70,7 +71,7 @@ export default function ServiceHistory(props: Props): JSX.Element {
     <p>Not loaded</p>
   ) : (
       <>
-      <DateSearchBar change={handleChange} />
+      <DateSearchBar/>
         <h5 className="containers">{`${firstLetterToUpperCase(
           props.appName
         )} ${firstLetterToUpperCase(props.serviceName)} history:`}</h5>
