@@ -41,21 +41,49 @@ export default function ServiceHistory(props: Props): JSX.Element {
 
   let obj = JSON.parse(response);
 
-  const [date, setDate] = useState("");
+  
+  const [status, setStatus] = useState("");
 
-  const handleChange = (event: any) => {
-    console.log("event is: " + event.value)
+ 
+  const handleSelect = (event: any) => {
+    setStatus(event.target.value)
   };
 
+  const handleSubmit = (event: any) => {
+    console.log("EVENT IS: " + event.target.value)
+  }
 
   let filteredMessages;
   filteredMessages = obj.filter(function (item: ServiceInterface) {
-    if(date){
-      return item.created.substr(0, 10) === date;
-    } else {
-      return item;
+    switch(status){
+      case "":
+        return item;
+        break;
+      case "healthy":
+        console.log(item)
+        return item;
+        break;
+      case "unhealthy":
+        return item;
+        break;
+      default:
+        return item;
     }
   });
+
+  const [date, setDate] = useState(new Date());
+  const returnVariable = (date: Date) => { 
+    setDate(date);
+    console.log(date)
+    
+  }
+
+  // if(date){
+  //   return item.created.substr(0, 10) === date;
+  // } else {
+  //   return item;
+  // }
+  
 
   const checkServiceStatus = (containers: Array<ContainerInterface>) => {
     for (let i = 0; i < containers.length; i++) {
@@ -71,10 +99,11 @@ export default function ServiceHistory(props: Props): JSX.Element {
     <p>Not loaded</p>
   ) : (
       <>
-      <DateSearchBar/>
+      <DateSearchBar onChange={handleSelect} returnVariable={returnVariable}/>
+      
         <h5 className="containers">{`${firstLetterToUpperCase(
           props.appName
-        )} ${firstLetterToUpperCase(props.serviceName)} history:`}</h5>
+        )} ${firstLetterToUpperCase(props.serviceName)} Messages:`}</h5>
         {filteredMessages.map((service: ServiceInterface) => {
           let date: string =
             service.created.substr(0, 10) + " " + service.created.substr(11, 8);

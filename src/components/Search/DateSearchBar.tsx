@@ -38,6 +38,8 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface Props {
+  onChange: (event: any) => void;
+  returnVariable: (date: Date) => void;
 }
 
 export default function DateAndTimePickers(props: Props): JSX.Element {
@@ -47,13 +49,11 @@ export default function DateAndTimePickers(props: Props): JSX.Element {
     new Date('2020-04-21T21:11:54'),
   );
 
-
   const handleDateChange = (date: any ) => {
     setSelectedDate(date._d)
     console.log("selected date is: " + date._d)
   };
 
-  
   return (
     <div className="datePicker">
     <MuiPickersUtilsProvider utils={MomentUtils}>
@@ -84,7 +84,7 @@ export default function DateAndTimePickers(props: Props): JSX.Element {
             <Select
               className={classes.inputField}
               native
-              // onChange={props.onChange}
+              onChange={props.onChange}
               inputProps={{
                 name: 'status',
                 id: 'status-native-simple',
@@ -100,4 +100,3 @@ export default function DateAndTimePickers(props: Props): JSX.Element {
      </div>
   );
 }
-
