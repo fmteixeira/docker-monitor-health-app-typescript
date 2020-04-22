@@ -36,10 +36,10 @@ export default function ApplicationsList(props: Props): JSX.Element {
   return (
     <>
       <Grid container spacing={1} className="applications-container">
-        {applications.map((application: ApplicationInterface) => {
+        {applications.map((application: ApplicationInterface, index: number) => {
           const shouldOpen = openAppName === application.name ? true : false;
           return (
-            <Grid key={application.name} item xs={12}>
+            <Grid key={index} item xs={12}>
               <ApplicationListItem
                 application={application}
                 open={shouldOpen}

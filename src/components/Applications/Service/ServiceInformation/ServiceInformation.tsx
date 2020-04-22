@@ -18,6 +18,7 @@ interface Props {
   serviceName: string;
   service: ServiceInterface;
   handleBackButtonClick: () => void;
+  handleHeaderTitle: () => void;
 }
 
 const useStyles = makeStyles({
@@ -39,7 +40,7 @@ const useStyles = makeStyles({
 });
 
 export default function ServiceInformation(props: Props): JSX.Element {
-  const { appName, serviceName, service } = props;
+  const { appName, serviceName, service, handleHeaderTitle } = props;
   const [backButton, setBackButton] = useState(false);
   const classes = useStyles();
 
@@ -47,7 +48,7 @@ export default function ServiceInformation(props: Props): JSX.Element {
     setBackButton(true);
   }
 
-  return backButton ? <Service appName={appName} serviceName={serviceName} handleBackButtonClick={props.handleBackButtonClick} /> : (
+  return backButton ? <Service appName={appName} serviceName={serviceName} handleBackButtonClick={props.handleBackButtonClick} handleHeaderTitle={handleHeaderTitle} /> : (
     <>
       <NavigationBar handleBackButtonClick={handleBackButtonClick} />
       <h5>Service Information</h5>
@@ -64,9 +65,9 @@ export default function ServiceInformation(props: Props): JSX.Element {
       </Grid>
 
       <h5>Containers</h5>
-      {service.containers.map((container: any) => {
+      {service.containers.map((container: any, index: number) => {
         return (
-          <Grid container className={classes.paper}>
+          <Grid container key={index} className={classes.paper}>
             <ServiceItemRow
               name={firstLetterToUpperCase(
                 container.names.toString().substring(1, 50)

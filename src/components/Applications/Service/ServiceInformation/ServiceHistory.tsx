@@ -25,12 +25,12 @@ interface Props {
 
 export default function ServiceHistory(props: Props): JSX.Element {
   // State
-  const { handleMessageClick, serviceName, appName } = props;
+  const { handleMessageClick, appName, serviceName } = props;
   const [service, setService] = useState<Array<ServiceInterface> | any>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getServiceHistory(props.serviceName, props.serviceName).then((res) => {
+    getServiceHistory(serviceName, serviceName).then((res) => {
       if (res) {
         setService(res);
         setLoading(false);
@@ -61,17 +61,17 @@ export default function ServiceHistory(props: Props): JSX.Element {
 
   //Checks the messages status
   const checkMessageStatus = (message: any) => {
-     for(var i = 0; i < message.containers.length; i++){
-       if(!message.containers[i].healthy){
-         return message.expires;
-       } 
-     }
+    for (var i = 0; i < message.containers.length; i++) {
+      if (!message.containers[i].healthy) {
+        return message.expires;
+      }
+    }
   }
 
   //Filter the messages according to the status.
   let filteredMessages;
-  filteredMessages = obj.filter(function(item:ServiceInterface){
-    switch(status){
+  filteredMessages = obj.filter(function (item: ServiceInterface) {
+    switch (status) {
       case "":
         return item;
         break;
@@ -87,7 +87,7 @@ export default function ServiceHistory(props: Props): JSX.Element {
     }
   })
 
-  
+
   // filteredMessages = obj.filter(function(item:ServiceInterface){
   //   if(newDate){
   //     return item.created.substr(0,10) === newDate.substr(0,10)
@@ -110,20 +110,20 @@ export default function ServiceHistory(props: Props): JSX.Element {
     <p>Not loaded</p>
   ) : (
       <>
-        <DateSearchBar onChange={handleSelect} returnVariable={returnVariable} handleDateChange={handleDateChange}/>
+        <DateSearchBar onChange={handleSelect} returnVariable={returnVariable} handleDateChange={handleDateChange} />
 
         {/* <h5 className="containers">{`${firstLetterToUpperCase(
           appName
         )} ${firstLetterToUpperCase(serviceName)} Messages:`}</h5> */}
-        {filteredMessages.map((service: ServiceInterface) => {
+        {filteredMessages.map((service: ServiceInterface, index: number) => {
           let date: string =
             service.created.substr(0, 10) + " " + service.created.substr(11, 8);
           let createdDate = new Date(date);
           return (
             <Grid
               container
+              key={index}
               className="message"
-              key={service.created}
               onClick={() => handleMessageClick(service)}
             >
               <ServiceItemRow

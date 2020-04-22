@@ -17,11 +17,12 @@ import {
 
 interface Props {
   handleServiceClick: () => void;
+  handleHeaderTitle: () => void;
 }
 
 export default function Applications(props: Props): JSX.Element {
   //State 
-  const { handleServiceClick} = props;
+  const { handleServiceClick, handleHeaderTitle } = props;
   /* Applications */
 
   // Redux
@@ -74,6 +75,7 @@ export default function Applications(props: Props): JSX.Element {
       );
     };
 
+    handleHeaderTitle();
     // Get Notification state every 10 seconds
     const notificationInterval = setInterval(
       (function fetchNotificationInfo(): TimerHandler {
