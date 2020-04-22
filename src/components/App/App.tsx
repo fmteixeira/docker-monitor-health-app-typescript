@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { SnackbarProvider } from "notistack";
 //import { useSelector } from "react-redux";
 import "./App.css";
@@ -14,12 +14,17 @@ function App(props: Props): JSX.Element {
   // Redux
   //const keycloak = useSelector(state => state.keycloak);
   //keycloak.logout();
+  
+  const [title, setTitle] = useState("Applications");
+  const handleClick:any = (appName:string, serviceName:string) => {
+    setTitle(appName + " " + serviceName)
+  }
 
   return (
     <SnackbarProvider maxSnack={3}>
       <>
-        <Header kc={props.kc} />
-        <Navigation />
+        <Header kc={props.kc} title={title} />
+        <Navigation onClick={(appName, serviceName) => handleClick(appName, serviceName)}/>
       </>
     </SnackbarProvider>
   );

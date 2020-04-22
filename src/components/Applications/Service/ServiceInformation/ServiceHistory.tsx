@@ -83,9 +83,9 @@ export default function ServiceHistory(props: Props): JSX.Element {
       <>
         <DateSearchBar onChange={handleSelect} returnVariable={returnVariable} handleDateChange={handleDateChange}/>
 
-        <h5 className="containers">{`${firstLetterToUpperCase(
+        {/* <h5 className="containers">{`${firstLetterToUpperCase(
           appName
-        )} ${firstLetterToUpperCase(serviceName)} Messages:`}</h5>
+        )} ${firstLetterToUpperCase(serviceName)} Messages:`}</h5> */}
         {filteredMessages.map((service: ServiceInterface) => {
           let date: string =
             service.created.substr(0, 10) + " " + service.created.substr(11, 8);

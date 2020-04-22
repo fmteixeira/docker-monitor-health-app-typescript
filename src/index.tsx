@@ -14,6 +14,7 @@ import rootReducer from "./redux/reducers";
 const middleware = [thunk];
 const store = createStore(rootReducer, applyMiddleware(...middleware));
 
+
 /*eslint-disable*/
 function getKeycloak() {
   if (process.env.NODE_ENV === "production") {

@@ -4,7 +4,6 @@ import "./ApplicationsList.css";
 import Grid from "@material-ui/core/Grid";
 // Components
 import ApplicationListItem from "./ApplicationListItem/ApplicationListItem";
-import SearchBar from "../../Search/SearchBar";
 // Interfaces
 import {
   ApplicationInterface,
@@ -21,46 +20,10 @@ export default function ApplicationsList(props: Props): JSX.Element {
   const { applications, notificationState, handleServiceClick } = props;
   // State
   const [openAppName, setOpenAppName] = useState("");
-  const [search, setSearch] = useState("");
 
   const handleApplicationClick = (clickedAppName: string): void => {
     setOpenAppName(openAppName !== clickedAppName ? clickedAppName : "");
   };
-
-  function handleChange(event: any) {
-    setSearch(event.target.value);
-  }
-
-  const [status, setStatus] = useState("");
-
-  const handleSelect = (event: any) => {
-    setStatus(event.target.value)
-  };
-
-  let filteredApplications;
-  filteredApplications = applications.filter(function (
-    item: ApplicationInterface
-  ) {
-    switch (status) {
-      case "":
-        return item.name.toLowerCase().includes(search.toLowerCase());
-        break;
-      case "all":
-        return item.name.toLowerCase().includes(search.toLowerCase());
-        break;
-      case "healthy":
-        return (
-          item.name.toLowerCase().includes(search.toLowerCase()) &&
-          item.healthy === true
-        );
-        break;
-      default:
-        return (
-          item.name.toLowerCase().includes(search.toLowerCase()) &&
-          item.healthy === false
-        );
-    }
-  });
 
   // Get Notification State
   const getNotificationState = (application: ApplicationInterface): boolean => {
@@ -72,10 +35,8 @@ export default function ApplicationsList(props: Props): JSX.Element {
 
   return (
     <>
-      <SearchBar change={handleChange} onChange={handleSelect} />
-      <h4 className="title">Applications</h4>
-      <Grid container spacing={1}>
-        {filteredApplications.map((application: ApplicationInterface) => {
+      <Grid container spacing={1} className="applications-container">
+        {applications.map((application: ApplicationInterface) => {
           const shouldOpen = openAppName === application.name ? true : false;
           return (
             <Grid key={application.name} item xs={12}>

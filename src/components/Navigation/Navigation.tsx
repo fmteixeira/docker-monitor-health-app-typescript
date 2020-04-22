@@ -7,23 +7,32 @@ import Container from "@material-ui/core/Container";
 
 interface ServInterface {
   serviceName: string;
-  appName: string
+  appName: string;
 }
 
-export default function Navigation(): JSX.Element {
+interface Props {
+  onClick: (appName:string, serviceName: string) => void;
+}
+
+export default function Navigation(props: Props): JSX.Element {
+
   const [service, setService] = useState<ServInterface>({ appName: "", serviceName: "" });
 
   const handleServiceClick = (app: string = "", serviceName: string = ""): void => {
     setService({ appName: app, serviceName: serviceName });
   };
 
+  props.onClick(service.appName, service.serviceName)
+
+  
+
   return service.serviceName != "" ? (
-    <Container maxWidth="md">
+    <Container maxWidth="md" >
       <Service appName={service.appName} serviceName={service.serviceName} handleBackButtonClick={handleServiceClick} />
     </Container>
   ) : (
       <Container maxWidth="md">
-        <Applications handleServiceClick={handleServiceClick} />
+        <Applications handleServiceClick={handleServiceClick}/>
       </Container>
     );
 }

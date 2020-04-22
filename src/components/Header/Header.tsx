@@ -17,6 +17,7 @@ import NotificationsOffIcon from "@material-ui/icons/NotificationsOff";
 
 interface Props {
   kc: any;
+  title: string;
 }
 
 export default function Header(props: Props): JSX.Element {
@@ -52,8 +53,8 @@ export default function Header(props: Props): JSX.Element {
   return (
     <div className="header">
       <Grid container direction="row" justify="flex-start" alignItems="center">
-        <Grid item xs={2}>
-          <h3 className="app-name">Applications</h3>
+        <Grid item xs={4}>
+        <h3 className="app-name">{firstLetterToUpperCase(props.title)}</h3>
         </Grid>
         <Grid item xs={8}>
           <Grid container justify="flex-end">

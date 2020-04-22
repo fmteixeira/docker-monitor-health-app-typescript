@@ -21,7 +21,7 @@ interface Props {
 
 export default function Applications(props: Props): JSX.Element {
   //State 
-  const { handleServiceClick } = props;
+  const { handleServiceClick} = props;
   /* Applications */
 
   // Redux
