@@ -88,16 +88,19 @@ export default function DateAndTimePickers(props: Props): JSX.Element {
               'aria-label': 'change date',
             }}
           />
-          <KeyboardTimePicker
-            margin="normal"
-            id="time-picker"
-            label="Time picker"
-            value={selectedDate}
-            onChange={returnVariable}
-            KeyboardButtonProps={{
-              'aria-label': 'change time',
-            }}
-          />
+          <KeyboardDatePicker
+          disableToolbar
+          variant="inline"
+          format="MM/dd/yyyy"
+          margin="normal"
+          id="date-picker-inline"
+          label="Date picker inline"
+          value={selectedDate}
+          onChange={returnVariable}
+          KeyboardButtonProps={{
+            'aria-label': 'change date',
+          }}
+        />
           <FormControl className={classes.formControl}>
             <InputLabel htmlFor="status-native-simple" className={classes.inputField}>Status</InputLabel>
             <Select

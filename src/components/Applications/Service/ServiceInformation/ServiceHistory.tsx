@@ -47,6 +47,18 @@ export default function ServiceHistory(props: Props): JSX.Element {
     setStatus(event.target.value)
   };
 
+  const [date, setDate] = useState<MaterialUiPickersDate>();
+  const returnVariable = (date: any) => {
+    setDate(date._d.toLocaleString());
+    console.log("date is: " + date._d.toLocaleString())
+    console.log("date is: " + date)
+  }
+
+  const [newDate, setNewDate] = useState();
+  const handleDateChange = (date: any ) =>{
+    setNewDate(date.target.value)
+  }
+
   //Checks the messages status
   const checkMessageStatus = (message: any) => {
      for(var i = 0; i < message.containers.length; i++){
@@ -75,17 +87,6 @@ export default function ServiceHistory(props: Props): JSX.Element {
     }
   })
 
-  const [date, setDate] = useState<MaterialUiPickersDate>();
-  const returnVariable = (date: any) => {
-    setDate(date._d.toLocaleString());
-    console.log(date)
-  }
-
-  const [newDate, setNewDate] = useState();
-  const handleDateChange = (date: any ) =>{
-    setNewDate(date.target.value)
-  }
-  
   
   // filteredMessages = obj.filter(function(item:ServiceInterface){
   //   if(newDate){
