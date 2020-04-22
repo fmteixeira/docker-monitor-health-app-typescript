@@ -47,6 +47,34 @@ export default function ServiceHistory(props: Props): JSX.Element {
     setStatus(event.target.value)
   };
 
+  //Checks the messages status
+  const checkMessageStatus = (message: any) => {
+     for(var i = 0; i < message.containers.length; i++){
+       if(!message.containers[i].healthy){
+         return message.expires;
+       } 
+     }
+  }
+
+  //Filter the messages according to the status.
+  let filteredMessages;
+  filteredMessages = obj.filter(function(item:ServiceInterface){
+    switch(status){
+      case "":
+        return item;
+        break;
+      case "all":
+        return item;
+        break;
+      case "unhealthy":
+        return item.expires === checkMessageStatus(item);
+        break;
+      case "healthy":
+        return item.expires != checkMessageStatus(item);
+        break;
+    }
+  })
+
   const [date, setDate] = useState<MaterialUiPickersDate>();
   const returnVariable = (date: any) => {
     setDate(date._d.toLocaleString());
@@ -58,14 +86,14 @@ export default function ServiceHistory(props: Props): JSX.Element {
     setNewDate(date.target.value)
   }
   
-  let filteredMessages;
-  filteredMessages = obj.filter(function(item:ServiceInterface){
-    if(newDate){
-      return item.created.substr(0,10) === newDate.substr(0,10)
-    } else {
-      return item;
-    }
-  })
+  
+  // filteredMessages = obj.filter(function(item:ServiceInterface){
+  //   if(newDate){
+  //     return item.created.substr(0,10) === newDate.substr(0,10)
+  //   } else {
+  //     return item;
+  //   }
+  // })
 
   const checkServiceStatus = (containers: Array<ContainerInterface>) => {
     for (let i = 0; i < containers.length; i++) {
