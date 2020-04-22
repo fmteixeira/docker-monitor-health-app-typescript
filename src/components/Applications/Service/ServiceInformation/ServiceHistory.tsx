@@ -24,12 +24,12 @@ interface Props {
 
 export default function ServiceHistory(props: Props): JSX.Element {
   // State
-  const { handleMessageClick } = props;
+  const { handleMessageClick, appName, serviceName } = props;
   const [service, setService] = useState<Array<ServiceInterface> | any>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getServiceHistory(props.serviceName, props.serviceName).then((res) => {
+    getServiceHistory(serviceName, serviceName).then((res) => {
       if (res) {
         setService(res);
         setLoading(false);
@@ -49,7 +49,7 @@ export default function ServiceHistory(props: Props): JSX.Element {
 
   let filteredMessages;
   filteredMessages = obj.filter(function (item: ServiceInterface) {
-    if(date){
+    if (date) {
       return item.created.substr(0, 10) === date;
     } else {
       return item;
@@ -70,17 +70,18 @@ export default function ServiceHistory(props: Props): JSX.Element {
     <p>Not loaded</p>
   ) : (
       <>
-      <DateSearchBar change={handleChange} />
+        <DateSearchBar change={handleChange} />
         <h5 className="containers">{`${firstLetterToUpperCase(
-          props.appName
-        )} ${firstLetterToUpperCase(props.serviceName)} history:`}</h5>
-        {filteredMessages.map((service: ServiceInterface) => {
+          appName
+        )} ${firstLetterToUpperCase(serviceName)} history:`}</h5>
+        {filteredMessages.map((service: ServiceInterface, index: number) => {
           let date: string =
             service.created.substr(0, 10) + " " + service.created.substr(11, 8);
           let createdDate = new Date(date);
           return (
             <Grid
               container
+              key={index}
               className="message"
               onClick={() => handleMessageClick(service)}
             >

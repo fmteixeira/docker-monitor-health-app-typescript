@@ -33,7 +33,7 @@ export default function ApplicationsList(props: Props): JSX.Element {
 
   const [status, setStatus] = useState("");
 
-  const handleSelect = (event:any) => {
+  const handleSelect = (event: any) => {
     setStatus(event.target.value)
   };
 
@@ -73,7 +73,7 @@ export default function ApplicationsList(props: Props): JSX.Element {
   return (
     <>
       <SearchBar change={handleChange} onChange={handleSelect} />
-      <h4 className="title">Applications</h4>
+      <p></p>
       <Grid container spacing={1}>
         {filteredApplications.map((application: ApplicationInterface) => {
           const shouldOpen = openAppName === application.name ? true : false;
