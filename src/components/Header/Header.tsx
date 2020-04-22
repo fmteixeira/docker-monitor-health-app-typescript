@@ -21,6 +21,7 @@ interface Props {
 }
 
 export default function Header(props: Props): JSX.Element {
+  const { kc, title } = props;
   const [anchorEl, setAnchorEl] = useState<(EventTarget & Element) | null>(
     null
   );
@@ -53,14 +54,14 @@ export default function Header(props: Props): JSX.Element {
   return (
     <div className="header">
       <Grid container direction="row" justify="flex-start" alignItems="center">
-        <Grid item xs={4}>
-        <h3 className="app-name">{firstLetterToUpperCase(props.title)}</h3>
+        <Grid item xs={2}>
+          <h3 className="app-name">{title}</h3>
         </Grid>
         <Grid item xs={8}>
           <Grid container justify="flex-end">
             <Grid item>
               <Gravatar
-                email={props.kc.tokenParsed.preferred_username}
+                email={kc.tokenParsed.preferred_username}
                 default="monsterid"
                 size={40}
                 className="photo"
@@ -85,13 +86,13 @@ export default function Header(props: Props): JSX.Element {
                   {notificationStatus.global ? (
                     <NotificationsActiveIcon className="active" />
                   ) : (
-                    <NotificationsOffIcon />
-                  )}
+                      <NotificationsOffIcon />
+                    )}
                   <button>Subscrição Global</button>
                 </MenuItem>
                 <MenuItem
                   className="user-menu-item logout-button"
-                  onClick={props.kc.logout}
+                  onClick={kc.logout}
                 >
                   <ExitToAppIcon />
                   <button>Logout</button>
@@ -101,12 +102,12 @@ export default function Header(props: Props): JSX.Element {
             <Grid item>
               <h6>
                 {firstLetterToUpperCase(
-                  props.kc.tokenParsed.preferred_username
+                  kc.tokenParsed.preferred_username
                 )}
               </h6>
               <p>
                 {firstLetterToUpperCase(
-                  props.kc.tokenParsed.preferred_username
+                  kc.tokenParsed.preferred_username
                 )}
               </p>
             </Grid>

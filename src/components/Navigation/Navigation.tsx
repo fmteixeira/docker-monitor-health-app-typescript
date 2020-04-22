@@ -11,28 +11,24 @@ interface ServInterface {
 }
 
 interface Props {
-  onClick: (appName:string, serviceName: string) => void;
+  handleHeaderTitle: () => void;
 }
 
 export default function Navigation(props: Props): JSX.Element {
-
+  const { handleHeaderTitle } = props;
   const [service, setService] = useState<ServInterface>({ appName: "", serviceName: "" });
 
   const handleServiceClick = (app: string = "", serviceName: string = ""): void => {
     setService({ appName: app, serviceName: serviceName });
   };
 
-  props.onClick(service.appName, service.serviceName)
-
-  
-
   return service.serviceName != "" ? (
-    <Container maxWidth="md" >
-      <Service appName={service.appName} serviceName={service.serviceName} handleBackButtonClick={handleServiceClick} />
+    <Container maxWidth="md">
+      <Service appName={service.appName} serviceName={service.serviceName} handleBackButtonClick={handleServiceClick} handleHeaderTitle={handleHeaderTitle} />
     </Container>
   ) : (
       <Container maxWidth="md">
-        <Applications handleServiceClick={handleServiceClick}/>
+        <Applications handleServiceClick={handleServiceClick} handleHeaderTitle={handleHeaderTitle} />
       </Container>
     );
 }
