@@ -50,8 +50,6 @@ export default function ServiceHistory(props: Props): JSX.Element {
   const [date, setDate] = useState<MaterialUiPickersDate>();
   const returnVariable = (date: any) => {
     setDate(date._d.toLocaleString());
-    console.log("date is: " + date._d.toLocaleString())
-    console.log("date is: " + date)
   }
 
   const [newDate, setNewDate] = useState();

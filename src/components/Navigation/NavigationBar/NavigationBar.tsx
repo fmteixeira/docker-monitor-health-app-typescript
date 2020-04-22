@@ -1,4 +1,5 @@
 import React from "react";
+import "./NavigationBar.css"
 // Material-UI
 import Grid from "@material-ui/core/Grid";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
@@ -18,7 +19,7 @@ export default function NavigationBar(props: Props): JSX.Element {
 
   return (
     <div>
-      <Grid container>
+      <Grid container className="arrowBack">
         <Grid item xs={1}>
           <IconButton onClick={() => handleBackButtonClick()}>
             <ArrowBackIcon style={style} />
