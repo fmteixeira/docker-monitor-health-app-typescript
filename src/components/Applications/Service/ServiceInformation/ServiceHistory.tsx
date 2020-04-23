@@ -41,11 +41,18 @@ export default function ServiceHistory(props: Props): JSX.Element {
 
   let messages = JSON.parse(response);
 
-  //Sets the date selected by the user. 
+  //Sets the date selected by the user.
   const [selectedDate, setSelectedDate] = useState();
-  const handleDateChange = (date: any ) =>{
-    setSelectedDate(date.substr(0,10))
-  }
+  const handleDateChange = (date: any) => {
+    setSelectedDate(date.substr(0, 10));
+  };
+
+  //Sets the hour selected by the user.
+  const [selectedHour, setSelectedHour] = useState();
+  const handleHourChange = (hour: any) => {
+    setSelectedHour(hour.substr(0, 8));
+    console.log(hour);
+  };
 
   //Checks if the message is healthy or unhealthy and returns the message created date.
   const checkMessageStatus = (message: any) => {
@@ -54,41 +61,53 @@ export default function ServiceHistory(props: Props): JSX.Element {
         return message.created;
       }
     }
-  }
+  };
 
   //Sets the status to the one chosen by the user.
   const [status, setStatus] = useState("");
   const handleSelect = (event: any) => {
-    setStatus(event.target.value)
+    setStatus(event.target.value);
   };
 
   //Filters the messages according to the status and date choosen by the user.
   let filteredMessages = messages.filter(function (message: ServiceInterface) {
-    let messageCreatedDate = message.created.substr(0,10);
+    let messageCreatedDate = message.created.substr(0, 10);
+    let messageCreatedHour = message.created.substr(11, 8);
     switch (status) {
       case "all":
-        if(selectedDate === messageCreatedDate){
-          return selectedDate === messageCreatedDate && message;
+        if (selectedDate || selectedHour) {
+          return (
+            messageCreatedDate === selectedDate ||
+            messageCreatedHour === selectedHour
+          );
         } else {
           return message;
         }
+        break;
       case "unhealthy":
-        if(selectedDate === messageCreatedDate){
-          return message.created === checkMessageStatus(message) && selectedDate === messageCreatedDate;
-          } else {
-            return message.created === checkMessageStatus(message);
-          }
+        if(selectedDate && selectedHour){
+          return (((messageCreatedDate === selectedDate && message.created === checkMessageStatus(message)) && 
+          (messageCreatedHour === selectedHour && message.created === checkMessageStatus(message))))
+        } else if (selectedDate || selectedHour) {
+          return (messageCreatedDate === selectedDate && message.created === checkMessageStatus(message)) || 
+          (messageCreatedHour === selectedHour && message.created === checkMessageStatus(message));
+        }else {
+          return message.created === checkMessageStatus(message);
+      }
       case "healthy":
-        if(selectedDate === messageCreatedDate){
-        return message.created != checkMessageStatus(message) && selectedDate === messageCreatedDate;
-        } else {
+        if(selectedDate && selectedHour){
+          return (((messageCreatedDate === selectedDate && message.created != checkMessageStatus(message)) && 
+          (messageCreatedHour === selectedHour && message.created === checkMessageStatus(message))))
+        } else if (selectedDate || selectedHour) {
+          return (messageCreatedDate === selectedDate && message.created != checkMessageStatus(message)) || 
+          (messageCreatedHour === selectedHour && message.created != checkMessageStatus(message));
+        }else {
           return message.created != checkMessageStatus(message);
-        }
+      }
       default:
         return message;
     }
-  })
-
+  });
 
   const checkServiceStatus = (containers: Array<ContainerInterface>) => {
     for (let i = 0; i < containers.length; i++) {
@@ -103,34 +122,38 @@ export default function ServiceHistory(props: Props): JSX.Element {
   return loading ? (
     <p>Not loaded</p>
   ) : (
-      <>
-        <DateSearchBar onChange={handleSelect} onHandleDateChange={handleDateChange}/>
+    <>
+      <DateSearchBar
+        onChange={handleSelect}
+        onDateChange={handleDateChange}
+        onHourChange={handleHourChange}
+      />
 
-        {/* <h5 className="containers">{`${firstLetterToUpperCase(
+      {/* <h5 className="containers">{`${firstLetterToUpperCase(
           appName
         )} ${firstLetterToUpperCase(serviceName)} Messages:`}</h5> */}
-        {filteredMessages.map((service: ServiceInterface, index: number) => {
-          let date: string =
-            service.created.substr(0, 10) + " " + service.created.substr(11, 8);
-          let createdDate = new Date(date);
-          return (
-            <Grid
-              container
-              key={index}
-              className="message"
-              onClick={() => handleMessageClick(service)}
-            >
-              <ServiceItemRow
-                name={
-                  createdDate.toLocaleString() +
-                  " | Containers: " +
-                  service.containers.length
-                }
-                healthy={checkServiceStatus(service.containers)}
-              />
-            </Grid>
-          );
-        })}
-      </>
-    );
+      {filteredMessages.map((service: ServiceInterface, index: number) => {
+        let date: string =
+          service.created.substr(0, 10) + " " + service.created.substr(11, 8);
+        let createdDate = new Date(date);
+        return (
+          <Grid
+            container
+            key={index}
+            className="message"
+            onClick={() => handleMessageClick(service)}
+          >
+            <ServiceItemRow
+              name={
+                createdDate.toLocaleString() +
+                " | Containers: " +
+                service.containers.length
+              }
+              healthy={checkServiceStatus(service.containers)}
+            />
+          </Grid>
+        );
+      })}
+    </>
+  );
 }
