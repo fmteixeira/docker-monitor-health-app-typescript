@@ -49,12 +49,24 @@ export default function ServiceHistory(props: Props): JSX.Element {
     setSelectedDate(date.substr(0, 10));
   };
 
+  //Converts 12h time to 24h time.
+  const convertTime12to24 = (time12h: any) => {
+    const [time, modifier] = time12h.split(" ");
+    let [hours, minutes] = time.split(":");
+
+    if (hours === "12") {
+      hours = "00";
+    }
+    if (modifier === "PM") {
+      hours = parseInt(hours, 10) + 12;
+    }
+    return `${hours}:${minutes}`;
+  };
+
   //Sets the hour selected by the user.
   const [selectedHour, setSelectedHour] = useState();
   const handleHourChange = (hour: any) => {
-    setSelectedHour(hour);
-    console.log(hour.toLocaleString())
-    console.log(moment().format(hour));
+    setSelectedHour(convertTime12to24(hour));
   };
 
   //Checks if the message is healthy or unhealthy and returns the message created date.
@@ -78,8 +90,11 @@ export default function ServiceHistory(props: Props): JSX.Element {
     let messageCreatedHour = message.created.substr(11, 5);
     switch (status) {
       case "all":
-        if(selectedDate === moment().format()){
-          return message;
+        if (selectedDate && selectedHour) {
+          return (
+            messageCreatedDate === selectedDate &&
+            messageCreatedHour === selectedHour
+          );
         } else if (selectedDate || selectedHour) {
           return (
             messageCreatedDate === selectedDate ||
@@ -90,27 +105,41 @@ export default function ServiceHistory(props: Props): JSX.Element {
         }
         break;
       case "unhealthy":
-        if(selectedDate && selectedHour){
-          return (((messageCreatedDate === selectedDate && message.created === checkMessageStatus(message)) && 
-          (messageCreatedHour === selectedHour && message.created === checkMessageStatus(message))))
+        if (selectedDate && selectedHour) {
+          return (
+            messageCreatedDate === selectedDate &&
+            message.created === checkMessageStatus(message) &&
+            messageCreatedHour === selectedHour &&
+            message.created === checkMessageStatus(message)
+          );
         } else if (selectedDate || selectedHour) {
-          return (messageCreatedDate === selectedDate && message.created === checkMessageStatus(message)) || 
-          (messageCreatedHour === selectedHour && message.created === checkMessageStatus(message));
-        }else {
+          return (
+            (messageCreatedDate === selectedDate &&
+              message.created === checkMessageStatus(message)) ||
+            (messageCreatedHour === selectedHour &&
+              message.created === checkMessageStatus(message))
+          );
+        } else {
           return message.created === checkMessageStatus(message);
-      }
+        }
       case "healthy":
-        console.log("selectedhour is:" + selectedHour)
-        console.log("messageCreatedhour is:" + messageCreatedHour.toLocaleString() )
-        if(selectedDate && selectedHour){
-          return (((messageCreatedDate === selectedDate && message.created != checkMessageStatus(message)) && 
-          (messageCreatedHour === selectedHour && message.created === checkMessageStatus(message))))
+        if (selectedDate && selectedHour) {
+          return (
+            messageCreatedDate === selectedDate &&
+            message.created != checkMessageStatus(message) &&
+            messageCreatedHour === selectedHour &&
+            message.created === checkMessageStatus(message)
+          );
         } else if (selectedDate || selectedHour) {
-          return (messageCreatedDate === selectedDate && message.created != checkMessageStatus(message)) || 
-          (messageCreatedHour === selectedHour && message.created != checkMessageStatus(message));
-        }else {
+          return (
+            (messageCreatedDate === selectedDate &&
+              message.created != checkMessageStatus(message)) ||
+            (messageCreatedHour === selectedHour &&
+              message.created != checkMessageStatus(message))
+          );
+        } else {
           return message.created != checkMessageStatus(message);
-      }
+        }
       default:
         return message;
     }
