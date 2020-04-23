@@ -16,6 +16,8 @@ import {
   ContainerInterface,
 } from "../../../../resources/interfaces";
 
+import moment from "moment";
+
 interface Props {
   appName: string;
   serviceName: string;
@@ -50,8 +52,9 @@ export default function ServiceHistory(props: Props): JSX.Element {
   //Sets the hour selected by the user.
   const [selectedHour, setSelectedHour] = useState();
   const handleHourChange = (hour: any) => {
-    setSelectedHour(hour.substr(0, 8));
-    console.log(hour);
+    setSelectedHour(hour);
+    console.log(hour.toLocaleString())
+    console.log(moment().format(hour));
   };
 
   //Checks if the message is healthy or unhealthy and returns the message created date.
@@ -72,10 +75,12 @@ export default function ServiceHistory(props: Props): JSX.Element {
   //Filters the messages according to the status and date choosen by the user.
   let filteredMessages = messages.filter(function (message: ServiceInterface) {
     let messageCreatedDate = message.created.substr(0, 10);
-    let messageCreatedHour = message.created.substr(11, 8);
+    let messageCreatedHour = message.created.substr(11, 5);
     switch (status) {
       case "all":
-        if (selectedDate || selectedHour) {
+        if(selectedDate === moment().format()){
+          return message;
+        } else if (selectedDate || selectedHour) {
           return (
             messageCreatedDate === selectedDate ||
             messageCreatedHour === selectedHour
@@ -95,6 +100,8 @@ export default function ServiceHistory(props: Props): JSX.Element {
           return message.created === checkMessageStatus(message);
       }
       case "healthy":
+        console.log("selectedhour is:" + selectedHour)
+        console.log("messageCreatedhour is:" + messageCreatedHour.toLocaleString() )
         if(selectedDate && selectedHour){
           return (((messageCreatedDate === selectedDate && message.created != checkMessageStatus(message)) && 
           (messageCreatedHour === selectedHour && message.created === checkMessageStatus(message))))

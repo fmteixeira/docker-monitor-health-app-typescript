@@ -23,7 +23,7 @@ interface Props {
 }
 
 export default function DateAndTimePickers(props: Props): JSX.Element {
-  const { onChange } = props;
+  const { onChange, onDateChange, onHourChange} = props;
 
   const [selectedDate, setSelectedDate] = useState<any | null>(
     moment().format()
@@ -34,13 +34,18 @@ export default function DateAndTimePickers(props: Props): JSX.Element {
 
   const handleDateChange = (date: any) => {
     setSelectedDate(date);
-    props.onDateChange(date.format());
+    onDateChange(date.format());
   };
 
   const handleHourChange = (hour: any) => {
     setSelectedHour(hour);
-    props.onHourChange(hour.format("LTS"));
+    onHourChange(hour.format("LTS"));
   };
+  
+  const cleanFilter = () => {
+    setSelectedDate(null)
+    setSelectedHour(null)
+  }
 
   return (
     <div className="date-picker-container">
@@ -49,6 +54,7 @@ export default function DateAndTimePickers(props: Props): JSX.Element {
           <MuiPickersUtilsProvider utils={MomentUtils} locale="fr">
             <div className="date-picker">
               <KeyboardDatePicker
+                clearable={true}
                 label="Date picker"
                 format={"YYYY-MM-DD"}
                 value={selectedDate}
@@ -60,6 +66,7 @@ export default function DateAndTimePickers(props: Props): JSX.Element {
 
           <div className="time-picker">
             <KeyboardTimePicker
+              ampm={false}
               id="time-picker"
               label="Time picker"
               value={selectedHour}
@@ -89,8 +96,13 @@ export default function DateAndTimePickers(props: Props): JSX.Element {
               </Select>
             </FormControl>
           </div>
+
+         <div className="button-container">
+          <button onClick={cleanFilter} className="clean-filter-button">Clean Filter</button>
+          </div>
         </Grid>
       </MuiPickersUtilsProvider>
+     
     </div>
   );
 }
