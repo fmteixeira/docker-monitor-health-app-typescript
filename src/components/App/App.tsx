@@ -18,11 +18,6 @@ function App(props: Props): JSX.Element {
   //const keycloak = useSelector(state => state.keycloak);
   //keycloak.logout();
 
-  const [title, setTitle] = useState("Applications");
-  const handleClick: any = (appName: string, serviceName: string) => {
-    setTitle(appName + " " + serviceName)
-  }
-
   const handleTitleChange = (...args: string[]): void => {
     let title: string = "";
     if (args.length === 0) {

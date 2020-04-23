@@ -15,7 +15,6 @@ import {
   ServiceInterface,
   ContainerInterface,
 } from "../../../../resources/interfaces";
-import { MaterialUiPickersDate } from "@material-ui/pickers/typings/date";
 
 interface Props {
   appName: string;
@@ -40,59 +39,56 @@ export default function ServiceHistory(props: Props): JSX.Element {
 
   const response = JSON.stringify(service, undefined, 2);
 
-  let obj = JSON.parse(response);
+  let messages = JSON.parse(response);
 
+  //Sets the date selected by the user. 
+  const [selectedDate, setSelectedDate] = useState();
+  const handleDateChange = (date: any ) =>{
+    setSelectedDate(date.substr(0,10))
+  }
+
+  //Checks if the message is healthy or unhealthy and returns the message created date.
+  const checkMessageStatus = (message: any) => {
+    for (var i = 0; i < message.containers.length; i++) {
+      if (!message.containers[i].healthy) {
+        return message.created;
+      }
+    }
+  }
+
+  //Sets the status to the one chosen by the user.
   const [status, setStatus] = useState("");
   const handleSelect = (event: any) => {
     setStatus(event.target.value)
   };
 
-  const [date, setDate] = useState<MaterialUiPickersDate>();
-  const returnVariable = (date: any) => {
-    setDate(date._d.toLocaleString());
-  }
-
-  const [newDate, setNewDate] = useState();
-  const handleDateChange = (date: any ) =>{
-    setNewDate(date.target.value)
-  }
-
-  //Checks the messages status
-  const checkMessageStatus = (message: any) => {
-    for (var i = 0; i < message.containers.length; i++) {
-      if (!message.containers[i].healthy) {
-        return message.expires;
-      }
-    }
-  }
-
-  //Filter the messages according to the status.
-  let filteredMessages;
-  filteredMessages = obj.filter(function (item: ServiceInterface) {
+  //Filters the messages according to the status and date choosen by the user.
+  let filteredMessages = messages.filter(function (message: ServiceInterface) {
+    let messageCreatedDate = message.created.substr(0,10);
     switch (status) {
-      case "":
-        return item;
-        break;
       case "all":
-        return item;
-        break;
+        if(selectedDate === messageCreatedDate){
+          return selectedDate === messageCreatedDate && message;
+        } else {
+          return message;
+        }
       case "unhealthy":
-        return item.expires === checkMessageStatus(item);
-        break;
+        if(selectedDate === messageCreatedDate){
+          return message.created === checkMessageStatus(message) && selectedDate === messageCreatedDate;
+          } else {
+            return message.created === checkMessageStatus(message);
+          }
       case "healthy":
-        return item.expires != checkMessageStatus(item);
-        break;
+        if(selectedDate === messageCreatedDate){
+        return message.created != checkMessageStatus(message) && selectedDate === messageCreatedDate;
+        } else {
+          return message.created != checkMessageStatus(message);
+        }
+      default:
+        return message;
     }
   })
 
-
-  // filteredMessages = obj.filter(function(item:ServiceInterface){
-  //   if(newDate){
-  //     return item.created.substr(0,10) === newDate.substr(0,10)
-  //   } else {
-  //     return item;
-  //   }
-  // })
 
   const checkServiceStatus = (containers: Array<ContainerInterface>) => {
     for (let i = 0; i < containers.length; i++) {
@@ -108,7 +104,7 @@ export default function ServiceHistory(props: Props): JSX.Element {
     <p>Not loaded</p>
   ) : (
       <>
-        <DateSearchBar onChange={handleSelect} returnVariable={returnVariable} handleDateChange={handleDateChange} />
+        <DateSearchBar onChange={handleSelect} onHandleDateChange={handleDateChange}/>
 
         {/* <h5 className="containers">{`${firstLetterToUpperCase(
           appName
