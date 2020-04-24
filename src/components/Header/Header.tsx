@@ -54,10 +54,10 @@ export default function Header(props: Props): JSX.Element {
   return (
     <div className="header">
       <Grid container direction="row" justify="flex-start" alignItems="center">
-        <Grid item xs={6}>
+        <Grid item xs={8}>
           <h3 className="app-name">{title}</h3>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={4}>
           <Grid container justify="flex-end">
             <Grid item>
               <Gravatar

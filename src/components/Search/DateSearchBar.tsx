@@ -32,14 +32,14 @@ export default function DateAndTimePickers(props: Props): JSX.Element {
     moment().format()
   );
 
-  const handleDateChange = (date: any) => {
+  const handleDateChange = (date: any | null) => {
     setSelectedDate(date);
-    onDateChange(date.format());
+    onDateChange(date ? date.format() : null);
   };
 
-  const handleHourChange = (hour: any) => {
+  const handleHourChange = (hour: any | null) => {
     setSelectedHour(hour);
-    onHourChange(hour.format("LTS"));
+    onHourChange(hour ? hour.format("LTS") : null);
   };
   
   const cleanFilter = () => {

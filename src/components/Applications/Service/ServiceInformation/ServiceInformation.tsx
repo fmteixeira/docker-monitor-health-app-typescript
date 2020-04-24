@@ -44,8 +44,10 @@ export default function ServiceInformation(props: Props): JSX.Element {
   const [backButton, setBackButton] = useState(false);
   const classes = useStyles();
 
+  let date: string = service.created.substr(0, 10) + " " + service.created.substr(11, 8);
+  let serviceCreatedDate = new Date(date).toLocaleString();
   useEffect(() => {
-    handleHeaderTitle(firstLetterToUpperCase(appName), firstLetterToUpperCase(serviceName), service.created);
+    handleHeaderTitle(firstLetterToUpperCase(appName), firstLetterToUpperCase(serviceName), serviceCreatedDate);
   }, [])
 
   const handleBackButtonClick = (): void => {

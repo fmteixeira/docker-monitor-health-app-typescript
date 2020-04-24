@@ -24,9 +24,10 @@
 }
 
 .clean-filter-button{
-    background-color: rgb(187, 199, 212);
-    border: 1px solid rgb(141, 151, 160);
-    color: rgb(177, 10, 10);
+    background: rgb(219,135,135);
+    background: linear-gradient(90deg, rgba(219,135,135,1) 0%, rgba(205,43,43,1) 100%);
+    border: none;
+    color: white;
     border-radius: 0.3rem;
 }
 
