@@ -56,7 +56,6 @@ export default function DateAndTimePickers(props: Props): JSX.Element {
           <MuiPickersUtilsProvider utils={MomentUtils} locale="fr">
             <div className="date-picker">
               <KeyboardDatePicker
-                clearable={true}
                 label="Date picker"
                 format={"YYYY-MM-DD"}
                 value={selectedDate}

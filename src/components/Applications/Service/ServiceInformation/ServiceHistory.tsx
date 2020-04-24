@@ -27,6 +27,9 @@ export default function ServiceHistory(props: Props): JSX.Element {
   const { handleMessageClick, appName, serviceName } = props;
   const [service, setService] = useState<Array<ServiceInterface> | any>([]);
   const [loading, setLoading] = useState(true);
+  const [status, setStatus] = useState("");
+  const [selectedHour, setSelectedHour] = useState<any | null>();
+  const [selectedDate, setSelectedDate] = useState<any | null>();
 
   useEffect(() => {
     getServiceHistory(serviceName, serviceName).then((res) => {
@@ -41,10 +44,20 @@ export default function ServiceHistory(props: Props): JSX.Element {
 
   let messages = JSON.parse(response);
 
-  //Sets the date selected by the user.
-  const [selectedDate, setSelectedDate] = useState<any | null>();
+
+  //Sets the status to the one chosen by the user.
+  const handleSelect = (event: any) => {
+    setStatus(event.target.value);
+  };
+
+  //Sets the date to the one selected by the user.
   const handleDateChange = (date: any) => {
     setSelectedDate(date ? date.substr(0, 10) : date);
+  };
+
+  //Sets the hour to the one selected by the user.
+  const handleHourChange = (hour: any) => {
+    setSelectedHour(convertTime12to24(hour));
   };
 
   //Converts 12h time to 24h time.
@@ -64,11 +77,6 @@ export default function ServiceHistory(props: Props): JSX.Element {
     return `${hours}:${minutes}`;
   };
 
-  //Sets the hour selected by the user.
-  const [selectedHour, setSelectedHour] = useState<any | null>();
-  const handleHourChange = (hour: any) => {
-    setSelectedHour(convertTime12to24(hour));
-  };
 
   //Checks if the message is healthy or unhealthy and returns the message created date.
   const checkMessageStatus = (message: any) => {
@@ -77,12 +85,6 @@ export default function ServiceHistory(props: Props): JSX.Element {
         return message.created;
       }
     }
-  };
-
-  //Sets the status to the one chosen by the user.
-  const [status, setStatus] = useState("");
-  const handleSelect = (event: any) => {
-    setStatus(event.target.value);
   };
 
   //Filters the messages according to the status and date choosen by the user.
@@ -184,8 +186,7 @@ export default function ServiceHistory(props: Props): JSX.Element {
               healthy={checkServiceStatus(service.containers)}
             />
           </Grid>
-        );
-      })}
+      )})}
     </>
   );
 }
