@@ -3,8 +3,7 @@ import "./ServiceHistory.css";
 
 // Request
 import { getServiceHistory } from "../../../../resources/requests";
-// Scripts
-import { firstLetterToUpperCase } from "../../../../resources/scripts";
+
 // Components
 import ServiceItemRow from "./ServiceItemRow/ServiceItemRow";
 import DateSearchBar from "../../../Search/DateSearchBar";
@@ -16,7 +15,6 @@ import {
   ContainerInterface,
 } from "../../../../resources/interfaces";
 
-import moment from "moment";
 
 interface Props {
   appName: string;
@@ -44,13 +42,17 @@ export default function ServiceHistory(props: Props): JSX.Element {
   let messages = JSON.parse(response);
 
   //Sets the date selected by the user.
-  const [selectedDate, setSelectedDate] = useState();
+  const [selectedDate, setSelectedDate] = useState<any | null>();
   const handleDateChange = (date: any) => {
-    setSelectedDate(date.substr(0, 10));
+    setSelectedDate(date ? date.substr(0, 10) : date);
   };
 
   //Converts 12h time to 24h time.
-  const convertTime12to24 = (time12h: any) => {
+  const convertTime12to24 = (time12h: any | null) => {
+    if(!time12h){
+      return null;
+    }
+
     const [time, modifier] = time12h.split(" ");
     let [hours, minutes] = time.split(":");
 
@@ -64,7 +66,7 @@ export default function ServiceHistory(props: Props): JSX.Element {
   };
 
   //Sets the hour selected by the user.
-  const [selectedHour, setSelectedHour] = useState();
+  const [selectedHour, setSelectedHour] = useState<any | null>();
   const handleHourChange = (hour: any) => {
     setSelectedHour(convertTime12to24(hour));
   };
@@ -103,12 +105,10 @@ export default function ServiceHistory(props: Props): JSX.Element {
         } else {
           return message;
         }
-        break;
       case "unhealthy":
         if (selectedDate && selectedHour) {
           return (
             messageCreatedDate === selectedDate &&
-            message.created === checkMessageStatus(message) &&
             messageCreatedHour === selectedHour &&
             message.created === checkMessageStatus(message)
           );
@@ -126,19 +126,18 @@ export default function ServiceHistory(props: Props): JSX.Element {
         if (selectedDate && selectedHour) {
           return (
             messageCreatedDate === selectedDate &&
-            message.created != checkMessageStatus(message) &&
             messageCreatedHour === selectedHour &&
-            message.created === checkMessageStatus(message)
+            message.created !== checkMessageStatus(message)
           );
         } else if (selectedDate || selectedHour) {
           return (
             (messageCreatedDate === selectedDate &&
-              message.created != checkMessageStatus(message)) ||
+              message.created !== checkMessageStatus(message)) ||
             (messageCreatedHour === selectedHour &&
-              message.created != checkMessageStatus(message))
+              message.created !== checkMessageStatus(message))
           );
         } else {
-          return message.created != checkMessageStatus(message);
+          return message.created !== checkMessageStatus(message);
         }
       default:
         return message;

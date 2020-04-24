@@ -14,7 +14,7 @@ import {
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import { MaterialUiPickersDate } from "@material-ui/pickers/typings/date";
+import ClearIcon from '@material-ui/icons/Clear';
 
 interface Props {
   onChange: (event: any) => void;
@@ -45,6 +45,8 @@ export default function DateAndTimePickers(props: Props): JSX.Element {
   const cleanFilter = () => {
     setSelectedDate(null)
     setSelectedHour(null)
+    onDateChange(null)
+    onHourChange(null)
   }
 
   return (
@@ -98,7 +100,7 @@ export default function DateAndTimePickers(props: Props): JSX.Element {
           </div>
 
          <div className="button-container">
-          <button onClick={cleanFilter} className="clean-filter-button">Clean Filter</button>
+          <button onClick={cleanFilter} className="clean-filter-button"><ClearIcon fontSize="small"/></button>
           </div>
         </Grid>
       </MuiPickersUtilsProvider>
