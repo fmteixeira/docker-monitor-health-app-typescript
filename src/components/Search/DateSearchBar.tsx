@@ -91,7 +91,6 @@ export default function DateAndTimePickers(props: Props): JSX.Element {
                 }}
                 className="select-status"
               >
-                <option value={"status"}>Choose status</option>
                 <option value={"all"}>All</option>
                 <option value={"healthy"}>Healthy</option>
                 <option value={"unhealthy"}>Unhealthy</option>

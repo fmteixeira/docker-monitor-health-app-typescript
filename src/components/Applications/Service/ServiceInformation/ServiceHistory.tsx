@@ -52,7 +52,6 @@ export default function ServiceHistory(props: Props): JSX.Element {
     if(!time12h){
       return null;
     }
-
     const [time, modifier] = time12h.split(" ");
     let [hours, minutes] = time.split(":");
 
@@ -91,20 +90,6 @@ export default function ServiceHistory(props: Props): JSX.Element {
     let messageCreatedDate = message.created.substr(0, 10);
     let messageCreatedHour = message.created.substr(11, 5);
     switch (status) {
-      case "all":
-        if (selectedDate && selectedHour) {
-          return (
-            messageCreatedDate === selectedDate &&
-            messageCreatedHour === selectedHour
-          );
-        } else if (selectedDate || selectedHour) {
-          return (
-            messageCreatedDate === selectedDate ||
-            messageCreatedHour === selectedHour
-          );
-        } else {
-          return message;
-        }
       case "unhealthy":
         if (selectedDate && selectedHour) {
           return (
@@ -140,7 +125,19 @@ export default function ServiceHistory(props: Props): JSX.Element {
           return message.created !== checkMessageStatus(message);
         }
       default:
-        return message;
+        if (selectedDate && selectedHour) {
+          return (
+            messageCreatedDate === selectedDate &&
+            messageCreatedHour === selectedHour
+          );
+        } else if (selectedDate || selectedHour) {
+          return (
+            messageCreatedDate === selectedDate ||
+            messageCreatedHour === selectedHour
+          );
+        } else {
+          return message;
+        }
     }
   });
 
