@@ -23,7 +23,7 @@ function App(props: Props): JSX.Element {
     if (args.length === 0) {
       title = "Applications"
     } else {
-      title = args.join(" ") + " Messages";
+      title = args.join(" ");
     }
     setHeaderTitle(title);
   }

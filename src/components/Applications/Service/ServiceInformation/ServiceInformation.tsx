@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./ServiceInformation.css";
 //Script
 import { firstLetterToUpperCase } from "../../../../resources/scripts";
@@ -18,7 +18,7 @@ interface Props {
   serviceName: string;
   service: ServiceInterface;
   handleBackButtonClick: () => void;
-  handleHeaderTitle: () => void;
+  handleHeaderTitle: (...args: string[]) => void;
 }
 
 const useStyles = makeStyles({
@@ -43,6 +43,10 @@ export default function ServiceInformation(props: Props): JSX.Element {
   const { appName, serviceName, service, handleHeaderTitle } = props;
   const [backButton, setBackButton] = useState(false);
   const classes = useStyles();
+
+  useEffect(() => {
+    handleHeaderTitle(firstLetterToUpperCase(appName), firstLetterToUpperCase(serviceName), service.created);
+  }, [])
 
   const handleBackButtonClick = (): void => {
     setBackButton(true);

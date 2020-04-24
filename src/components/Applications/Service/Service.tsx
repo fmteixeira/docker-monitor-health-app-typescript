@@ -25,8 +25,8 @@ export default function Service(props: Props): JSX.Element {
   };
 
   useEffect(() => {
-    handleHeaderTitle(firstLetterToUpperCase(appName), firstLetterToUpperCase(serviceName));
-  })
+    handleHeaderTitle(firstLetterToUpperCase(appName), firstLetterToUpperCase(serviceName), "Messages");
+  }, [])
 
   return view ? <ServiceInformation appName={appName} serviceName={serviceName} service={service} handleBackButtonClick={handleBackButtonClick} handleHeaderTitle={handleHeaderTitle} /> : (
     <>
