@@ -1,15 +1,18 @@
 body {
   color: white;
-  background-color: #36475F;
+  background: rgb(71, 95, 125);
+  background: radial-gradient(
+    circle,
+    rgba(71, 95, 125, 1) 0%,
+    rgba(52, 75, 103, 1) 100%
+  );
 }
 
 .App-logo {
   height: 40vmin;
 }
 
-
 .App-header {
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -18,4 +21,3 @@ body {
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
