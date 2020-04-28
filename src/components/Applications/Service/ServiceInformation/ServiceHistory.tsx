@@ -7,6 +7,7 @@ import { getServiceHistory } from "../../../../resources/requests";
 // Components
 import ServiceItemRow from "./ServiceItemRow/ServiceItemRow";
 import DateSearchBar from "../../../Search/DateSearchBar";
+import NoDataReceivedItemRow from "./ServiceItemRow/NoDataReceivedItemRow";
 
 // Material-UI
 import Grid from "@material-ui/core/Grid";
@@ -210,8 +211,7 @@ export default function ServiceHistory(props: Props): JSX.Element {
                 key={index}
                 className="message"
               >
-                <ServiceItemRow name={`${expiresDate.toLocaleString()} | No data received`}
-                  healthy={false} />
+                <NoDataReceivedItemRow name={`${expiresDate.toLocaleString()} | No data received`}/>
               </Grid>
 
             ) :
