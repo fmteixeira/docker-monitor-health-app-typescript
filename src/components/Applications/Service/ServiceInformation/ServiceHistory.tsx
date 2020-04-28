@@ -14,6 +14,7 @@ import {
   ServiceInterface,
   ContainerInterface,
 } from "../../../../resources/interfaces";
+import { parse } from "url";
 
 
 interface Props {
@@ -34,11 +35,41 @@ export default function ServiceHistory(props: Props): JSX.Element {
   useEffect(() => {
     getServiceHistory(serviceName, serviceName).then((res) => {
       if (res) {
+        for (let key in res) {
+          let localDate = new Date().toISOString();
+          let index = Object.keys(res).indexOf(key);
+          let index2 = (index < res.length) ? index + 1 : index;
+
+          if (Date.parse(res[0].expires) < Date.parse(localDate) &&
+            res[0].containers.length != 0) {
+            let noDataReceived: ServiceInterface = {
+              serverName: res[0].serverName,
+              appName: res[0].appName,
+              created: res[0].created,
+              expires: res[0].expires,
+              containers: []
+            };
+            res.splice(0, 0, noDataReceived);
+          }
+
+          if (Date.parse(res[index].expires) < Date.parse(res[index2].created) &&
+            res[index].containers.length != 0) {
+            let noDataReceived: ServiceInterface = {
+              serverName: res[index].serverName,
+              appName: res[index].appName,
+              created: res[index].created,
+              expires: res[index].expires,
+              containers: []
+            };
+            res.splice(index2, 0, noDataReceived);
+          }
+        }
         setService(res);
         setLoading(false);
       }
     });
   }, []);
+
 
   const response = JSON.stringify(service, undefined, 2);
 
@@ -62,7 +93,7 @@ export default function ServiceHistory(props: Props): JSX.Element {
 
   //Converts 12h time to 24h time.
   const convertTime12to24 = (time12h: any | null) => {
-    if(!time12h){
+    if (!time12h) {
       return null;
     }
     const [time, modifier] = time12h.split(" ");
@@ -145,7 +176,6 @@ export default function ServiceHistory(props: Props): JSX.Element {
 
   const checkServiceStatus = (containers: Array<ContainerInterface>) => {
     for (let i = 0; i < containers.length; i++) {
-      console.log(JSON.parse(JSON.stringify(containers[i])).healthy);
       if (!JSON.parse(JSON.stringify(containers[i])).healthy) {
         return false;
       }
@@ -156,37 +186,55 @@ export default function ServiceHistory(props: Props): JSX.Element {
   return loading ? (
     <p>Not loaded</p>
   ) : (
-    <>
-      <DateSearchBar
-        onChange={handleSelect}
-        onDateChange={handleDateChange}
-        onHourChange={handleHourChange}
-      />
+      <>
+        <DateSearchBar
+          onChange={handleSelect}
+          onDateChange={handleDateChange}
+          onHourChange={handleHourChange}
+        />
 
-      {/* <h5 className="containers">{`${firstLetterToUpperCase(
+        {/* <h5 className="containers">{`${firstLetterToUpperCase(
           appName
         )} ${firstLetterToUpperCase(serviceName)} Messages:`}</h5> */}
-      {filteredMessages.map((service: ServiceInterface, index: number) => {
-        let date: string =
-          service.created.substr(0, 10) + " " + service.created.substr(11, 8);
-        let createdDate = new Date(date);
-        return (
-          <Grid
-            container
-            key={index}
-            className="message"
-            onClick={() => handleMessageClick(service)}
-          >
-            <ServiceItemRow
-              name={
-                createdDate.toLocaleString() +
-                " | Containers: " +
-                service.containers.length
-              }
-              healthy={checkServiceStatus(service.containers)}
-            />
-          </Grid>
-      )})}
-    </>
-  );
+        {filteredMessages.map((service: ServiceInterface, index: number) => {
+          let date: string =
+            service.created.substr(0, 10) + " " + service.created.substr(11, 8);
+          let date1: string =
+            service.expires.substr(0, 10) + " " + service.expires.substr(11, 8);
+          let createdDate = new Date(date);
+          let expiresDate = new Date(date1);
+          return (
+            service.containers.length == 0 ? (
+              <Grid
+                container
+                key={index}
+                className="message"
+              >
+                <ServiceItemRow name={`${expiresDate.toLocaleString()} | No data received`}
+                  healthy={false} />
+              </Grid>
+
+            ) :
+
+              <Grid
+                container
+                key={index}
+                className="message"
+                onClick={() => handleMessageClick(service)}
+              >
+
+
+                <ServiceItemRow
+                  name={
+                    createdDate.toLocaleString() +
+                    " | Containers: " +
+                    service.containers.length
+                  }
+                  healthy={checkServiceStatus(service.containers)}
+                />
+              </Grid>
+          )
+        })}
+      </>
+    );
 }
