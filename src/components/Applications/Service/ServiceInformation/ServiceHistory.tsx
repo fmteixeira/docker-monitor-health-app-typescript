@@ -139,7 +139,7 @@ export default function ServiceHistory(props: Props): JSX.Element {
               message.created === checkMessageStatus(message))
           );
         } else {
-          return message.created === checkMessageStatus(message);
+          return message.created === checkMessageStatus(message) || message.containers.length == 0
         }
       case "healthy":
         if (selectedDate && selectedHour) {
@@ -156,7 +156,7 @@ export default function ServiceHistory(props: Props): JSX.Element {
               message.created !== checkMessageStatus(message))
           );
         } else {
-          return message.created !== checkMessageStatus(message);
+          return message.created !== checkMessageStatus(message) && message.containers.length != 0;
         }
       default:
         if (selectedDate && selectedHour) {
@@ -211,7 +211,7 @@ export default function ServiceHistory(props: Props): JSX.Element {
                 key={index}
                 className="message"
               >
-                <NoDataReceivedItemRow name={`${expiresDate.toLocaleString()} | No data received`}/>
+                <NoDataReceivedItemRow name={`${expiresDate.toLocaleString()} | No data received`} />
               </Grid>
 
             ) :
