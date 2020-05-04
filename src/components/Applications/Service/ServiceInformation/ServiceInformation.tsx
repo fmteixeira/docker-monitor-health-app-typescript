@@ -19,6 +19,7 @@ interface Props {
   service: ServiceInterface;
   handleBackButtonClick: () => void;
   handleHeaderTitle: (...args: string[]) => void;
+  setView: () => void;
 }
 
 const useStyles = makeStyles({
@@ -40,8 +41,7 @@ const useStyles = makeStyles({
 });
 
 export default function ServiceInformation(props: Props): JSX.Element {
-  const { appName, serviceName, service, handleHeaderTitle } = props;
-  const [backButton, setBackButton] = useState(false);
+  const { appName, serviceName, service, handleHeaderTitle, setView } = props;
   const classes = useStyles();
 
   let date: string = service.created.substr(0, 10) + " " + service.created.substr(11, 8);
@@ -50,13 +50,9 @@ export default function ServiceInformation(props: Props): JSX.Element {
     handleHeaderTitle(firstLetterToUpperCase(appName), firstLetterToUpperCase(serviceName), serviceCreatedDate);
   }, [])
 
-  const handleBackButtonClick = (): void => {
-    setBackButton(true);
-  }
-
-  return backButton ? <Service appName={appName} serviceName={serviceName} handleBackButtonClick={props.handleBackButtonClick} handleHeaderTitle={handleHeaderTitle} /> : (
+  return (
     <>
-      <NavigationBar handleBackButtonClick={handleBackButtonClick} />
+      <NavigationBar handleBackButtonClick={setView} />
       <h5>Service Information</h5>
       <Grid container spacing={3}>
         <Grid item xs={12}>

@@ -24,11 +24,15 @@ export default function Service(props: Props): JSX.Element {
     setView(true);
   };
 
+  const controllView = (): void => {
+    setView(false);
+  };
+
   useEffect(() => {
     handleHeaderTitle(firstLetterToUpperCase(appName), firstLetterToUpperCase(serviceName), "Messages");
   }, [])
 
-  return view ? <ServiceInformation appName={appName} serviceName={serviceName} service={service} handleBackButtonClick={handleBackButtonClick} handleHeaderTitle={handleHeaderTitle} /> : (
+  return view ? <ServiceInformation appName={appName} serviceName={serviceName} service={service} handleBackButtonClick={handleBackButtonClick} handleHeaderTitle={handleHeaderTitle} setView={controllView} /> : (
     <>
       <NavigationBar handleBackButtonClick={handleBackButtonClick} />
       <ServiceHistory appName={appName} serviceName={serviceName} handleMessageClick={handleMessageClick} />
