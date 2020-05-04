@@ -11,7 +11,24 @@
         {
           "Id": "457fd13e19e6c2403c99ea71ed19d497434cf7cfe87e4ee8840241dfdae3d21f",
           "Names": [
-            "/docker-monitor-health-app_lb_1"
+            "/docker-monitor-health-app_lb_1",
+            "/docker-monitor-health-app_lb_test_array",
+            {
+              "test_key_1_string": "test_key_1_string",
+              "test_key_2_number": 12,
+              "test_key_3_array": [
+                "test_key_3_array_element_1",
+                123,
+                {
+                  "test_key_3_object_key_1_string": "test_key_3_object_key_1_string",
+                  "test_key_3_object_key_1_number": 13
+                }
+              ],
+              "test_key_4_object": {
+                "test_key_4_object_key_1_string": "test_key_4_object_key_1_string",
+                "test_key_4_object_key_1_number": 13
+              }
+            }
           ],
           "Image": "jrofurtado/nghttpx-autoreload-with-healthcheck:1.0.0",
           "ImageID": "sha256:93cd4ced2ee718a2e0d30e226b6a358afb08d4e3cd11ec3813dde41db97cc836",
@@ -65,9 +82,7 @@
         },
         {
           "Id": "6293419d2073912a18a4c16ebfb424ca6b713bb06b6c2bf67853882f30de30e1",
-          "Names": [
-            "/docker-monitor-health-app_server_1"
-          ],
+          "Names": ["/docker-monitor-health-app_server_1"],
           "Image": "jrofurtado/docker-monitor-health-server:latest",
           "ImageID": "sha256:15c302eb0c4e6627411b3d3a51631e1eafab8d121a39142f8d586c6618c79942",
           "Command": "docker-entrypoint.sh /bin/sh -c /entrypoint.sh",
@@ -123,9 +138,7 @@
         },
         {
           "Id": "61f3e1af181baebd1ad549df31dd72af6dbf10b4d789e0d95a20c62757889e45",
-          "Names": [
-            "/docker-monitor-health-app_agent_1"
-          ],
+          "Names": ["/docker-monitor-health-app_agent_1"],
           "Image": "jrofurtado/docker-monitor-health-agent:latest",
           "ImageID": "sha256:c436d890c00ddd038d3f6a699938bddc52d48bc1191b13c23b66c08c88a4bbd1",
           "Command": "docker-entrypoint.sh /bin/sh -c /entrypoint.sh",
@@ -179,9 +192,7 @@
         },
         {
           "Id": "6970f2fc84a81756f90352e0f99287e18a4dacbe6ae30a5a8f80025761a71310",
-          "Names": [
-            "/docker-monitor-health-app_auth_1"
-          ],
+          "Names": ["/docker-monitor-health-app_auth_1"],
           "Image": "jrofurtado/keycloak-with-healthcheck:8.0.1",
           "ImageID": "sha256:5f689f80bcdf3bf0528c65ee9ab51e3d6d4a5c4cbbc94d173479918e349d1d2a",
           "Command": "/opt/jboss/tools/docker-entrypoint.sh -b 0.0.0.0",
@@ -256,9 +267,7 @@
         },
         {
           "Id": "008209ecc8c741139c804ac9f386822d25e5629a2cdb1333a128a2d150e46d0b",
-          "Names": [
-            "/docker-monitor-health-app_db_1"
-          ],
+          "Names": ["/docker-monitor-health-app_db_1"],
           "Image": "jrofurtado/mysql-with-healthcheck:5.7.28",
           "ImageID": "sha256:ca8d4bb83805c5ce09e0e8d9f9f441ffa9aef7a07a395121844dd8687bac12d5",
           "Command": "docker-entrypoint.sh mysqld",
@@ -331,9 +340,7 @@
         },
         {
           "Id": "0c8450b20a505e4e4aeab5da81038ac1e9481325f887c1c512ed7867c52fc365",
-          "Names": [
-            "/sweet_rhodes"
-          ],
+          "Names": ["/sweet_rhodes"],
           "Image": "sha256:e6e51a8a563b20e19d79db755e6c9055f5339688e56639867c5e5b3dcb511e79",
           "ImageID": "sha256:e6e51a8a563b20e19d79db755e6c9055f5339688e56639867c5e5b3dcb511e79",
           "Command": "/bin/sh -c 'npm run build'",
@@ -369,9 +376,7 @@
         },
         {
           "Id": "9aefd40278f25a14fc90b71c3a30f1e1e11cb5953501b7a7a48946950b982527",
-          "Names": [
-            "/fervent_archimedes"
-          ],
+          "Names": ["/fervent_archimedes"],
           "Image": "sha256:008069f87c82fde02de96f338b9daf815d8f96eed9a31fa160bf0fb7b95201d0",
           "ImageID": "sha256:008069f87c82fde02de96f338b9daf815d8f96eed9a31fa160bf0fb7b95201d0",
           "Command": "/bin/sh -c 'npm run build'",
@@ -407,9 +412,7 @@
         },
         {
           "Id": "d0e6ee5a4421328a8bbb30697934d413dd7296c559e31e5da31aaae8538503d4",
-          "Names": [
-            "/gracious_cartwright"
-          ],
+          "Names": ["/gracious_cartwright"],
           "Image": "fooapp:v2",
           "ImageID": "sha256:e5620dcaa8fe0a6749b8f4914367e70353d7b64fbba6d449f34a93cf83e5632f",
           "Command": "nginx -g 'daemon off;'",
@@ -447,9 +450,7 @@
         },
         {
           "Id": "d5d2813a9c006db3c3f8dc9e48f7caeba5c3534f5102f5e3fa3348a6ab0b7bf9",
-          "Names": [
-            "/objective_euclid"
-          ],
+          "Names": ["/objective_euclid"],
           "Image": "fooapp:v2",
           "ImageID": "sha256:e5620dcaa8fe0a6749b8f4914367e70353d7b64fbba6d449f34a93cf83e5632f",
           "Command": "nginx -g 'daemon off;'",
@@ -487,9 +488,7 @@
         },
         {
           "Id": "3a02af9d3e4e66fbd2afd413cc756cf96f13f8e74b5758ff71cb44507b0e92f4",
-          "Names": [
-            "/amazing_chandrasekhar"
-          ],
+          "Names": ["/amazing_chandrasekhar"],
           "Image": "fooapp:v2",
           "ImageID": "sha256:e5620dcaa8fe0a6749b8f4914367e70353d7b64fbba6d449f34a93cf83e5632f",
           "Command": "nginx -g 'daemon off;'",
@@ -527,9 +526,7 @@
         },
         {
           "Id": "a48243337ffc31b51498ac9c38d8377ed43bea8c838dcc61c90b6d19e6074abc",
-          "Names": [
-            "/gallant_lovelace"
-          ],
+          "Names": ["/gallant_lovelace"],
           "Image": "sha256:0ee195bcdd17bda2a89bd5dd10d5b8b03e4d94b1fbe2a402d89c249f6c694983",
           "ImageID": "sha256:0ee195bcdd17bda2a89bd5dd10d5b8b03e4d94b1fbe2a402d89c249f6c694983",
           "Command": "nginx -g 'daemon off;'",
@@ -567,9 +564,7 @@
         },
         {
           "Id": "45530ce69a32ae7fd85d567a664ccb3d3dbaa17e2abf80ef2b3894dc606ae37d",
-          "Names": [
-            "/blissful_shamir"
-          ],
+          "Names": ["/blissful_shamir"],
           "Image": "sha256:0ee195bcdd17bda2a89bd5dd10d5b8b03e4d94b1fbe2a402d89c249f6c694983",
           "ImageID": "sha256:0ee195bcdd17bda2a89bd5dd10d5b8b03e4d94b1fbe2a402d89c249f6c694983",
           "Command": "nginx -g 'daemon off;'",
@@ -607,9 +602,7 @@
         },
         {
           "Id": "159e492130053ba8f6cd0624949cac289fc01891846be7ed68572aa26462a8c5",
-          "Names": [
-            "/sad_goodall"
-          ],
+          "Names": ["/sad_goodall"],
           "Image": "fooapp:v1",
           "ImageID": "sha256:e5620dcaa8fe0a6749b8f4914367e70353d7b64fbba6d449f34a93cf83e5632f",
           "Command": "nginx -g 'daemon off;'",
@@ -655,32 +648,14 @@
         "Images": 392,
         "Driver": "overlay2",
         "DriverStatus": [
-          [
-            "Backing Filesystem",
-            "<unknown>"
-          ],
-          [
-            "Supports d_type",
-            "true"
-          ],
-          [
-            "Native Overlay Diff",
-            "true"
-          ]
+          ["Backing Filesystem", "<unknown>"],
+          ["Supports d_type", "true"],
+          ["Native Overlay Diff", "true"]
         ],
         "SystemStatus": null,
         "Plugins": {
-          "Volume": [
-            "local"
-          ],
-          "Network": [
-            "bridge",
-            "host",
-            "ipvlan",
-            "macvlan",
-            "null",
-            "overlay"
-          ],
+          "Volume": ["local"],
+          "Network": ["bridge", "host", "ipvlan", "macvlan", "null", "overlay"],
           "Authorization": null,
           "Log": [
             "awslogs",
@@ -723,9 +698,7 @@
         "RegistryConfig": {
           "AllowNondistributableArtifactsCIDRs": [],
           "AllowNondistributableArtifactsHostnames": [],
-          "InsecureRegistryCIDRs": [
-            "127.0.0.0/8"
-          ],
+          "InsecureRegistryCIDRs": ["127.0.0.0/8"],
           "IndexConfigs": {
             "docker.io": {
               "Name": "docker.io",
@@ -778,9 +751,7 @@
           "ID": "fec3683",
           "Expected": "fec3683"
         },
-        "SecurityOptions": [
-          "name=seccomp,profile=default"
-        ],
+        "SecurityOptions": ["name=seccomp,profile=default"],
         "ProductLicense": "Community Engine",
         "Warnings": null
       },
@@ -796,9 +767,7 @@
       "containers": [
         {
           "Id": "457fd13e19e6c2403c99ea71ed19d497434cf7cfe87e4ee8840241dfdae3d21f",
-          "Names": [
-            "/docker-monitor-health-app_lb_1"
-          ],
+          "Names": ["/docker-monitor-health-app_lb_1"],
           "Image": "jrofurtado/nghttpx-autoreload-with-healthcheck:1.0.0",
           "ImageID": "sha256:93cd4ced2ee718a2e0d30e226b6a358afb08d4e3cd11ec3813dde41db97cc836",
           "Command": "/bin/sh -c /entrypoint.sh",
@@ -851,9 +820,7 @@
         },
         {
           "Id": "6293419d2073912a18a4c16ebfb424ca6b713bb06b6c2bf67853882f30de30e1",
-          "Names": [
-            "/docker-monitor-health-app_server_1"
-          ],
+          "Names": ["/docker-monitor-health-app_server_1"],
           "Image": "jrofurtado/docker-monitor-health-server:latest",
           "ImageID": "sha256:15c302eb0c4e6627411b3d3a51631e1eafab8d121a39142f8d586c6618c79942",
           "Command": "docker-entrypoint.sh /bin/sh -c /entrypoint.sh",
@@ -909,9 +876,7 @@
         },
         {
           "Id": "61f3e1af181baebd1ad549df31dd72af6dbf10b4d789e0d95a20c62757889e45",
-          "Names": [
-            "/docker-monitor-health-app_agent_1"
-          ],
+          "Names": ["/docker-monitor-health-app_agent_1"],
           "Image": "jrofurtado/docker-monitor-health-agent:latest",
           "ImageID": "sha256:c436d890c00ddd038d3f6a699938bddc52d48bc1191b13c23b66c08c88a4bbd1",
           "Command": "docker-entrypoint.sh /bin/sh -c /entrypoint.sh",
@@ -965,9 +930,7 @@
         },
         {
           "Id": "6970f2fc84a81756f90352e0f99287e18a4dacbe6ae30a5a8f80025761a71310",
-          "Names": [
-            "/docker-monitor-health-app_auth_1"
-          ],
+          "Names": ["/docker-monitor-health-app_auth_1"],
           "Image": "jrofurtado/keycloak-with-healthcheck:8.0.1",
           "ImageID": "sha256:5f689f80bcdf3bf0528c65ee9ab51e3d6d4a5c4cbbc94d173479918e349d1d2a",
           "Command": "/opt/jboss/tools/docker-entrypoint.sh -b 0.0.0.0",
@@ -1042,9 +1005,7 @@
         },
         {
           "Id": "008209ecc8c741139c804ac9f386822d25e5629a2cdb1333a128a2d150e46d0b",
-          "Names": [
-            "/docker-monitor-health-app_db_1"
-          ],
+          "Names": ["/docker-monitor-health-app_db_1"],
           "Image": "jrofurtado/mysql-with-healthcheck:5.7.28",
           "ImageID": "sha256:ca8d4bb83805c5ce09e0e8d9f9f441ffa9aef7a07a395121844dd8687bac12d5",
           "Command": "docker-entrypoint.sh mysqld",
@@ -1117,9 +1078,7 @@
         },
         {
           "Id": "0c8450b20a505e4e4aeab5da81038ac1e9481325f887c1c512ed7867c52fc365",
-          "Names": [
-            "/sweet_rhodes"
-          ],
+          "Names": ["/sweet_rhodes"],
           "Image": "sha256:e6e51a8a563b20e19d79db755e6c9055f5339688e56639867c5e5b3dcb511e79",
           "ImageID": "sha256:e6e51a8a563b20e19d79db755e6c9055f5339688e56639867c5e5b3dcb511e79",
           "Command": "/bin/sh -c 'npm run build'",
@@ -1155,9 +1114,7 @@
         },
         {
           "Id": "9aefd40278f25a14fc90b71c3a30f1e1e11cb5953501b7a7a48946950b982527",
-          "Names": [
-            "/fervent_archimedes"
-          ],
+          "Names": ["/fervent_archimedes"],
           "Image": "sha256:008069f87c82fde02de96f338b9daf815d8f96eed9a31fa160bf0fb7b95201d0",
           "ImageID": "sha256:008069f87c82fde02de96f338b9daf815d8f96eed9a31fa160bf0fb7b95201d0",
           "Command": "/bin/sh -c 'npm run build'",
@@ -1193,9 +1150,7 @@
         },
         {
           "Id": "d0e6ee5a4421328a8bbb30697934d413dd7296c559e31e5da31aaae8538503d4",
-          "Names": [
-            "/gracious_cartwright"
-          ],
+          "Names": ["/gracious_cartwright"],
           "Image": "fooapp:v2",
           "ImageID": "sha256:e5620dcaa8fe0a6749b8f4914367e70353d7b64fbba6d449f34a93cf83e5632f",
           "Command": "nginx -g 'daemon off;'",
@@ -1233,9 +1188,7 @@
         },
         {
           "Id": "d5d2813a9c006db3c3f8dc9e48f7caeba5c3534f5102f5e3fa3348a6ab0b7bf9",
-          "Names": [
-            "/objective_euclid"
-          ],
+          "Names": ["/objective_euclid"],
           "Image": "fooapp:v2",
           "ImageID": "sha256:e5620dcaa8fe0a6749b8f4914367e70353d7b64fbba6d449f34a93cf83e5632f",
           "Command": "nginx -g 'daemon off;'",
@@ -1273,9 +1226,7 @@
         },
         {
           "Id": "3a02af9d3e4e66fbd2afd413cc756cf96f13f8e74b5758ff71cb44507b0e92f4",
-          "Names": [
-            "/amazing_chandrasekhar"
-          ],
+          "Names": ["/amazing_chandrasekhar"],
           "Image": "fooapp:v2",
           "ImageID": "sha256:e5620dcaa8fe0a6749b8f4914367e70353d7b64fbba6d449f34a93cf83e5632f",
           "Command": "nginx -g 'daemon off;'",
@@ -1313,9 +1264,7 @@
         },
         {
           "Id": "a48243337ffc31b51498ac9c38d8377ed43bea8c838dcc61c90b6d19e6074abc",
-          "Names": [
-            "/gallant_lovelace"
-          ],
+          "Names": ["/gallant_lovelace"],
           "Image": "sha256:0ee195bcdd17bda2a89bd5dd10d5b8b03e4d94b1fbe2a402d89c249f6c694983",
           "ImageID": "sha256:0ee195bcdd17bda2a89bd5dd10d5b8b03e4d94b1fbe2a402d89c249f6c694983",
           "Command": "nginx -g 'daemon off;'",
@@ -1353,9 +1302,7 @@
         },
         {
           "Id": "45530ce69a32ae7fd85d567a664ccb3d3dbaa17e2abf80ef2b3894dc606ae37d",
-          "Names": [
-            "/blissful_shamir"
-          ],
+          "Names": ["/blissful_shamir"],
           "Image": "sha256:0ee195bcdd17bda2a89bd5dd10d5b8b03e4d94b1fbe2a402d89c249f6c694983",
           "ImageID": "sha256:0ee195bcdd17bda2a89bd5dd10d5b8b03e4d94b1fbe2a402d89c249f6c694983",
           "Command": "nginx -g 'daemon off;'",
@@ -1393,9 +1340,7 @@
         },
         {
           "Id": "159e492130053ba8f6cd0624949cac289fc01891846be7ed68572aa26462a8c5",
-          "Names": [
-            "/sad_goodall"
-          ],
+          "Names": ["/sad_goodall"],
           "Image": "fooapp:v1",
           "ImageID": "sha256:e5620dcaa8fe0a6749b8f4914367e70353d7b64fbba6d449f34a93cf83e5632f",
           "Command": "nginx -g 'daemon off;'",
@@ -1441,32 +1386,14 @@
         "Images": 392,
         "Driver": "overlay2",
         "DriverStatus": [
-          [
-            "Backing Filesystem",
-            "<unknown>"
-          ],
-          [
-            "Supports d_type",
-            "true"
-          ],
-          [
-            "Native Overlay Diff",
-            "true"
-          ]
+          ["Backing Filesystem", "<unknown>"],
+          ["Supports d_type", "true"],
+          ["Native Overlay Diff", "true"]
         ],
         "SystemStatus": null,
         "Plugins": {
-          "Volume": [
-            "local"
-          ],
-          "Network": [
-            "bridge",
-            "host",
-            "ipvlan",
-            "macvlan",
-            "null",
-            "overlay"
-          ],
+          "Volume": ["local"],
+          "Network": ["bridge", "host", "ipvlan", "macvlan", "null", "overlay"],
           "Authorization": null,
           "Log": [
             "awslogs",
@@ -1509,9 +1436,7 @@
         "RegistryConfig": {
           "AllowNondistributableArtifactsCIDRs": [],
           "AllowNondistributableArtifactsHostnames": [],
-          "InsecureRegistryCIDRs": [
-            "127.0.0.0/8"
-          ],
+          "InsecureRegistryCIDRs": ["127.0.0.0/8"],
           "IndexConfigs": {
             "docker.io": {
               "Name": "docker.io",
@@ -1564,9 +1489,7 @@
           "ID": "fec3683",
           "Expected": "fec3683"
         },
-        "SecurityOptions": [
-          "name=seccomp,profile=default"
-        ],
+        "SecurityOptions": ["name=seccomp,profile=default"],
         "ProductLicense": "Community Engine",
         "Warnings": null
       },
@@ -1582,9 +1505,7 @@
       "containers": [
         {
           "Id": "457fd13e19e6c2403c99ea71ed19d497434cf7cfe87e4ee8840241dfdae3d21f",
-          "Names": [
-            "/docker-monitor-health-app_lb_1"
-          ],
+          "Names": ["/docker-monitor-health-app_lb_1"],
           "Image": "jrofurtado/nghttpx-autoreload-with-healthcheck:1.0.0",
           "ImageID": "sha256:93cd4ced2ee718a2e0d30e226b6a358afb08d4e3cd11ec3813dde41db97cc836",
           "Command": "/bin/sh -c /entrypoint.sh",
@@ -1637,9 +1558,7 @@
         },
         {
           "Id": "6293419d2073912a18a4c16ebfb424ca6b713bb06b6c2bf67853882f30de30e1",
-          "Names": [
-            "/docker-monitor-health-app_server_1"
-          ],
+          "Names": ["/docker-monitor-health-app_server_1"],
           "Image": "jrofurtado/docker-monitor-health-server:latest",
           "ImageID": "sha256:15c302eb0c4e6627411b3d3a51631e1eafab8d121a39142f8d586c6618c79942",
           "Command": "docker-entrypoint.sh /bin/sh -c /entrypoint.sh",
@@ -1695,9 +1614,7 @@
         },
         {
           "Id": "61f3e1af181baebd1ad549df31dd72af6dbf10b4d789e0d95a20c62757889e45",
-          "Names": [
-            "/docker-monitor-health-app_agent_1"
-          ],
+          "Names": ["/docker-monitor-health-app_agent_1"],
           "Image": "jrofurtado/docker-monitor-health-agent:latest",
           "ImageID": "sha256:c436d890c00ddd038d3f6a699938bddc52d48bc1191b13c23b66c08c88a4bbd1",
           "Command": "docker-entrypoint.sh /bin/sh -c /entrypoint.sh",
@@ -1751,9 +1668,7 @@
         },
         {
           "Id": "6970f2fc84a81756f90352e0f99287e18a4dacbe6ae30a5a8f80025761a71310",
-          "Names": [
-            "/docker-monitor-health-app_auth_1"
-          ],
+          "Names": ["/docker-monitor-health-app_auth_1"],
           "Image": "jrofurtado/keycloak-with-healthcheck:8.0.1",
           "ImageID": "sha256:5f689f80bcdf3bf0528c65ee9ab51e3d6d4a5c4cbbc94d173479918e349d1d2a",
           "Command": "/opt/jboss/tools/docker-entrypoint.sh -b 0.0.0.0",
@@ -1828,9 +1743,7 @@
         },
         {
           "Id": "008209ecc8c741139c804ac9f386822d25e5629a2cdb1333a128a2d150e46d0b",
-          "Names": [
-            "/docker-monitor-health-app_db_1"
-          ],
+          "Names": ["/docker-monitor-health-app_db_1"],
           "Image": "jrofurtado/mysql-with-healthcheck:5.7.28",
           "ImageID": "sha256:ca8d4bb83805c5ce09e0e8d9f9f441ffa9aef7a07a395121844dd8687bac12d5",
           "Command": "docker-entrypoint.sh mysqld",
@@ -1903,9 +1816,7 @@
         },
         {
           "Id": "0c8450b20a505e4e4aeab5da81038ac1e9481325f887c1c512ed7867c52fc365",
-          "Names": [
-            "/sweet_rhodes"
-          ],
+          "Names": ["/sweet_rhodes"],
           "Image": "sha256:e6e51a8a563b20e19d79db755e6c9055f5339688e56639867c5e5b3dcb511e79",
           "ImageID": "sha256:e6e51a8a563b20e19d79db755e6c9055f5339688e56639867c5e5b3dcb511e79",
           "Command": "/bin/sh -c 'npm run build'",
@@ -1941,9 +1852,7 @@
         },
         {
           "Id": "9aefd40278f25a14fc90b71c3a30f1e1e11cb5953501b7a7a48946950b982527",
-          "Names": [
-            "/fervent_archimedes"
-          ],
+          "Names": ["/fervent_archimedes"],
           "Image": "sha256:008069f87c82fde02de96f338b9daf815d8f96eed9a31fa160bf0fb7b95201d0",
           "ImageID": "sha256:008069f87c82fde02de96f338b9daf815d8f96eed9a31fa160bf0fb7b95201d0",
           "Command": "/bin/sh -c 'npm run build'",
@@ -1979,9 +1888,7 @@
         },
         {
           "Id": "d0e6ee5a4421328a8bbb30697934d413dd7296c559e31e5da31aaae8538503d4",
-          "Names": [
-            "/gracious_cartwright"
-          ],
+          "Names": ["/gracious_cartwright"],
           "Image": "fooapp:v2",
           "ImageID": "sha256:e5620dcaa8fe0a6749b8f4914367e70353d7b64fbba6d449f34a93cf83e5632f",
           "Command": "nginx -g 'daemon off;'",
@@ -2019,9 +1926,7 @@
         },
         {
           "Id": "d5d2813a9c006db3c3f8dc9e48f7caeba5c3534f5102f5e3fa3348a6ab0b7bf9",
-          "Names": [
-            "/objective_euclid"
-          ],
+          "Names": ["/objective_euclid"],
           "Image": "fooapp:v2",
           "ImageID": "sha256:e5620dcaa8fe0a6749b8f4914367e70353d7b64fbba6d449f34a93cf83e5632f",
           "Command": "nginx -g 'daemon off;'",
@@ -2059,9 +1964,7 @@
         },
         {
           "Id": "3a02af9d3e4e66fbd2afd413cc756cf96f13f8e74b5758ff71cb44507b0e92f4",
-          "Names": [
-            "/amazing_chandrasekhar"
-          ],
+          "Names": ["/amazing_chandrasekhar"],
           "Image": "fooapp:v2",
           "ImageID": "sha256:e5620dcaa8fe0a6749b8f4914367e70353d7b64fbba6d449f34a93cf83e5632f",
           "Command": "nginx -g 'daemon off;'",
@@ -2099,9 +2002,7 @@
         },
         {
           "Id": "a48243337ffc31b51498ac9c38d8377ed43bea8c838dcc61c90b6d19e6074abc",
-          "Names": [
-            "/gallant_lovelace"
-          ],
+          "Names": ["/gallant_lovelace"],
           "Image": "sha256:0ee195bcdd17bda2a89bd5dd10d5b8b03e4d94b1fbe2a402d89c249f6c694983",
           "ImageID": "sha256:0ee195bcdd17bda2a89bd5dd10d5b8b03e4d94b1fbe2a402d89c249f6c694983",
           "Command": "nginx -g 'daemon off;'",
@@ -2139,9 +2040,7 @@
         },
         {
           "Id": "45530ce69a32ae7fd85d567a664ccb3d3dbaa17e2abf80ef2b3894dc606ae37d",
-          "Names": [
-            "/blissful_shamir"
-          ],
+          "Names": ["/blissful_shamir"],
           "Image": "sha256:0ee195bcdd17bda2a89bd5dd10d5b8b03e4d94b1fbe2a402d89c249f6c694983",
           "ImageID": "sha256:0ee195bcdd17bda2a89bd5dd10d5b8b03e4d94b1fbe2a402d89c249f6c694983",
           "Command": "nginx -g 'daemon off;'",
@@ -2179,9 +2078,7 @@
         },
         {
           "Id": "159e492130053ba8f6cd0624949cac289fc01891846be7ed68572aa26462a8c5",
-          "Names": [
-            "/sad_goodall"
-          ],
+          "Names": ["/sad_goodall"],
           "Image": "fooapp:v1",
           "ImageID": "sha256:e5620dcaa8fe0a6749b8f4914367e70353d7b64fbba6d449f34a93cf83e5632f",
           "Command": "nginx -g 'daemon off;'",
@@ -2227,32 +2124,14 @@
         "Images": 392,
         "Driver": "overlay2",
         "DriverStatus": [
-          [
-            "Backing Filesystem",
-            "<unknown>"
-          ],
-          [
-            "Supports d_type",
-            "true"
-          ],
-          [
-            "Native Overlay Diff",
-            "true"
-          ]
+          ["Backing Filesystem", "<unknown>"],
+          ["Supports d_type", "true"],
+          ["Native Overlay Diff", "true"]
         ],
         "SystemStatus": null,
         "Plugins": {
-          "Volume": [
-            "local"
-          ],
-          "Network": [
-            "bridge",
-            "host",
-            "ipvlan",
-            "macvlan",
-            "null",
-            "overlay"
-          ],
+          "Volume": ["local"],
+          "Network": ["bridge", "host", "ipvlan", "macvlan", "null", "overlay"],
           "Authorization": null,
           "Log": [
             "awslogs",
@@ -2295,9 +2174,7 @@
         "RegistryConfig": {
           "AllowNondistributableArtifactsCIDRs": [],
           "AllowNondistributableArtifactsHostnames": [],
-          "InsecureRegistryCIDRs": [
-            "127.0.0.0/8"
-          ],
+          "InsecureRegistryCIDRs": ["127.0.0.0/8"],
           "IndexConfigs": {
             "docker.io": {
               "Name": "docker.io",
@@ -2350,9 +2227,7 @@
           "ID": "fec3683",
           "Expected": "fec3683"
         },
-        "SecurityOptions": [
-          "name=seccomp,profile=default"
-        ],
+        "SecurityOptions": ["name=seccomp,profile=default"],
         "ProductLicense": "Community Engine",
         "Warnings": null
       },
@@ -2368,9 +2243,7 @@
       "containers": [
         {
           "Id": "457fd13e19e6c2403c99ea71ed19d497434cf7cfe87e4ee8840241dfdae3d21f",
-          "Names": [
-            "/docker-monitor-health-app_lb_1"
-          ],
+          "Names": ["/docker-monitor-health-app_lb_1"],
           "Image": "jrofurtado/nghttpx-autoreload-with-healthcheck:1.0.0",
           "ImageID": "sha256:93cd4ced2ee718a2e0d30e226b6a358afb08d4e3cd11ec3813dde41db97cc836",
           "Command": "/bin/sh -c /entrypoint.sh",
@@ -2423,9 +2296,7 @@
         },
         {
           "Id": "6293419d2073912a18a4c16ebfb424ca6b713bb06b6c2bf67853882f30de30e1",
-          "Names": [
-            "/docker-monitor-health-app_server_1"
-          ],
+          "Names": ["/docker-monitor-health-app_server_1"],
           "Image": "jrofurtado/docker-monitor-health-server:latest",
           "ImageID": "sha256:15c302eb0c4e6627411b3d3a51631e1eafab8d121a39142f8d586c6618c79942",
           "Command": "docker-entrypoint.sh /bin/sh -c /entrypoint.sh",
@@ -2481,9 +2352,7 @@
         },
         {
           "Id": "61f3e1af181baebd1ad549df31dd72af6dbf10b4d789e0d95a20c62757889e45",
-          "Names": [
-            "/docker-monitor-health-app_agent_1"
-          ],
+          "Names": ["/docker-monitor-health-app_agent_1"],
           "Image": "jrofurtado/docker-monitor-health-agent:latest",
           "ImageID": "sha256:c436d890c00ddd038d3f6a699938bddc52d48bc1191b13c23b66c08c88a4bbd1",
           "Command": "docker-entrypoint.sh /bin/sh -c /entrypoint.sh",
@@ -2537,9 +2406,7 @@
         },
         {
           "Id": "6970f2fc84a81756f90352e0f99287e18a4dacbe6ae30a5a8f80025761a71310",
-          "Names": [
-            "/docker-monitor-health-app_auth_1"
-          ],
+          "Names": ["/docker-monitor-health-app_auth_1"],
           "Image": "jrofurtado/keycloak-with-healthcheck:8.0.1",
           "ImageID": "sha256:5f689f80bcdf3bf0528c65ee9ab51e3d6d4a5c4cbbc94d173479918e349d1d2a",
           "Command": "/opt/jboss/tools/docker-entrypoint.sh -b 0.0.0.0",
@@ -2614,9 +2481,7 @@
         },
         {
           "Id": "008209ecc8c741139c804ac9f386822d25e5629a2cdb1333a128a2d150e46d0b",
-          "Names": [
-            "/docker-monitor-health-app_db_1"
-          ],
+          "Names": ["/docker-monitor-health-app_db_1"],
           "Image": "jrofurtado/mysql-with-healthcheck:5.7.28",
           "ImageID": "sha256:ca8d4bb83805c5ce09e0e8d9f9f441ffa9aef7a07a395121844dd8687bac12d5",
           "Command": "docker-entrypoint.sh mysqld",
@@ -2689,9 +2554,7 @@
         },
         {
           "Id": "0c8450b20a505e4e4aeab5da81038ac1e9481325f887c1c512ed7867c52fc365",
-          "Names": [
-            "/sweet_rhodes"
-          ],
+          "Names": ["/sweet_rhodes"],
           "Image": "sha256:e6e51a8a563b20e19d79db755e6c9055f5339688e56639867c5e5b3dcb511e79",
           "ImageID": "sha256:e6e51a8a563b20e19d79db755e6c9055f5339688e56639867c5e5b3dcb511e79",
           "Command": "/bin/sh -c 'npm run build'",
@@ -2727,9 +2590,7 @@
         },
         {
           "Id": "9aefd40278f25a14fc90b71c3a30f1e1e11cb5953501b7a7a48946950b982527",
-          "Names": [
-            "/fervent_archimedes"
-          ],
+          "Names": ["/fervent_archimedes"],
           "Image": "sha256:008069f87c82fde02de96f338b9daf815d8f96eed9a31fa160bf0fb7b95201d0",
           "ImageID": "sha256:008069f87c82fde02de96f338b9daf815d8f96eed9a31fa160bf0fb7b95201d0",
           "Command": "/bin/sh -c 'npm run build'",
@@ -2765,9 +2626,7 @@
         },
         {
           "Id": "d0e6ee5a4421328a8bbb30697934d413dd7296c559e31e5da31aaae8538503d4",
-          "Names": [
-            "/gracious_cartwright"
-          ],
+          "Names": ["/gracious_cartwright"],
           "Image": "fooapp:v2",
           "ImageID": "sha256:e5620dcaa8fe0a6749b8f4914367e70353d7b64fbba6d449f34a93cf83e5632f",
           "Command": "nginx -g 'daemon off;'",
@@ -2805,9 +2664,7 @@
         },
         {
           "Id": "d5d2813a9c006db3c3f8dc9e48f7caeba5c3534f5102f5e3fa3348a6ab0b7bf9",
-          "Names": [
-            "/objective_euclid"
-          ],
+          "Names": ["/objective_euclid"],
           "Image": "fooapp:v2",
           "ImageID": "sha256:e5620dcaa8fe0a6749b8f4914367e70353d7b64fbba6d449f34a93cf83e5632f",
           "Command": "nginx -g 'daemon off;'",
@@ -2845,9 +2702,7 @@
         },
         {
           "Id": "3a02af9d3e4e66fbd2afd413cc756cf96f13f8e74b5758ff71cb44507b0e92f4",
-          "Names": [
-            "/amazing_chandrasekhar"
-          ],
+          "Names": ["/amazing_chandrasekhar"],
           "Image": "fooapp:v2",
           "ImageID": "sha256:e5620dcaa8fe0a6749b8f4914367e70353d7b64fbba6d449f34a93cf83e5632f",
           "Command": "nginx -g 'daemon off;'",
@@ -2885,9 +2740,7 @@
         },
         {
           "Id": "a48243337ffc31b51498ac9c38d8377ed43bea8c838dcc61c90b6d19e6074abc",
-          "Names": [
-            "/gallant_lovelace"
-          ],
+          "Names": ["/gallant_lovelace"],
           "Image": "sha256:0ee195bcdd17bda2a89bd5dd10d5b8b03e4d94b1fbe2a402d89c249f6c694983",
           "ImageID": "sha256:0ee195bcdd17bda2a89bd5dd10d5b8b03e4d94b1fbe2a402d89c249f6c694983",
           "Command": "nginx -g 'daemon off;'",
@@ -2925,9 +2778,7 @@
         },
         {
           "Id": "45530ce69a32ae7fd85d567a664ccb3d3dbaa17e2abf80ef2b3894dc606ae37d",
-          "Names": [
-            "/blissful_shamir"
-          ],
+          "Names": ["/blissful_shamir"],
           "Image": "sha256:0ee195bcdd17bda2a89bd5dd10d5b8b03e4d94b1fbe2a402d89c249f6c694983",
           "ImageID": "sha256:0ee195bcdd17bda2a89bd5dd10d5b8b03e4d94b1fbe2a402d89c249f6c694983",
           "Command": "nginx -g 'daemon off;'",
@@ -2965,9 +2816,7 @@
         },
         {
           "Id": "159e492130053ba8f6cd0624949cac289fc01891846be7ed68572aa26462a8c5",
-          "Names": [
-            "/sad_goodall"
-          ],
+          "Names": ["/sad_goodall"],
           "Image": "fooapp:v1",
           "ImageID": "sha256:e5620dcaa8fe0a6749b8f4914367e70353d7b64fbba6d449f34a93cf83e5632f",
           "Command": "nginx -g 'daemon off;'",
@@ -3013,32 +2862,14 @@
         "Images": 392,
         "Driver": "overlay2",
         "DriverStatus": [
-          [
-            "Backing Filesystem",
-            "<unknown>"
-          ],
-          [
-            "Supports d_type",
-            "true"
-          ],
-          [
-            "Native Overlay Diff",
-            "true"
-          ]
+          ["Backing Filesystem", "<unknown>"],
+          ["Supports d_type", "true"],
+          ["Native Overlay Diff", "true"]
         ],
         "SystemStatus": null,
         "Plugins": {
-          "Volume": [
-            "local"
-          ],
-          "Network": [
-            "bridge",
-            "host",
-            "ipvlan",
-            "macvlan",
-            "null",
-            "overlay"
-          ],
+          "Volume": ["local"],
+          "Network": ["bridge", "host", "ipvlan", "macvlan", "null", "overlay"],
           "Authorization": null,
           "Log": [
             "awslogs",
@@ -3081,9 +2912,7 @@
         "RegistryConfig": {
           "AllowNondistributableArtifactsCIDRs": [],
           "AllowNondistributableArtifactsHostnames": [],
-          "InsecureRegistryCIDRs": [
-            "127.0.0.0/8"
-          ],
+          "InsecureRegistryCIDRs": ["127.0.0.0/8"],
           "IndexConfigs": {
             "docker.io": {
               "Name": "docker.io",
@@ -3136,9 +2965,7 @@
           "ID": "fec3683",
           "Expected": "fec3683"
         },
-        "SecurityOptions": [
-          "name=seccomp,profile=default"
-        ],
+        "SecurityOptions": ["name=seccomp,profile=default"],
         "ProductLicense": "Community Engine",
         "Warnings": null
       },
@@ -3154,9 +2981,7 @@
       "containers": [
         {
           "Id": "457fd13e19e6c2403c99ea71ed19d497434cf7cfe87e4ee8840241dfdae3d21f",
-          "Names": [
-            "/docker-monitor-health-app_lb_1"
-          ],
+          "Names": ["/docker-monitor-health-app_lb_1"],
           "Image": "jrofurtado/nghttpx-autoreload-with-healthcheck:1.0.0",
           "ImageID": "sha256:93cd4ced2ee718a2e0d30e226b6a358afb08d4e3cd11ec3813dde41db97cc836",
           "Command": "/bin/sh -c /entrypoint.sh",
@@ -3209,9 +3034,7 @@
         },
         {
           "Id": "6293419d2073912a18a4c16ebfb424ca6b713bb06b6c2bf67853882f30de30e1",
-          "Names": [
-            "/docker-monitor-health-app_server_1"
-          ],
+          "Names": ["/docker-monitor-health-app_server_1"],
           "Image": "jrofurtado/docker-monitor-health-server:latest",
           "ImageID": "sha256:15c302eb0c4e6627411b3d3a51631e1eafab8d121a39142f8d586c6618c79942",
           "Command": "docker-entrypoint.sh /bin/sh -c /entrypoint.sh",
@@ -3267,9 +3090,7 @@
         },
         {
           "Id": "61f3e1af181baebd1ad549df31dd72af6dbf10b4d789e0d95a20c62757889e45",
-          "Names": [
-            "/docker-monitor-health-app_agent_1"
-          ],
+          "Names": ["/docker-monitor-health-app_agent_1"],
           "Image": "jrofurtado/docker-monitor-health-agent:latest",
           "ImageID": "sha256:c436d890c00ddd038d3f6a699938bddc52d48bc1191b13c23b66c08c88a4bbd1",
           "Command": "docker-entrypoint.sh /bin/sh -c /entrypoint.sh",
@@ -3323,9 +3144,7 @@
         },
         {
           "Id": "6970f2fc84a81756f90352e0f99287e18a4dacbe6ae30a5a8f80025761a71310",
-          "Names": [
-            "/docker-monitor-health-app_auth_1"
-          ],
+          "Names": ["/docker-monitor-health-app_auth_1"],
           "Image": "jrofurtado/keycloak-with-healthcheck:8.0.1",
           "ImageID": "sha256:5f689f80bcdf3bf0528c65ee9ab51e3d6d4a5c4cbbc94d173479918e349d1d2a",
           "Command": "/opt/jboss/tools/docker-entrypoint.sh -b 0.0.0.0",
@@ -3400,9 +3219,7 @@
         },
         {
           "Id": "008209ecc8c741139c804ac9f386822d25e5629a2cdb1333a128a2d150e46d0b",
-          "Names": [
-            "/docker-monitor-health-app_db_1"
-          ],
+          "Names": ["/docker-monitor-health-app_db_1"],
           "Image": "jrofurtado/mysql-with-healthcheck:5.7.28",
           "ImageID": "sha256:ca8d4bb83805c5ce09e0e8d9f9f441ffa9aef7a07a395121844dd8687bac12d5",
           "Command": "docker-entrypoint.sh mysqld",
@@ -3475,9 +3292,7 @@
         },
         {
           "Id": "0c8450b20a505e4e4aeab5da81038ac1e9481325f887c1c512ed7867c52fc365",
-          "Names": [
-            "/sweet_rhodes"
-          ],
+          "Names": ["/sweet_rhodes"],
           "Image": "sha256:e6e51a8a563b20e19d79db755e6c9055f5339688e56639867c5e5b3dcb511e79",
           "ImageID": "sha256:e6e51a8a563b20e19d79db755e6c9055f5339688e56639867c5e5b3dcb511e79",
           "Command": "/bin/sh -c 'npm run build'",
@@ -3513,9 +3328,7 @@
         },
         {
           "Id": "9aefd40278f25a14fc90b71c3a30f1e1e11cb5953501b7a7a48946950b982527",
-          "Names": [
-            "/fervent_archimedes"
-          ],
+          "Names": ["/fervent_archimedes"],
           "Image": "sha256:008069f87c82fde02de96f338b9daf815d8f96eed9a31fa160bf0fb7b95201d0",
           "ImageID": "sha256:008069f87c82fde02de96f338b9daf815d8f96eed9a31fa160bf0fb7b95201d0",
           "Command": "/bin/sh -c 'npm run build'",
@@ -3551,9 +3364,7 @@
         },
         {
           "Id": "d0e6ee5a4421328a8bbb30697934d413dd7296c559e31e5da31aaae8538503d4",
-          "Names": [
-            "/gracious_cartwright"
-          ],
+          "Names": ["/gracious_cartwright"],
           "Image": "fooapp:v2",
           "ImageID": "sha256:e5620dcaa8fe0a6749b8f4914367e70353d7b64fbba6d449f34a93cf83e5632f",
           "Command": "nginx -g 'daemon off;'",
@@ -3591,9 +3402,7 @@
         },
         {
           "Id": "d5d2813a9c006db3c3f8dc9e48f7caeba5c3534f5102f5e3fa3348a6ab0b7bf9",
-          "Names": [
-            "/objective_euclid"
-          ],
+          "Names": ["/objective_euclid"],
           "Image": "fooapp:v2",
           "ImageID": "sha256:e5620dcaa8fe0a6749b8f4914367e70353d7b64fbba6d449f34a93cf83e5632f",
           "Command": "nginx -g 'daemon off;'",
@@ -3631,9 +3440,7 @@
         },
         {
           "Id": "3a02af9d3e4e66fbd2afd413cc756cf96f13f8e74b5758ff71cb44507b0e92f4",
-          "Names": [
-            "/amazing_chandrasekhar"
-          ],
+          "Names": ["/amazing_chandrasekhar"],
           "Image": "fooapp:v2",
           "ImageID": "sha256:e5620dcaa8fe0a6749b8f4914367e70353d7b64fbba6d449f34a93cf83e5632f",
           "Command": "nginx -g 'daemon off;'",
@@ -3671,9 +3478,7 @@
         },
         {
           "Id": "a48243337ffc31b51498ac9c38d8377ed43bea8c838dcc61c90b6d19e6074abc",
-          "Names": [
-            "/gallant_lovelace"
-          ],
+          "Names": ["/gallant_lovelace"],
           "Image": "sha256:0ee195bcdd17bda2a89bd5dd10d5b8b03e4d94b1fbe2a402d89c249f6c694983",
           "ImageID": "sha256:0ee195bcdd17bda2a89bd5dd10d5b8b03e4d94b1fbe2a402d89c249f6c694983",
           "Command": "nginx -g 'daemon off;'",
@@ -3711,9 +3516,7 @@
         },
         {
           "Id": "45530ce69a32ae7fd85d567a664ccb3d3dbaa17e2abf80ef2b3894dc606ae37d",
-          "Names": [
-            "/blissful_shamir"
-          ],
+          "Names": ["/blissful_shamir"],
           "Image": "sha256:0ee195bcdd17bda2a89bd5dd10d5b8b03e4d94b1fbe2a402d89c249f6c694983",
           "ImageID": "sha256:0ee195bcdd17bda2a89bd5dd10d5b8b03e4d94b1fbe2a402d89c249f6c694983",
           "Command": "nginx -g 'daemon off;'",
@@ -3751,9 +3554,7 @@
         },
         {
           "Id": "159e492130053ba8f6cd0624949cac289fc01891846be7ed68572aa26462a8c5",
-          "Names": [
-            "/sad_goodall"
-          ],
+          "Names": ["/sad_goodall"],
           "Image": "fooapp:v1",
           "ImageID": "sha256:e5620dcaa8fe0a6749b8f4914367e70353d7b64fbba6d449f34a93cf83e5632f",
           "Command": "nginx -g 'daemon off;'",
@@ -3799,32 +3600,14 @@
         "Images": 392,
         "Driver": "overlay2",
         "DriverStatus": [
-          [
-            "Backing Filesystem",
-            "<unknown>"
-          ],
-          [
-            "Supports d_type",
-            "true"
-          ],
-          [
-            "Native Overlay Diff",
-            "true"
-          ]
+          ["Backing Filesystem", "<unknown>"],
+          ["Supports d_type", "true"],
+          ["Native Overlay Diff", "true"]
         ],
         "SystemStatus": null,
         "Plugins": {
-          "Volume": [
-            "local"
-          ],
-          "Network": [
-            "bridge",
-            "host",
-            "ipvlan",
-            "macvlan",
-            "null",
-            "overlay"
-          ],
+          "Volume": ["local"],
+          "Network": ["bridge", "host", "ipvlan", "macvlan", "null", "overlay"],
           "Authorization": null,
           "Log": [
             "awslogs",
@@ -3867,9 +3650,7 @@
         "RegistryConfig": {
           "AllowNondistributableArtifactsCIDRs": [],
           "AllowNondistributableArtifactsHostnames": [],
-          "InsecureRegistryCIDRs": [
-            "127.0.0.0/8"
-          ],
+          "InsecureRegistryCIDRs": ["127.0.0.0/8"],
           "IndexConfigs": {
             "docker.io": {
               "Name": "docker.io",
@@ -3922,9 +3703,7 @@
           "ID": "fec3683",
           "Expected": "fec3683"
         },
-        "SecurityOptions": [
-          "name=seccomp,profile=default"
-        ],
+        "SecurityOptions": ["name=seccomp,profile=default"],
         "ProductLicense": "Community Engine",
         "Warnings": null
       },

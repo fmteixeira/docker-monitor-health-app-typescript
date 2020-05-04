@@ -1,0 +1,3 @@
+echo alterando permissões
+echo Bionicle123 | sudo -S chmod -R 777 ./*
+echo alterado...

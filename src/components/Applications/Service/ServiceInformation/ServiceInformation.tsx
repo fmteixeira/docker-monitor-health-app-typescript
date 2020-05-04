@@ -7,11 +7,14 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 //Interface
-import { ServiceInterface } from "../../../../resources/interfaces";
+import {
+  ServiceInterface,
+  ContainerInterface,
+} from "../../../../resources/interfaces";
 //Components
-import ServiceItemRow from "./ServiceItemRow/ServiceItemRow";
+import JsonHTML from "../../../JsonHTML/JsonHTML";
 import NavigationBar from "../../../Navigation/NavigationBar/NavigationBar";
-import Service from "../Service";
+import ServiceContainerList from "./ServiceContainerList/ServiceContainerList";
 
 interface Props {
   appName: string;
@@ -27,11 +30,6 @@ const useStyles = makeStyles({
     flexGrow: 1,
     backgroundColor: "#455c78",
   },
-  paper: {
-    borderRadius: "0.3rem",
-    backgroundColor: "white",
-    margin: "0.5rem 0",
-  },
   info: {
     padding: "1rem",
   },
@@ -44,11 +42,26 @@ export default function ServiceInformation(props: Props): JSX.Element {
   const { appName, serviceName, service, handleHeaderTitle, setView } = props;
   const classes = useStyles();
 
-  let date: string = service.created.substr(0, 10) + " " + service.created.substr(11, 8);
+  let date: string =
+    service.created.substr(0, 10) + " " + service.created.substr(11, 8);
   let serviceCreatedDate = new Date(date).toLocaleString();
+
   useEffect(() => {
-    handleHeaderTitle(firstLetterToUpperCase(appName), firstLetterToUpperCase(serviceName), serviceCreatedDate);
-  }, [])
+    handleHeaderTitle(
+      firstLetterToUpperCase(appName),
+      firstLetterToUpperCase(serviceName),
+      serviceCreatedDate
+    );
+  }, []);
+
+  // Container State
+  const [openContainer, setOpenContainer] = useState<ContainerInterface | null>(
+    null
+  );
+
+  const handleContainerClick = (container: ContainerInterface): void => {
+    setOpenContainer(container);
+  };
 
   return (
     <>
@@ -66,19 +79,14 @@ export default function ServiceInformation(props: Props): JSX.Element {
         </Grid>
       </Grid>
 
-      <h5>Containers</h5>
-      {service.containers.map((container: any, index: number) => {
-        return (
-          <Grid container key={index} className={classes.paper}>
-            <ServiceItemRow
-              name={firstLetterToUpperCase(
-                container.names.toString().substring(1, 50)
-              )}
-              healthy={container.healthy}
-            />
-          </Grid>
-        );
-      })}
+      {openContainer ? (
+        <JsonHTML title={"Container"} json={openContainer} />
+      ) : (
+        <ServiceContainerList
+          service={service}
+          handleContainerClick={handleContainerClick}
+        />
+      )}
     </>
   );
 }
