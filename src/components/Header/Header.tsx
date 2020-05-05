@@ -100,7 +100,7 @@ export default function Header(props: Props): JSX.Element {
               </Menu>
             </Grid>
             <Grid item>
-              <h6>
+              <h6 id="username">
                 {firstLetterToUpperCase(
                   kc.tokenParsed.preferred_username
                 )}

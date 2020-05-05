@@ -1,4 +1,5 @@
 import React from "react";
+import "./JsonHTML.css";
 // Material-UI
 import Paper from "@material-ui/core/Paper";
 
@@ -16,13 +17,15 @@ export default function JsonHTML(props: Props) {
       key: string | number,
       displayTitle?: boolean
     ): JSX.Element => {
-      const valueElement: JSX.Element = <p>{value ? "True" : "False"}</p>;
+      const valueElement: JSX.Element = <h6 id="value">{value ? "True" : "False"}</h6>;
 
+      //healthy
       return (
-        <li key={key}>
-          {displayTitle ? <h4>{key}</h4> : null}
-          {valueElement}
-        </li>
+        <div className="container-field">
+          <li key={key}>
+            {displayTitle ? <h6 id="healthy">{key + ": "}<span>{valueElement}</span></h6> : null}
+          </li>
+          </div>
       );
     };
 
@@ -32,10 +35,11 @@ export default function JsonHTML(props: Props) {
       displayTitle?: boolean
     ): JSX.Element => {
       return (
-        <li key={key}>
-          {displayTitle ? <h4>{key}</h4> : null}
-          <p>{text}</p>
-        </li>
+        <div className="container-field">
+          <li key={key}>
+            {displayTitle ? <h6 id="key">{key + ": "}<span id="text">{text}</span></h6> : null}
+          </li>
+        </div>
       );
     };
 
@@ -45,7 +49,7 @@ export default function JsonHTML(props: Props) {
       displayTitle?: boolean
     ): JSX.Element => {
       const valueElement: JSX.Element = (
-        <ul>
+        <ul className="ul-div">
           {array.map((value, i) => {
             if (["string", "number"].includes(typeof value)) {
               return handleText(value, i, false);
@@ -61,10 +65,12 @@ export default function JsonHTML(props: Props) {
       );
 
       return (
-        <li key={key}>
-          {displayTitle ? <h4>{key}</h4> : null}
-          {valueElement}
-        </li>
+        <div className="container-field">
+          <li key={key}>
+            {displayTitle ? <h6>{key}</h6> : null}
+            {valueElement}
+          </li>
+        </div>
       );
     };
 
@@ -90,12 +96,14 @@ export default function JsonHTML(props: Props) {
         return element;
       };
       return key ? (
-        <li key={key}>
-          {displayTitle ? <h4>{key}</h4> : null}
-          <ul>{getObjectElement()}</ul>
-        </li>
+        <div className="container-field">
+          <li key={key}>
+            {displayTitle ? <h6>{key}</h6> : null}
+            <ul className="ul-div">{getObjectElement()}</ul>
+          </li>
+        </div>
       ) : (
-        <ul>{getObjectElement()}</ul>
+        <ul className="ul-div">{getObjectElement()}</ul>
       );
     };
 
@@ -103,9 +111,11 @@ export default function JsonHTML(props: Props) {
   };
 
   return (
-    <Paper>
-      {title ? <h4>{title}</h4> : null}
-      {getRender()}
-    </Paper>
+    <div>
+      {title ? <h5>{title}</h5> : null}
+      <div className="container-div">
+        {getRender()}
+      </div>
+    </div>
   );
 }

@@ -1,0 +1,29 @@
+.container-field{
+    list-style-type: none;
+}
+
+.container-div{
+    color: black;
+    border-radius: 0.3rem;
+    background-color: rgb(245, 249, 253);
+    box-shadow: 2px 1px 14px -1px rgba(41,57,77,1);
+    padding: 1rem 0;
+    margin-bottom: 1rem;
+}
+
+.ul-div {
+    padding: 0 1rem;
+    margin: 0;
+}
+
+#text, #value{
+    font-weight: lighter;
+}
+
+#value{
+    display: inline;
+}
+
+#healthy{
+    margin-bottom: 0;
+}
