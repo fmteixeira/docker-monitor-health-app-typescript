@@ -15,8 +15,6 @@ import {
   ServiceInterface,
   ContainerInterface,
 } from "../../../../resources/interfaces";
-import { parse } from "url";
-
 
 interface Props {
   appName: string;
@@ -34,7 +32,7 @@ export default function ServiceHistory(props: Props): JSX.Element {
   const [selectedDate, setSelectedDate] = useState<any | null>();
 
   useEffect(() => {
-    getServiceHistory(serviceName, serviceName).then((res) => {
+    getServiceHistory(appName, serviceName).then((res) => {
       if (res) {
         for (let key in res) {
           let localDate = new Date().toISOString();
@@ -42,7 +40,7 @@ export default function ServiceHistory(props: Props): JSX.Element {
           let index2 = (index < res.length) ? index + 1 : index;
 
           if (Date.parse(res[0].expires) < Date.parse(localDate) &&
-            res[0].containers.length != 0) {
+            res[0].containers.length !== 0) {
             let noDataReceived: ServiceInterface = {
               serverName: res[0].serverName,
               appName: res[0].appName,
@@ -54,7 +52,7 @@ export default function ServiceHistory(props: Props): JSX.Element {
           }
 
           if (Date.parse(res[index].expires) < Date.parse(res[index2].created) &&
-            res[index].containers.length != 0) {
+            res[index].containers.length !== 0) {
             let noDataReceived: ServiceInterface = {
               serverName: res[index].serverName,
               appName: res[index].appName,
@@ -69,7 +67,7 @@ export default function ServiceHistory(props: Props): JSX.Element {
         setLoading(false);
       }
     });
-  }, []);
+  }, [appName, serviceName]);
 
 
   const response = JSON.stringify(service, undefined, 2);
@@ -139,7 +137,7 @@ export default function ServiceHistory(props: Props): JSX.Element {
               message.created === checkMessageStatus(message))
           );
         } else {
-          return message.created === checkMessageStatus(message) || message.containers.length == 0
+          return message.created === checkMessageStatus(message) || message.containers.length === 0
         }
       case "healthy":
         if (selectedDate && selectedHour) {
@@ -156,7 +154,7 @@ export default function ServiceHistory(props: Props): JSX.Element {
               message.created !== checkMessageStatus(message))
           );
         } else {
-          return message.created !== checkMessageStatus(message) && message.containers.length != 0;
+          return message.created !== checkMessageStatus(message) && message.containers.length !== 0;
         }
       default:
         if (selectedDate && selectedHour) {
@@ -205,7 +203,7 @@ export default function ServiceHistory(props: Props): JSX.Element {
           let createdDate = new Date(date);
           let expiresDate = new Date(date1);
           return (
-            service.containers.length == 0 ? (
+            service.containers.length === 0 ? (
               <Grid
                 container
                 key={index}

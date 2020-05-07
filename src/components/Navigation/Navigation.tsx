@@ -22,7 +22,7 @@ export default function Navigation(props: Props): JSX.Element {
     setService({ appName: app, serviceName: serviceName });
   };
 
-  return service.serviceName != "" ? (
+  return service.serviceName !== "" ? (
     <Container maxWidth="md">
       <Service appName={service.appName} serviceName={service.serviceName} handleBackButtonClick={handleServiceClick} handleHeaderTitle={handleHeaderTitle} />
     </Container>

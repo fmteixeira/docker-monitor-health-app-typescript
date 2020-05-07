@@ -52,7 +52,7 @@ export default function ServiceInformation(props: Props): JSX.Element {
       firstLetterToUpperCase(serviceName),
       serviceCreatedDate
     );
-  }, []);
+  }, [appName, serviceName, serviceCreatedDate, handleHeaderTitle]);
 
   // Container State
   const [openContainer, setOpenContainer] = useState<ContainerInterface | null>(
@@ -82,11 +82,11 @@ export default function ServiceInformation(props: Props): JSX.Element {
       {openContainer ? (
         <JsonHTML title={"Container"} json={openContainer} />
       ) : (
-        <ServiceContainerList
-          service={service}
-          handleContainerClick={handleContainerClick}
-        />
-      )}
+          <ServiceContainerList
+            service={service}
+            handleContainerClick={handleContainerClick}
+          />
+        )}
     </>
   );
 }

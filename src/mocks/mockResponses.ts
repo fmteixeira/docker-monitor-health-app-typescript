@@ -77,7 +77,7 @@ export async function getServiceHistory(
   const response = require("./responses/serviceStateHistory.json").data;
   const serviceHistory: Array<ServiceInterface> | any = [];
 
-  response.map((service: ServiceInterface) => {
+  response.forEach((service: ServiceInterface) => {
     let serv = {
       serverName: serverName,
       appName: appName,

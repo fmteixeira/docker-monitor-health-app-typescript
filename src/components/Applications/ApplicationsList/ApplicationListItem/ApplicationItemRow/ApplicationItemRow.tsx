@@ -48,15 +48,15 @@ export default function ApplicationItemRow(props: Props): JSX.Element {
             notificationGlobalEnabled={notificationGlobalEnabled}
           />
         ) : null}
-        {props.healthy ? (
+        {healthy ? (
           <IconButton aria-label="delete" className="green-color">
-            <CheckIcon fontSize="small"/>
+            <CheckIcon fontSize="small" />
           </IconButton>
         ) : (
-          <IconButton aria-label="delete" className="red-color">
-            <PriorityHighIcon fontSize="small"/>
-          </IconButton>
-        )}
+            <IconButton aria-label="delete" className="red-color">
+              <PriorityHighIcon fontSize="small" />
+            </IconButton>
+          )}
       </Grid>
     </>
   );

@@ -1,12 +1,11 @@
 import React, { MouseEvent } from "react";
 import "./NotificationBell.css";
 // Material-UI
-import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import NotificationsActiveIcon from "@material-ui/icons/NotificationsActive";
 import NotificationsOffIcon from "@material-ui/icons/NotificationsOff";
 // Snackbar
-import { useSnackbar, SnackbarKey } from "notistack";
+import { useSnackbar } from "notistack";
 
 interface Props {
   applicationName: string;
@@ -31,15 +30,15 @@ function NotificationBell(props: Props): JSX.Element {
     } else {
       message = `${
         notificationEnabled ? "Retirou a subscrição a" : "Subscreveu a"
-      } ${applicationName}`;
+        } ${applicationName}`;
     }
 
     enqueueSnackbar(message, {
       variant: notificationGlobalEnabled
         ? "warning"
         : notificationEnabled
-        ? "warning"
-        : "success",
+          ? "warning"
+          : "success",
       anchorOrigin: {
         vertical: "bottom",
         horizontal: "center",
@@ -56,14 +55,14 @@ function NotificationBell(props: Props): JSX.Element {
       <NotificationsActiveIcon fontSize="small" />
     </IconButton>
   ) : (
-    <IconButton
-      onClick={handleClick}
-      aria-label="notification"
-      className="notification-bell"
-    >
-      <NotificationsOffIcon fontSize="small" />
-    </IconButton>
-  );
+      <IconButton
+        onClick={handleClick}
+        aria-label="notification"
+        className="notification-bell"
+      >
+        <NotificationsOffIcon fontSize="small" />
+      </IconButton>
+    );
 }
 
 export default NotificationBell;

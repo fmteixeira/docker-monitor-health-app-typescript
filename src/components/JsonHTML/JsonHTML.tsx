@@ -1,7 +1,5 @@
 import React from "react";
 import "./JsonHTML.css";
-// Material-UI
-import Paper from "@material-ui/core/Paper";
 
 interface Props {
   title?: string;
@@ -21,11 +19,11 @@ export default function JsonHTML(props: Props) {
 
       //healthy
       return (
-        <div className="container-field">
-          <li key={key}>
+        <div className="container-field" key={key}>
+          <li>
             {displayTitle ? <h6 id="healthy">{key + ": "}<span>{valueElement}</span></h6> : null}
           </li>
-          </div>
+        </div>
       );
     };
 
@@ -35,8 +33,8 @@ export default function JsonHTML(props: Props) {
       displayTitle?: boolean
     ): JSX.Element => {
       return (
-        <div className="container-field">
-          <li key={key}>
+        <div className="container-field" key={key}>
+          <li>
             {displayTitle ? <h6 id="key">{key + ": "}<span id="text">{text}</span></h6> : null}
           </li>
         </div>
@@ -60,13 +58,14 @@ export default function JsonHTML(props: Props) {
             } else if (typeof value === "object") {
               return handleObject(value, i, false);
             }
+            return null;
           })}
         </ul>
       );
 
       return (
-        <div className="container-field">
-          <li key={key}>
+        <div className="container-field" key={key}>
+          <li>
             {displayTitle ? <h6>{key}</h6> : null}
             {valueElement}
           </li>
@@ -96,15 +95,15 @@ export default function JsonHTML(props: Props) {
         return element;
       };
       return key ? (
-        <div className="container-field">
-          <li key={key}>
+        <div className="container-field" key={key}>
+          <li>
             {displayTitle ? <h6>{key}</h6> : null}
             <ul className="ul-div">{getObjectElement()}</ul>
           </li>
         </div>
       ) : (
-        <ul className="ul-div">{getObjectElement()}</ul>
-      );
+          <ul className="ul-div">{getObjectElement()}</ul>
+        );
     };
 
     return handleObject(json, undefined, false);

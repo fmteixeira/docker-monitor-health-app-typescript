@@ -93,7 +93,7 @@ export default function Applications(props: Props): JSX.Element {
     return (): void => {
       clearInterval(notificationInterval);
     };
-  }, [dispatch]);
+  }, [dispatch, handleHeaderTitle]);
 
   return (
     <div>

@@ -5,8 +5,7 @@ import {
   ServerInterface,
   ServiceInterface,
   ContainerInterface,
-  NotificationStatusInterface,
-  NotificationAppStatusInterface,
+  NotificationStatusInterface
 } from "./interfaces";
 /* develblock:start */
 import allMocks from "../mocks/mockResponses";
@@ -122,7 +121,7 @@ export async function getServiceHistory(
     )
     .then((response) => {
       const serviceHistory: Array<ServiceInterface> | any = [];
-      response.data.map((service: ServiceInterface) => {
+      response.data.forEach((service: ServiceInterface) => {
         let serv = {
           serverName: service.serverName,
           appName: service.appName,
