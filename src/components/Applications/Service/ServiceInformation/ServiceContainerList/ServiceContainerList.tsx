@@ -23,7 +23,7 @@ const useStyles = makeStyles({
 
 interface Props {
   service: ServiceInterface;
-  handleContainerClick: (container: ContainerInterface) => void;
+  handleContainerClick: (container: ContainerInterface, title: string) => void;
 }
 
 export default function ServiceContainerList(props: Props) {
@@ -40,7 +40,8 @@ export default function ServiceContainerList(props: Props) {
               container
               key={index}
               className={classes.paper}
-              onClick={() => handleContainerClick(container)}
+              onClick={() => handleContainerClick(container, firstLetterToUpperCase(
+                container.names.toString().substring(1, 50)))}
             >
               <ServiceItemRow
                 name={firstLetterToUpperCase(

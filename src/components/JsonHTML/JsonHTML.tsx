@@ -19,11 +19,9 @@ export default function JsonHTML(props: Props) {
 
       //healthy
       return (
-        <div className="container-field" key={key}>
-          <li>
-            {displayTitle ? <h6 id="healthy">{key + ": "}<span>{valueElement}</span></h6> : null}
-          </li>
-        </div>
+        <li key={key} className="container-field">
+          {displayTitle ? <h6 id="healthy">{key + ": "}<span>{valueElement}</span></h6> : null}
+        </li>
       );
     };
 
@@ -33,11 +31,9 @@ export default function JsonHTML(props: Props) {
       displayTitle?: boolean
     ): JSX.Element => {
       return (
-        <div className="container-field" key={key}>
-          <li>
-            {displayTitle ? <h6 id="key">{key + ": "}<span id="text">{text}</span></h6> : null}
-          </li>
-        </div>
+        <li key={key} className="container-field">
+          {displayTitle ? <h6 id="key">{key + ": "}<span id="text">{text}</span></h6> : null}
+        </li>
       );
     };
 
@@ -64,12 +60,10 @@ export default function JsonHTML(props: Props) {
       );
 
       return (
-        <div className="container-field" key={key}>
-          <li>
-            {displayTitle ? <h6>{key}</h6> : null}
-            {valueElement}
-          </li>
-        </div>
+        <li key={key} className="container-field">
+          {displayTitle ? <h6>{key}</h6> : null}
+          {valueElement}
+        </li>
       );
     };
 
@@ -95,12 +89,10 @@ export default function JsonHTML(props: Props) {
         return element;
       };
       return key ? (
-        <div className="container-field" key={key}>
-          <li>
-            {displayTitle ? <h6>{key}</h6> : null}
-            <ul className="ul-div">{getObjectElement()}</ul>
-          </li>
-        </div>
+        <li key={key} className="container-field">
+          {displayTitle ? <h6>{key}</h6> : null}
+          <ul className="ul-div">{getObjectElement()}</ul>
+        </li>
       ) : (
           <ul className="ul-div">{getObjectElement()}</ul>
         );

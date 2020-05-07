@@ -15,6 +15,8 @@ import {
 import JsonHTML from "../../../JsonHTML/JsonHTML";
 import NavigationBar from "../../../Navigation/NavigationBar/NavigationBar";
 import ServiceContainerList from "./ServiceContainerList/ServiceContainerList";
+import { IconButton } from "@material-ui/core";
+import CloseIcon from '@material-ui/icons/Close';
 
 interface Props {
   appName: string;
@@ -40,7 +42,9 @@ const useStyles = makeStyles({
 
 export default function ServiceInformation(props: Props): JSX.Element {
   const { appName, serviceName, service, handleHeaderTitle, setView } = props;
+  const [containerView, setOpenContainerView] = useState(false);
   const classes = useStyles();
+  const [title, setTitle] = useState("Containers");
 
   let date: string =
     service.created.substr(0, 10) + " " + service.created.substr(11, 8);
@@ -59,9 +63,16 @@ export default function ServiceInformation(props: Props): JSX.Element {
     null
   );
 
-  const handleContainerClick = (container: ContainerInterface): void => {
+  const handleContainerClick = (container: ContainerInterface, title: string): void => {
     setOpenContainer(container);
+    setOpenContainerView(true);
+    setTitle(title);
   };
+
+  const setContainerView = () => {
+    setOpenContainerView(false);
+    setTitle("Containers");
+  }
 
   return (
     <>
@@ -79,8 +90,13 @@ export default function ServiceInformation(props: Props): JSX.Element {
         </Grid>
       </Grid>
 
-      {openContainer ? (
-        <JsonHTML title={"Container"} json={openContainer} />
+      {openContainer && containerView ? (
+        <>
+          <IconButton onClick={setContainerView}>
+            <CloseIcon />
+          </IconButton>
+          <JsonHTML title={title} json={openContainer} />
+        </>
       ) : (
           <ServiceContainerList
             service={service}
