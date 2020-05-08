@@ -5,25 +5,32 @@
 .container-div{
     color: black;
     border-radius: 0.3rem;
-    background-color: rgb(245, 249, 253);
+    background-color: rgb(255, 255, 255);
     box-shadow: 2px 1px 14px -1px rgba(41,57,77,1);
-    padding: 1rem 0;
+    padding: 0;
     margin-bottom: 1rem;
 }
 
-.ul-div {
+.containers-ul {
     padding: 0 1rem;
     margin: 0;
 }
 
-#text, #value{
+.container-info{
     font-weight: lighter;
 }
 
-#value{
+.healthy-value{
     display: inline;
+    font-weight: lighter;
 }
 
-#healthy{
-    margin-bottom: 0;
+.healthy-status{
+    padding-bottom: 2rem;
+    margin-bottom: 1rem;
+}
+
+.close-icon{
+    margin-top: 0;
+    text-align: right;
 }

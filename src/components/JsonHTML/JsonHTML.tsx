@@ -1,7 +1,7 @@
 import React from "react";
 import "./JsonHTML.css";
 import { IconButton, Grid } from "@material-ui/core";
-import CloseIcon from '@material-ui/icons/Close';
+import CloseIcon from "@material-ui/icons/Close";
 
 interface Props {
   title?: string;
@@ -18,12 +18,18 @@ export default function JsonHTML(props: Props) {
       key: string | number,
       displayTitle?: boolean
     ): JSX.Element => {
-      const valueElement: JSX.Element = <h6 id="value">{value ? "True" : "False"}</h6>;
+      const valueElement: JSX.Element = (
+        <h6 className="healthy-value">{value ? "True" : "False"}</h6>
+      );
 
-      //healthy
       return (
         <li key={key} className="container-field">
-          {displayTitle ? <h6 id="healthy">{key + ": "}<span>{valueElement}</span></h6> : null}
+          {displayTitle ? (
+            <h6 className="healthy-status">
+              {key + ": "}
+              <span>{valueElement}</span>
+            </h6>
+          ) : null}
         </li>
       );
     };
@@ -35,7 +41,12 @@ export default function JsonHTML(props: Props) {
     ): JSX.Element => {
       return (
         <li key={key} className="container-field">
-          {displayTitle ? <h6 id="key">{key + ": "}<span id="text">{text}</span></h6> : null}
+          {displayTitle ? (
+            <h6 className="key">
+              {key + ": "}
+              <span className="container-info">{text}</span>
+            </h6>
+          ) : null}
         </li>
       );
     };
@@ -46,7 +57,7 @@ export default function JsonHTML(props: Props) {
       displayTitle?: boolean
     ): JSX.Element => {
       const valueElement: JSX.Element = (
-        <ul className="ul-div">
+        <ul className="containers-ul">
           {array.map((value, i) => {
             if (["string", "number"].includes(typeof value)) {
               return handleText(value, i, false);
@@ -94,11 +105,11 @@ export default function JsonHTML(props: Props) {
       return key ? (
         <li key={key} className="container-field">
           {displayTitle ? <h6>{key}</h6> : null}
-          <ul className="ul-div">{getObjectElement()}</ul>
+          <ul className="containers-ul">{getObjectElement()}</ul>
         </li>
       ) : (
-          <ul className="ul-div">{getObjectElement()}</ul>
-        );
+        <ul className="containers-ul">{getObjectElement()}</ul>
+      );
     };
 
     return handleObject(json, undefined, false);
@@ -110,13 +121,14 @@ export default function JsonHTML(props: Props) {
         <Grid item xs={11}>
           {title ? <h5>{title}</h5> : null}
         </Grid>
-        <Grid item xs={1}>
-          <IconButton onClick={closeView}>
-            <CloseIcon />
-          </IconButton>
-        </Grid>
+        <Grid item xs={1}></Grid>
       </Grid>
       <div className="container-div">
+        <div className="close-icon">
+          <IconButton>
+            <CloseIcon onClick={closeView} />
+          </IconButton>
+        </div>
         {getRender()}
       </div>
     </div>
