@@ -1,13 +1,16 @@
 import React from "react";
 import "./JsonHTML.css";
+import { IconButton, Grid } from "@material-ui/core";
+import CloseIcon from '@material-ui/icons/Close';
 
 interface Props {
   title?: string;
   json: { [key: string]: any };
+  closeView: () => void;
 }
 
 export default function JsonHTML(props: Props) {
-  const { title, json } = props;
+  const { title, json, closeView } = props;
 
   const getRender = (): JSX.Element => {
     const handleBoolean = (
@@ -103,7 +106,16 @@ export default function JsonHTML(props: Props) {
 
   return (
     <div>
-      {title ? <h5>{title}</h5> : null}
+      <Grid container>
+        <Grid item xs={11}>
+          {title ? <h5>{title}</h5> : null}
+        </Grid>
+        <Grid item xs={1}>
+          <IconButton onClick={closeView}>
+            <CloseIcon />
+          </IconButton>
+        </Grid>
+      </Grid>
       <div className="container-div">
         {getRender()}
       </div>

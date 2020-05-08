@@ -15,8 +15,6 @@ import {
 import JsonHTML from "../../../JsonHTML/JsonHTML";
 import NavigationBar from "../../../Navigation/NavigationBar/NavigationBar";
 import ServiceContainerList from "./ServiceContainerList/ServiceContainerList";
-import { IconButton } from "@material-ui/core";
-import CloseIcon from '@material-ui/icons/Close';
 
 interface Props {
   appName: string;
@@ -91,12 +89,7 @@ export default function ServiceInformation(props: Props): JSX.Element {
       </Grid>
 
       {openContainer && containerView ? (
-        <>
-          <IconButton onClick={setContainerView}>
-            <CloseIcon />
-          </IconButton>
-          <JsonHTML title={title} json={openContainer} />
-        </>
+        <JsonHTML title={title} json={openContainer} closeView={setContainerView} />
       ) : (
           <ServiceContainerList
             service={service}
