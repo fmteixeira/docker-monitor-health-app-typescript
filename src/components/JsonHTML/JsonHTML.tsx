@@ -130,6 +130,10 @@ export default function JsonHTML(props: Props) {
           </IconButton>
         </div>
         {getRender()}
+        <div className="buttons-container">
+          <button >Ver em JSON</button>
+          <button >Descarregar</button>
+        </div>
       </div>
     </div>
   );

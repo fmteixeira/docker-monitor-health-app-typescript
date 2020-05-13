@@ -25,12 +25,20 @@
     font-weight: lighter;
 }
 
-.healthy-status{
-    padding-bottom: 2rem;
-    margin-bottom: 1rem;
-}
 
 .close-icon{
     margin-top: 0;
     text-align: right;
+}
+
+.buttons-container{
+    text-align: left;
+    padding: 0.5rem;
+}
+
+.buttons-container > button{
+    font-size: 0.8rem;
+    border-radius: 0.3rem;
+    margin: 0 0.2rem;
+    background-color: white;
 }
