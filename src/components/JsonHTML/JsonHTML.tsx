@@ -2,6 +2,8 @@ import React from "react";
 import "./JsonHTML.css";
 import { IconButton, Grid } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
+import GetAppIcon from "@material-ui/icons/GetApp";
+import FindInPageIcon from "@material-ui/icons/FindInPage";
 
 interface Props {
   title?: string;
@@ -125,15 +127,19 @@ export default function JsonHTML(props: Props) {
       </Grid>
       <div className="container-div">
         <div className="close-icon">
+          <button id="json-button">
+            See in JSON
+            <FindInPageIcon fontSize="small" />
+          </button>
+          <button id="download-button">
+            Download
+            <GetAppIcon fontSize="small" />
+          </button>
           <IconButton>
-            <CloseIcon onClick={closeView} />
+            <CloseIcon onClick={closeView} fontSize="small" id="close-icon" />
           </IconButton>
         </div>
         {getRender()}
-        <div className="buttons-container">
-          <button >Ver em JSON</button>
-          <button >Descarregar</button>
-        </div>
       </div>
     </div>
   );

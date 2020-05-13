@@ -7,7 +7,7 @@
     border-radius: 0.3rem;
     background-color: rgb(255, 255, 255);
     box-shadow: 2px 1px 14px -1px rgba(41,57,77,1);
-    padding: 0;
+    padding: 0.5rem;
     margin-bottom: 1rem;
 }
 
@@ -31,14 +31,38 @@
     text-align: right;
 }
 
-.buttons-container{
-    text-align: left;
-    padding: 0.5rem;
-}
 
-.buttons-container > button{
+.close-icon > button{
     font-size: 0.8rem;
     border-radius: 0.3rem;
     margin: 0 0.2rem;
+    padding: 0.3rem 0.5rem;
+}
+
+#json-button{
+    color: white;
+    background-color: rgb(100, 134, 207);
+}
+
+#json-button:hover{
+    background-color: rgb(76, 105, 168);
+}
+
+#download-button{
+    color: white;
+    background-color: #4CAF50;
+}
+
+#download-button:hover{
+    background-color: rgb(61, 141, 64);;
+}
+
+#close-icon{
+    color: red;
+    padding: 0.2rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 1px solid red;
     background-color: white;
+    border-radius: 3rem;
 }
