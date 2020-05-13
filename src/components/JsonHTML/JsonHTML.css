@@ -66,3 +66,8 @@
     background-color: white;
     border-radius: 3rem;
 }
+
+#close-icon:hover{
+    color: white;
+    background-color: red;
+}
