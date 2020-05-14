@@ -15,16 +15,18 @@ import {
   ServiceInterface,
   ContainerInterface,
 } from "../../../../resources/interfaces";
+import { firstLetterToUpperCase } from "../../../../resources/scripts";
 
 interface Props {
   appName: string;
   serviceName: string;
   handleMessageClick: (service: ServiceInterface) => void;
+  handleHeaderTitle: (...args: string[]) => void;
 }
 
 export default function ServiceHistory(props: Props): JSX.Element {
   // State
-  const { handleMessageClick, appName, serviceName } = props;
+  const { handleMessageClick, appName, serviceName, handleHeaderTitle } = props;
   const [service, setService] = useState<Array<ServiceInterface> | any>([]);
   const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState("");
@@ -67,7 +69,8 @@ export default function ServiceHistory(props: Props): JSX.Element {
         setLoading(false);
       }
     });
-  }, [appName, serviceName]);
+    handleHeaderTitle(firstLetterToUpperCase(appName), firstLetterToUpperCase(serviceName), "Messages");
+  }, [appName, serviceName, handleHeaderTitle, appName, serviceName]);
 
 
   const response = JSON.stringify(service, undefined, 2);
