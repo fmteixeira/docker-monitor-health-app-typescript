@@ -43,9 +43,9 @@ export default function JsonHTML(props: Props) {
       );
 
       return (
-        <li key={key} className="container-field">
+        <li key={key}>
           {displayTitle ? (
-            <h6 className="healthy-status">
+            <h6>
               {key + ": "}
               <span>{valueElement}</span>
             </h6>
@@ -60,11 +60,11 @@ export default function JsonHTML(props: Props) {
       displayTitle?: boolean
     ): JSX.Element => {
       return (
-        <li key={key} className="container-field">
+        <li key={key}>
           {displayTitle ? (
-            <h6 className="key">
+            <h6>
               {key + ": "}
-              <span className="container-info">{text}</span>
+              <span>{text}</span>
             </h6>
           ) : null}
         </li>
@@ -94,7 +94,7 @@ export default function JsonHTML(props: Props) {
       );
 
       return (
-        <li key={key} className="container-field">
+        <li key={key}>
           {displayTitle ? <h6>{key}</h6> : null}
           {valueElement}
         </li>
@@ -123,7 +123,7 @@ export default function JsonHTML(props: Props) {
         return element;
       };
       return key ? (
-        <li key={key} className="container-field">
+        <li key={key}>
           {displayTitle ? <h6>{key}</h6> : null}
           <ul className="containers-ul">{getObjectElement()}</ul>
         </li>
@@ -136,13 +136,13 @@ export default function JsonHTML(props: Props) {
   };
 
   return (
-    <div>
-      <Grid container>
-        <Grid item xs={6}>
-          {title ? <h5>{title}</h5> : null}
+    <>
+      <Grid container className="container-info-div">
+        <Grid item xs={8}>
+          {title ? <h5 id="app-name">{title}</h5> : null}
         </Grid>
-        <Grid item xs={6}>
-          <div className="icons-container">
+        <Grid item xs={4}>
+          <div className="buttons-container">
             <button id="json-button" onClick={openInJson}>
               {text}
               <FindInPageIcon fontSize="small" />
@@ -166,8 +166,7 @@ export default function JsonHTML(props: Props) {
           </div>
         </Grid>
       </Grid>
-
       <div className="container-div">{isJson ? viewJson() : getRender()}</div>
-    </div>
-  );
+  </>
+      );
 }

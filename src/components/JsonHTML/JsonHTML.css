@@ -1,14 +1,6 @@
-.container-field{
-    list-style-type: none;
-}
-
-.json-container{
-    list-style-type: none;
-    white-space: pre-wrap;
-    line-height: 1.7;
-    padding: 0 1rem;
-    margin: 1rem 0;
-}
+.container-info-div{
+    margin-top: 1.4rem;
+  }
 
 .container-div{
     color: black;
@@ -22,9 +14,10 @@
 .containers-ul {
     padding: 0 1rem;
     margin: 1rem 0;
+    list-style-type: none;
 }
 
-.container-info{
+h6 > span{
     font-weight: lighter;
 }
 
@@ -33,54 +26,59 @@
     font-weight: lighter;
 }
 
-.icons-container{
+.buttons-container{
     margin: 1.65rem 0 1rem 0;
     text-align: right;
 }
-.icons-container>h5{
-    margin: 2rem 0 1rem 0;
+
+#app-name{
+    margin-top: 2rem;
 }
 
-.icons-container > button{
+.json-container{
+    list-style-type: none;
+    white-space: pre-wrap;
+    line-height: 1.7;
+    padding: 0 1rem;
+    margin: 1rem 0;
+}
+
+#json-button, #download-button{
     font-size: 0.8rem;
     border-radius: 0.3rem;
     margin: 0 0.2rem;
     padding: 0.3rem 0.5rem;
+    border: none;
+    color: white;
 }
 
 #json-button{
-    color: white;
     background-color: rgb(100, 134, 207);
 }
 
 #json-button:hover{
-    background-color: rgb(76, 105, 168);
+    background-color: rgb(124, 158, 230);
 }
 
 #download-button{
-    color: white;
     background-color: #4CAF50;
-    font-size: 0.8rem;
-    border-radius: 0.3rem;
-    margin: 0 0.2rem;
-    padding: 0.3rem 0.5rem;
 }
 
 #download-button:hover{
-    background-color: rgb(61, 141, 64);;
+    background-color: rgb(116, 216, 119);;
 }
 
 #close-icon{
-    color: red;
+    color: white;
     padding: 0.2rem;
     width: 1.5rem;
     height: 1.5rem;
-    border: 1px solid red;
-    background-color: white;
+    border: none;
+    background-color: rgb(180, 7, 7);
     border-radius: 3rem;
 }
 
 #close-icon:hover{
     color: white;
-    background-color: red;
+    background-color: rgb(224, 26, 26);
 }

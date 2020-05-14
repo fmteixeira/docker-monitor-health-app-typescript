@@ -6,6 +6,7 @@ import { firstLetterToUpperCase } from "../../../../resources/scripts";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
+import GetAppIcon from "@material-ui/icons/GetApp";
 //Interface
 import {
   ServiceInterface,
@@ -48,6 +49,10 @@ export default function ServiceInformation(props: Props): JSX.Element {
     service.created.substr(0, 10) + " " + service.created.substr(11, 8);
   let serviceCreatedDate = new Date(date).toLocaleString();
 
+  const handleClick = () => {
+    console.log(service.containers);
+  };
+
   useEffect(() => {
     handleHeaderTitle(
       firstLetterToUpperCase(appName),
@@ -61,7 +66,10 @@ export default function ServiceInformation(props: Props): JSX.Element {
     null
   );
 
-  const handleContainerClick = (container: ContainerInterface, title: string): void => {
+  const handleContainerClick = (
+    container: ContainerInterface,
+    title: string
+  ): void => {
     setOpenContainer(container);
     setOpenContainerView(true);
     setTitle(title);
@@ -70,7 +78,7 @@ export default function ServiceInformation(props: Props): JSX.Element {
   const setContainerView = () => {
     setOpenContainerView(false);
     setTitle("Containers");
-  }
+  };
 
   return (
     <>
@@ -89,13 +97,35 @@ export default function ServiceInformation(props: Props): JSX.Element {
       </Grid>
 
       {openContainer && containerView ? (
-        <JsonHTML title={title} json={openContainer} closeView={setContainerView} />
+        <JsonHTML
+          title={title}
+          json={openContainer}
+          closeView={setContainerView}
+        />
       ) : (
+        <>
+        <div className="flex-container">
+        <h5>Containers</h5>
+        <a
+            href={URL.createObjectURL(
+              new Blob([JSON.stringify(service.containers, null, 2)], {
+                type: "text/plain",
+              })
+            )}
+            download={service.appName + "JSON.txt"}
+          >
+            <button id="download-button">
+              Download All
+              <GetAppIcon fontSize="small" />
+            </button>
+          </a>
+        </div>
           <ServiceContainerList
             service={service}
             handleContainerClick={handleContainerClick}
           />
-        )}
+        </>
+      )}
     </>
   );
 }

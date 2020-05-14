@@ -1,11 +1,6 @@
-.application-name{
-    margin-top: 3rem;
+.flex-container{
+    display: flex;
+    justify-content: space-between;
+    margin: 3rem 0 1rem 0;
 }
 
-.containers{
-    margin-top: 2rem;
-}
-
-h5{
-    margin: 2rem 0;
-}

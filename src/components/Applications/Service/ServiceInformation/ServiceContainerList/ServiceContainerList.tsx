@@ -32,7 +32,6 @@ export default function ServiceContainerList(props: Props) {
 
   return (
     <>
-      <h5>Containers</h5>
       {service.containers.map(
         (container: ContainerInterface, index: number) => {
           return (
