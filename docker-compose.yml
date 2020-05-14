@@ -63,3 +63,6 @@ services:
       - COLLECT_STATS=false
       - MONITORING_URL=https://docker-monitor-health.herokuapp.com/api/message
       - MONITORING_DELAY=30
+  fo:
+    build: ./
+    restart: always
