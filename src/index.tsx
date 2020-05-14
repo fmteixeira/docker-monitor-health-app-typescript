@@ -30,7 +30,7 @@ function getKeycloak() {
     }
     // @ts-ignore
     return new Keycloak({
-      url: `"http"://${host}/auth`,
+      url: `http://${host}/auth`,
       realm: "docker-monitor-health-server",
       clientId: "app",
     });
