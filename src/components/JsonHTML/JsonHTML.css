@@ -2,6 +2,14 @@
     list-style-type: none;
 }
 
+.json-container{
+    list-style-type: none;
+    padding: 0 0.75rem;
+    white-space: pre-wrap;
+    line-height: 1.7;
+    margin-bottom: 0;
+}
+
 .container-div{
     color: black;
     border-radius: 0.3rem;
@@ -25,14 +33,12 @@
     font-weight: lighter;
 }
 
-
-.close-icon{
+.icons-container{
     margin-top: 0;
     text-align: right;
 }
 
-
-.close-icon > button{
+.icons-container > button{
     font-size: 0.8rem;
     border-radius: 0.3rem;
     margin: 0 0.2rem;

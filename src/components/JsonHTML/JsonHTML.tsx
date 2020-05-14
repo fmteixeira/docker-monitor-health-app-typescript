@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./JsonHTML.css";
 import { IconButton, Grid } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
@@ -13,6 +13,24 @@ interface Props {
 
 export default function JsonHTML(props: Props) {
   const { title, json, closeView } = props;
+  
+  const [isJson, setIsJson] = useState(false);
+  const [text, setText] = useState("See in JSON")
+  const openInJson = () => {
+    setIsJson(!isJson);
+    setText(text === "See in JSON" ? "See Formatted" : "See in JSON");
+  };
+
+  const viewJson = () => {
+    let jsonObject = JSON.stringify(json);
+    let formattedJson = jsonObject.split(",").join("\n")
+    
+    return (
+      <ul className="json-container">
+        <li>{formattedJson}</li>
+      </ul>
+    );
+  };
 
   const getRender = (): JSX.Element => {
     const handleBoolean = (
@@ -126,9 +144,9 @@ export default function JsonHTML(props: Props) {
         <Grid item xs={1}></Grid>
       </Grid>
       <div className="container-div">
-        <div className="close-icon">
-          <button id="json-button">
-            See in JSON
+        <div className="icons-container">
+          <button id="json-button" onClick={openInJson}>
+            {text}
             <FindInPageIcon fontSize="small" />
           </button>
           <button id="download-button">
@@ -139,7 +157,7 @@ export default function JsonHTML(props: Props) {
             <CloseIcon onClick={closeView} fontSize="small" id="close-icon" />
           </IconButton>
         </div>
-        {getRender()}
+        {isJson ? viewJson() : getRender()}
       </div>
     </div>
   );
