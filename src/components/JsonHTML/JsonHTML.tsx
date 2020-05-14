@@ -13,9 +13,9 @@ interface Props {
 
 export default function JsonHTML(props: Props) {
   const { title, json, closeView } = props;
-  
+
   const [isJson, setIsJson] = useState(false);
-  const [text, setText] = useState("See in JSON")
+  const [text, setText] = useState("See in JSON");
   const openInJson = () => {
     setIsJson(!isJson);
     setText(text === "See in JSON" ? "See Formatted" : "See in JSON");
@@ -23,8 +23,8 @@ export default function JsonHTML(props: Props) {
 
   const viewJson = () => {
     let jsonObject = JSON.stringify(json);
-    let formattedJson = jsonObject.split(",").join("\n")
-    
+    let formattedJson = jsonObject.split(",").join("\n");
+
     return (
       <ul className="json-container">
         <li>{formattedJson}</li>
@@ -138,27 +138,36 @@ export default function JsonHTML(props: Props) {
   return (
     <div>
       <Grid container>
-        <Grid item xs={11}>
+        <Grid item xs={6}>
           {title ? <h5>{title}</h5> : null}
         </Grid>
-        <Grid item xs={1}></Grid>
+        <Grid item xs={6}>
+          <div className="icons-container">
+            <button id="json-button" onClick={openInJson}>
+              {text}
+              <FindInPageIcon fontSize="small" />
+            </button>
+            <a
+              href={URL.createObjectURL(
+                new Blob([JSON.stringify(json, null, 2)], {
+                  type: "text/plain",
+                })
+              )}
+              download={title + "JSON.txt"}
+            >
+              <button id="download-button">
+                Download
+                <GetAppIcon fontSize="small" />
+              </button>
+            </a>
+            <IconButton>
+              <CloseIcon onClick={closeView} fontSize="small" id="close-icon" />
+            </IconButton>
+          </div>
+        </Grid>
       </Grid>
-      <div className="container-div">
-        <div className="icons-container">
-          <button id="json-button" onClick={openInJson}>
-            {text}
-            <FindInPageIcon fontSize="small" />
-          </button>
-          <button id="download-button">
-            Download
-            <GetAppIcon fontSize="small" />
-          </button>
-          <IconButton>
-            <CloseIcon onClick={closeView} fontSize="small" id="close-icon" />
-          </IconButton>
-        </div>
-        {isJson ? viewJson() : getRender()}
-      </div>
+
+      <div className="container-div">{isJson ? viewJson() : getRender()}</div>
     </div>
   );
 }

@@ -4,10 +4,10 @@
 
 .json-container{
     list-style-type: none;
-    padding: 0 0.75rem;
     white-space: pre-wrap;
     line-height: 1.7;
-    margin-bottom: 0;
+    padding: 0 1rem;
+    margin: 1rem 0;
 }
 
 .container-div{
@@ -21,7 +21,7 @@
 
 .containers-ul {
     padding: 0 1rem;
-    margin: 0;
+    margin: 1rem 0;
 }
 
 .container-info{
@@ -34,8 +34,11 @@
 }
 
 .icons-container{
-    margin-top: 0;
+    margin: 1.65rem 0 1rem 0;
     text-align: right;
+}
+.icons-container>h5{
+    margin: 2rem 0 1rem 0;
 }
 
 .icons-container > button{
@@ -57,6 +60,10 @@
 #download-button{
     color: white;
     background-color: #4CAF50;
+    font-size: 0.8rem;
+    border-radius: 0.3rem;
+    margin: 0 0.2rem;
+    padding: 0.3rem 0.5rem;
 }
 
 #download-button:hover{
