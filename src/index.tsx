@@ -30,7 +30,7 @@ function getKeycloak() {
     }
     // @ts-ignore
     return new Keycloak({
-      url: `${host === "172.17.0.1" ? "http" : "https"}://${host}/auth`,
+      url: `"http"://${host}/auth`,
       realm: "docker-monitor-health-server",
       clientId: "app",
     });
