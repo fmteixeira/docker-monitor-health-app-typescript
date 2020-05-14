@@ -14,7 +14,6 @@ import rootReducer from "./redux/reducers";
 const middleware = [thunk];
 const store = createStore(rootReducer, applyMiddleware(...middleware));
 
-
 /*eslint-disable*/
 function getKeycloak() {
   if (process.env.NODE_ENV === "production") {
@@ -31,7 +30,7 @@ function getKeycloak() {
     }
     // @ts-ignore
     return new Keycloak({
-      url: `http://${host}/auth`,
+      url: `${host === "172.17.0.1" ? "http" : "https"}://${host}/auth`,
       realm: "docker-monitor-health-server",
       clientId: "app",
     });
