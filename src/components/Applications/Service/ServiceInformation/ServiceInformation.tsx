@@ -55,19 +55,20 @@ export default function ServiceInformation(props: Props): JSX.Element {
   const openAllInJson = () => {
     setIsJson(!isJson);
     setText(
-      text === "View all in JSON" ? "View all Formatted" : "View all in JSON"
+      text === "View all in JSON" ? "View Individually" : "View all in JSON"
     );
   };
 
   const viewAllInJson = () => {
-    service.containers.map((container: object, index: number) => {
-      //console.log(container);
-      return (
-        <ul className="json-container">
-          <li>{container}</li>
-        </ul>
-      );
-    });
+    let jsonObject = JSON.stringify(service.containers);
+    let formattedJson = jsonObject.split(",").join("\n").split("}").join("\n")
+    return (
+      <div className="container-div">
+      <ul className="json-container">
+        <li>{formattedJson}</li>
+      </ul>
+      </div>
+    );
   };
 
   useEffect(() => {
