@@ -194,10 +194,6 @@ export default function ServiceHistory(props: Props): JSX.Element {
           onDateChange={handleDateChange}
           onHourChange={handleHourChange}
         />
-
-        {/* <h5 className="containers">{`${firstLetterToUpperCase(
-          appName
-        )} ${firstLetterToUpperCase(serviceName)} Messages:`}</h5> */}
         {filteredMessages.map((service: ServiceInterface, index: number) => {
           let date: string =
             service.created.substr(0, 10) + " " + service.created.substr(11, 8);
