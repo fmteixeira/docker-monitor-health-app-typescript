@@ -15,10 +15,10 @@ export default function JsonHTML(props: Props) {
   const { title, json, closeView } = props;
 
   const [isJson, setIsJson] = useState(false);
-  const [text, setText] = useState("See in JSON");
+  const [text, setText] = useState("View in JSON");
   const openInJson = () => {
     setIsJson(!isJson);
-    setText(text === "See in JSON" ? "See Formatted" : "See in JSON");
+    setText(text === "View in JSON" ? "View Formatted" : "View in JSON");
   };
 
   const viewJson = () => {
