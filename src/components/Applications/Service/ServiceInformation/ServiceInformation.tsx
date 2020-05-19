@@ -3,7 +3,6 @@ import "./ServiceInformation.css";
 //Script
 import { firstLetterToUpperCase } from "../../../../resources/scripts";
 // Material-UI
-import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import GetAppIcon from "@material-ui/icons/GetApp";
@@ -27,23 +26,9 @@ interface Props {
   setView: () => void;
 }
 
-const useStyles = makeStyles({
-  root: {
-    flexGrow: 1,
-    backgroundColor: "#455c78",
-  },
-  info: {
-    padding: "1rem",
-  },
-  topTitle: {
-    marginTop: "0rem",
-  },
-});
-
 export default function ServiceInformation(props: Props): JSX.Element {
   const { appName, serviceName, service, handleHeaderTitle, setView } = props;
   const [containerView, setOpenContainerView] = useState(false);
-  const classes = useStyles();
   const [title, setTitle] = useState("Containers");
   const [text, setText] = useState("View all in JSON");
   const [isJson, setIsJson] = useState(false);
@@ -101,11 +86,11 @@ export default function ServiceInformation(props: Props): JSX.Element {
   return (
     <>
       <NavigationBar handleBackButtonClick={setView} />
-      <h5>Service Information</h5>
+      <h5 className="service-information-text">Service Information</h5>
       <Grid container spacing={3}>
         <Grid item xs={12}>
-          <Paper className={classes.info}>
-            <h6 className={classes.topTitle}>
+          <Paper className="service-info">
+            <h6 className="top-title">
               Server Name: {firstLetterToUpperCase(service.serverName)}
             </h6>
             <h6>Created: {service.created}</h6>
