@@ -8,7 +8,7 @@ import FindInPageIcon from "@material-ui/icons/FindInPage";
 interface Props {
   title?: string;
   json: { [key: string]: any };
-  closeView: () => void;
+  closeView?: () => void;
 }
 
 export default function JsonHTML(props: Props) {
@@ -128,8 +128,8 @@ export default function JsonHTML(props: Props) {
           <ul className="containers-ul">{getObjectElement()}</ul>
         </li>
       ) : (
-        <ul className="containers-ul">{getObjectElement()}</ul>
-      );
+          <ul className="containers-ul">{getObjectElement()}</ul>
+        );
     };
 
     return handleObject(json, undefined, false);
@@ -167,6 +167,6 @@ export default function JsonHTML(props: Props) {
         </Grid>
       </Grid>
       <div className="container-div">{isJson ? viewJson() : getRender()}</div>
-  </>
-      );
+    </>
+  );
 }

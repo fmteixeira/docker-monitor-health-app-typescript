@@ -49,9 +49,9 @@ export default function ServiceInformation(props: Props): JSX.Element {
     let formattedJson = jsonObject.split(",").join("\n").split("}").join("\n")
     return (
       <div className="container-div">
-      <ul className="json-container">
-        <li>{formattedJson}</li>
-      </ul>
+        <ul className="json-container">
+          <li>{formattedJson}</li>
+        </ul>
       </div>
     );
   };
@@ -83,21 +83,13 @@ export default function ServiceInformation(props: Props): JSX.Element {
     setTitle("Containers");
   };
 
+  const serviceInfoJSON = { ...service };
+  delete serviceInfoJSON["containers"];
+
   return (
     <>
       <NavigationBar handleBackButtonClick={setView} />
-      <h5 className="service-information-text">Service Information</h5>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <Paper className="service-info">
-            <h6 className="top-title">
-              Server Name: {firstLetterToUpperCase(service.serverName)}
-            </h6>
-            <h6>Created: {service.created}</h6>
-            <h6>Expires: {service.expires}</h6>
-          </Paper>
-        </Grid>
-      </Grid>
+      <JsonHTML json={serviceInfoJSON} title="Service Information" />
 
       {openContainer && containerView ? (
         <JsonHTML
@@ -106,39 +98,39 @@ export default function ServiceInformation(props: Props): JSX.Element {
           closeView={setContainerView}
         />
       ) : (
-        <>
-          <div className="flex-container">
-            <h5>Containers</h5>
-            <div>
-              <button id="json-button" onClick={openAllInJson}>
-                {text}
-                <FindInPageIcon fontSize="small" />
-              </button>
-              <a
-                href={URL.createObjectURL(
-                  new Blob([JSON.stringify(service.containers, null, 2)], {
-                    type: "text/plain",
-                  })
-                )}
-                download={service.appName + "JSON.txt"}
-              >
-                <button id="download-button">
-                  Download All
-                  <GetAppIcon fontSize="small" />
+          <>
+            <div className="flex-container">
+              <h5>Containers</h5>
+              <div>
+                <button id="json-button" onClick={openAllInJson}>
+                  {text}
+                  <FindInPageIcon fontSize="small" />
                 </button>
-              </a>
+                <a
+                  href={URL.createObjectURL(
+                    new Blob([JSON.stringify(service.containers, null, 2)], {
+                      type: "text/plain",
+                    })
+                  )}
+                  download={service.appName + "JSON.txt"}
+                >
+                  <button id="download-button">
+                    Download All
+                  <GetAppIcon fontSize="small" />
+                  </button>
+                </a>
+              </div>
             </div>
-          </div>
-          {isJson ? (
-            viewAllInJson()
-          ) : (
-            <ServiceContainerList
-              service={service}
-              handleContainerClick={handleContainerClick}
-            />
-          )}
-        </>
-      )}
+            {isJson ? (
+              viewAllInJson()
+            ) : (
+                <ServiceContainerList
+                  service={service}
+                  handleContainerClick={handleContainerClick}
+                />
+              )}
+          </>
+        )}
     </>
   );
 }
