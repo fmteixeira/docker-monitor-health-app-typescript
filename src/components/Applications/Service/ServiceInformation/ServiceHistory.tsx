@@ -72,7 +72,7 @@ export default function ServiceHistory(props: Props): JSX.Element {
       }
     });
     handleHeaderTitle(firstLetterToUpperCase(appName), firstLetterToUpperCase(serviceName), "Messages");
-  }, [appName, serviceName, handleHeaderTitle, appName, serviceName, handleCurrentComp]);
+  }, [handleHeaderTitle, appName, serviceName, handleCurrentComp]);
 
 
   const response = JSON.stringify(service, undefined, 2);
