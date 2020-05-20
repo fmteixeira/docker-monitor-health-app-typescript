@@ -9,11 +9,11 @@ volumes:
 services:
   lb:
     ports:
-      - "80:80"
+      - "${PORT}:${PORT}"
     image: jrofurtado/nghttpx-autoreload-with-healthcheck:1.0.0
     environment:
       PARAMS: '
-        -f"*,80;no-tls"
+        -f"*,${PORT};no-tls"
         -b"${REACT_APP_HOST:-172.17.0.1},3000;;dns;"
         -b"server,3000;/api/;dns;"
         -b"auth,8080;/auth/;dns;"'
