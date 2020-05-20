@@ -19,6 +19,7 @@ export default function Navigation(props: Props): JSX.Element {
   const { kc } = props;
   const [headerTitle, setHeaderTitle] = useState("");
   const [service, setService] = useState<ServInterface>({ appName: "", serviceName: "" });
+  const [currentComp, setCurrentComp] = useState("Applications");
 
   const handleServiceClick = (app: string = "", serviceName: string = ""): void => {
     setService({ appName: app, serviceName: serviceName });
@@ -34,18 +35,23 @@ export default function Navigation(props: Props): JSX.Element {
     setHeaderTitle(title);
   }
 
+  const handleCurrentComp = (currentComp: string) => {
+    setCurrentComp(currentComp);
+  }
+
   return service.serviceName !== "" ? (
     <div>
-      <Header kc={kc} title={headerTitle} />
+      <Header kc={kc} title={headerTitle} currentComp={currentComp} />
       <Container maxWidth="md">
-        <Service appName={service.appName} serviceName={service.serviceName} handleBackButtonClick={handleServiceClick} handleHeaderTitle={handleHeaderTitle} />
+        <Service appName={service.appName} serviceName={service.serviceName} handleBackButtonClick={handleServiceClick} handleHeaderTitle={handleHeaderTitle}
+          handleCurrentComp={handleCurrentComp} />
       </Container>
     </div>
   ) : (
       <div>
-        <Header kc={kc} title={headerTitle} />
+        <Header kc={kc} title={headerTitle} currentComp={currentComp} />
         <Container maxWidth="md">
-          <Applications handleServiceClick={handleServiceClick} handleHeaderTitle={handleHeaderTitle} />
+          <Applications handleServiceClick={handleServiceClick} handleHeaderTitle={handleHeaderTitle} handleCurrentComp={handleCurrentComp} />
         </Container>
       </div>
     );

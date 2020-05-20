@@ -14,14 +14,16 @@ import Menu from "@material-ui/core/Menu";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import NotificationsActiveIcon from "@material-ui/icons/NotificationsActive";
 import NotificationsOffIcon from "@material-ui/icons/NotificationsOff";
+import NavigationBar from "../Navigation/NavigationBar/NavigationBar";
 
 interface Props {
   kc: any;
   title: string;
+  currentComp: string;
 }
 
 export default function Header(props: Props): JSX.Element {
-  const { kc, title } = props;
+  const { kc, title, currentComp } = props;
   const [anchorEl, setAnchorEl] = useState<(EventTarget & Element) | null>(
     null
   );
@@ -55,7 +57,17 @@ export default function Header(props: Props): JSX.Element {
     <div className="header">
       <Grid container direction="row" justify="flex-start" alignItems="center">
         <Grid item xs={8}>
-          <h3 className="app-name">{title}</h3>
+          <Grid container direction="row" justify="flex-start" alignItems="center">
+            {currentComp !== "Applications" ? (
+              <Grid item xs={1}>
+                <NavigationBar handleBackButtonClick={() => console.log(currentComp)} />
+              </Grid>) :
+              <></>
+            }
+            <Grid item xs={11}>
+              <h3 className="app-name">{title}</h3>
+            </Grid>
+          </Grid>
         </Grid>
         <Grid item xs={4}>
           <Grid container justify="flex-end">
@@ -114,6 +126,6 @@ export default function Header(props: Props): JSX.Element {
           </Grid>
         </Grid>
       </Grid>
-    </div>
+    </div >
   );
 }

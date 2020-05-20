@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 // Components
 import ServiceHistory from './ServiceInformation/ServiceHistory';
 import ServiceInformation from './ServiceInformation/ServiceInformation';
 import NavigationBar from '../../Navigation/NavigationBar/NavigationBar';
-import { firstLetterToUpperCase } from '../../../resources/scripts';
+
 // Interface
 import { ServiceInterface } from '../../../resources/interfaces';
 
@@ -12,10 +12,11 @@ interface Props {
   serviceName: string;
   handleBackButtonClick: () => void;
   handleHeaderTitle: (...args: string[]) => void;
+  handleCurrentComp: (currentComp: string) => void;
 }
 
 export default function Service(props: Props): JSX.Element {
-  const { appName, serviceName, handleBackButtonClick, handleHeaderTitle } = props;
+  const { appName, serviceName, handleBackButtonClick, handleHeaderTitle, handleCurrentComp } = props;
   const [view, setView] = useState(false);
   const [service, setService] = useState<ServiceInterface | any>();
 
@@ -28,10 +29,12 @@ export default function Service(props: Props): JSX.Element {
     setView(false);
   };
 
-  return view ? <ServiceInformation appName={appName} serviceName={serviceName} service={service} handleBackButtonClick={handleBackButtonClick} handleHeaderTitle={handleHeaderTitle} setView={controllView} /> : (
-    <>
-      <NavigationBar handleBackButtonClick={handleBackButtonClick} />
-      <ServiceHistory appName={appName} serviceName={serviceName} handleHeaderTitle={handleHeaderTitle} handleMessageClick={handleMessageClick} />
-    </>
-  );
+  return view ? <ServiceInformation appName={appName} serviceName={serviceName} service={service} handleHeaderTitle={handleHeaderTitle}
+    setView={controllView} handleCurrentComp={handleCurrentComp} /> : (
+      <>
+        <NavigationBar handleBackButtonClick={handleBackButtonClick} />
+        <ServiceHistory appName={appName} serviceName={serviceName} handleHeaderTitle={handleHeaderTitle} handleMessageClick={handleMessageClick}
+          handleCurrentComp={handleCurrentComp} />
+      </>
+    );
 }

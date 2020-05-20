@@ -19,7 +19,7 @@ export default function NavigationBar(props: Props): JSX.Element {
 
   return (
     <div>
-      <Grid container className="arrowBack">
+      <Grid container>
         <Grid item xs={1}>
           <IconButton onClick={() => handleBackButtonClick()}>
             <ArrowBackIcon style={style} />

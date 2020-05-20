@@ -21,13 +21,13 @@ interface Props {
   appName: string;
   serviceName: string;
   service: ServiceInterface;
-  handleBackButtonClick: () => void;
   handleHeaderTitle: (...args: string[]) => void;
   setView: () => void;
+  handleCurrentComp: (currentComp: string) => void;
 }
 
 export default function ServiceInformation(props: Props): JSX.Element {
-  const { appName, serviceName, service, handleHeaderTitle, setView } = props;
+  const { appName, serviceName, service, handleHeaderTitle, setView, handleCurrentComp } = props;
   const [containerView, setOpenContainerView] = useState(false);
   const [title, setTitle] = useState("Containers");
   const [text, setText] = useState("View all in JSON");
@@ -57,12 +57,13 @@ export default function ServiceInformation(props: Props): JSX.Element {
   };
 
   useEffect(() => {
+    handleCurrentComp("ServiceInformation");
     handleHeaderTitle(
       firstLetterToUpperCase(appName),
       firstLetterToUpperCase(serviceName),
       serviceCreatedDate
     );
-  }, [appName, serviceName, serviceCreatedDate, handleHeaderTitle]);
+  }, [appName, serviceName, serviceCreatedDate, handleHeaderTitle, handleCurrentComp]);
 
   // Container State
   const [openContainer, setOpenContainer] = useState<ContainerInterface | null>(
