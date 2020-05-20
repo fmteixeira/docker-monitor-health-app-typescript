@@ -162,8 +162,8 @@ export default function JsonHTML(props: Props) {
                 <GetAppIcon fontSize="small" />
               </button>
             </a>
-            <IconButton>
-              <CloseIcon onClick={closeView} fontSize="small" id="close-icon" />
+            <IconButton onClick={closeView}>
+              <CloseIcon fontSize="small" id="close-icon" />
             </IconButton>
           </div> : null}
         </Grid>
