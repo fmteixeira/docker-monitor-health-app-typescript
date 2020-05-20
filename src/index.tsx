@@ -24,13 +24,13 @@ function getKeycloak() {
       clientId: process.env.REACT_APP_KEYCLOAK_RESOURCE,
     });
   } else {
-    let host = "172.17.0.1";
+    let host = "docker-monitor-health.herokuapp.com";
     if (process.env.REACT_APP_HOST != null) {
       host = process.env.REACT_APP_HOST;
     }
     // @ts-ignore
     return new Keycloak({
-      url: `http://${host}/auth`,
+      url: `https://${host}/auth`,
       realm: "docker-monitor-health-server",
       clientId: "app",
     });

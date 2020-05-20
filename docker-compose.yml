@@ -14,19 +14,40 @@ services:
     environment:
       PARAMS: '
         -f"*,80;no-tls"
-        -b"${REACT_APP_HOST:-172.17.0.1},3000;;dns;"
-        -b"server,3000;/api/;dns;"
-        -b"auth,8080;/auth/;dns;"'
+        -f"*,443"
+        -b"fo,80;/;dns;redirect-if-not-tls"
+        -b"server,3000;/api/;dns;redirect-if-not-tls"
+        -b"auth,8080;/auth/;dns;redirect-if-not-tls"'
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      front:
+      back:
+  le:
+    image: jrofurtado/letsencrypt-with-healthcheck:1.0.0
+    restart: always
+    environment:
+      DOMAIN: docker-monitor-health.herokuapp.com
+      CRONTAB_PERIOD: '4 4 4 * *'
+    volumes:
+    - lb-data:/volume
+    networks:
+      - front
+      - back
   server:
     image: jrofurtado/docker-monitor-health-server:latest
     volumes:
       - server_data:/volume
     environment:
       DEFAULT_APPS: '{"monitor":"fab4d210-69db-11ea-8339-811ba1916331"}'
-      KEYCLOAK_AUTH_SERVER_URL: "http://${REACT_APP_HOST:-172.17.0.1}/auth"
+      KEYCLOAK_AUTH_SERVER_URL: "https://docker-monitor-health.herokuapp.com/auth"
       KEYCLOAK_REALM: "docker-monitor-health-server"
       KEYCLOAK_RESOURCE: "server"
       KEYCLOAK_SSL_REQUIRED: "none"
+    networks:
+      - front
+      - back
   db:
     image: jrofurtado/mysql-with-healthcheck:5.7.28
     volumes:
@@ -37,6 +58,8 @@ services:
       MYSQL_DATABASE: auth
       MYSQL_USER: auth
       MYSQL_PASSWORD: password
+    networks:
+      - back
   auth:
     image: jrofurtado/keycloak-with-healthcheck:8.0.1
     environment:
@@ -52,6 +75,9 @@ services:
       ROOT_LOGLEVEL: WARN
     depends_on:
       - db
+    networks:
+      - front
+      - back
   agent:
     image: jrofurtado/docker-monitor-health-agent:latest
     volumes:
@@ -61,5 +87,13 @@ services:
       - DOCKER_API_VERSION=v1.40
       - APP_NAME=monitor
       - COLLECT_STATS=false
-      - MONITORING_URL=http://${REACT_APP_HOST:-172.17.0.1}/api/message
+      - MONITORING_URL=https://docker-monitor-health.herokuapp.com/api/message
       - MONITORING_DELAY=30
+    networks:
+      - back
+  fo:
+    build: ./
+    restart: always
+    networks:
+      - front
+      - back
