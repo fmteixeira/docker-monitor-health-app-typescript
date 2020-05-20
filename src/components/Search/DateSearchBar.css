@@ -1,7 +1,8 @@
 .date-picker-container{
+    margin-top: 8rem;
     margin-bottom: 2rem;
     padding: 0.5rem;
-  background: radial-gradient(
+    background: radial-gradient(
     circle,
     rgb(201, 211, 223) 0%,
     rgb(187, 199, 212) 100%
