@@ -3,8 +3,6 @@ import "./ServiceInformation.css";
 //Script
 import { firstLetterToUpperCase } from "../../../../resources/scripts";
 // Material-UI
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
 import GetAppIcon from "@material-ui/icons/GetApp";
 import FindInPageIcon from "@material-ui/icons/FindInPage";
 //Interface
@@ -14,20 +12,18 @@ import {
 } from "../../../../resources/interfaces";
 //Components
 import JsonHTML from "../../../JsonHTML/JsonHTML";
-import NavigationBar from "../../../Navigation/NavigationBar/NavigationBar";
 import ServiceContainerList from "./ServiceContainerList/ServiceContainerList";
 
 interface Props {
   appName: string;
   serviceName: string;
   service: ServiceInterface;
-  handleBackButtonClick: () => void;
   handleHeaderTitle: (...args: string[]) => void;
-  setView: () => void;
+  handleCurrentComp: (currentComp: string) => void;
 }
 
 export default function ServiceInformation(props: Props): JSX.Element {
-  const { appName, serviceName, service, handleHeaderTitle, setView } = props;
+  const { appName, serviceName, service, handleHeaderTitle, handleCurrentComp } = props;
   const [containerView, setOpenContainerView] = useState(false);
   const [title, setTitle] = useState("Containers");
   const [text, setText] = useState("View all in JSON");
@@ -57,12 +53,13 @@ export default function ServiceInformation(props: Props): JSX.Element {
   };
 
   useEffect(() => {
+    handleCurrentComp("ServiceInformation");
     handleHeaderTitle(
       firstLetterToUpperCase(appName),
       firstLetterToUpperCase(serviceName),
       serviceCreatedDate
     );
-  }, [appName, serviceName, serviceCreatedDate, handleHeaderTitle]);
+  }, [appName, serviceName, serviceCreatedDate, handleHeaderTitle, handleCurrentComp]);
 
   // Container State
   const [openContainer, setOpenContainer] = useState<ContainerInterface | null>(
@@ -88,8 +85,12 @@ export default function ServiceInformation(props: Props): JSX.Element {
 
   return (
     <>
+<<<<<<< HEAD
       <NavigationBar handleBackButtonClick={setView} />
       <JsonHTML json={serviceInfoJSON} title="Service Information" showButtons={false} />
+=======
+      <JsonHTML json={serviceInfoJSON} title="Service Information" />
+>>>>>>> a37e9419eaa3c1ca83787856b093e404ba31bae4
 
       {openContainer && containerView ? (
         <JsonHTML

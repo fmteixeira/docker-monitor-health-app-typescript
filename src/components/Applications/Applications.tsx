@@ -18,11 +18,12 @@ import {
 interface Props {
   handleServiceClick: () => void;
   handleHeaderTitle: () => void;
+  handleCurrentComp: (currentComp: string) => void;
 }
 
 export default function Applications(props: Props): JSX.Element {
   //State 
-  const { handleServiceClick, handleHeaderTitle } = props;
+  const { handleServiceClick, handleHeaderTitle, handleCurrentComp } = props;
   /* Applications */
 
   // Redux
@@ -38,6 +39,7 @@ export default function Applications(props: Props): JSX.Element {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    handleCurrentComp("Applications");
     // Set Fetched Applications
     const setApplications = (
       applications: Array<ApplicationInterface>
@@ -62,11 +64,12 @@ export default function Applications(props: Props): JSX.Element {
     return (): void => {
       clearInterval(appInterval);
     };
-  }, [dispatch]);
+  }, [dispatch, handleCurrentComp]);
 
   /* Notifications */
   useEffect(() => {
     // Set Fetched Notification Status
+
     const setNotificationStatus = (
       notificationStatus: NotificationStatusInterface
     ): void => {

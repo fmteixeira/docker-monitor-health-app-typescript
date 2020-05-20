@@ -22,11 +22,12 @@ interface Props {
   serviceName: string;
   handleMessageClick: (service: ServiceInterface) => void;
   handleHeaderTitle: (...args: string[]) => void;
+  handleCurrentComp: (currentComp: string) => void;
 }
 
 export default function ServiceHistory(props: Props): JSX.Element {
   // State
-  const { handleMessageClick, appName, serviceName, handleHeaderTitle } = props;
+  const { handleMessageClick, appName, serviceName, handleHeaderTitle, handleCurrentComp } = props;
   const [service, setService] = useState<Array<ServiceInterface> | any>([]);
   const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState("");
@@ -34,6 +35,7 @@ export default function ServiceHistory(props: Props): JSX.Element {
   const [selectedDate, setSelectedDate] = useState<any | null>();
 
   useEffect(() => {
+    handleCurrentComp("ServiceHistory");
     getServiceHistory(appName, serviceName).then((res) => {
       if (res) {
         for (let key in res) {
@@ -70,7 +72,7 @@ export default function ServiceHistory(props: Props): JSX.Element {
       }
     });
     handleHeaderTitle(firstLetterToUpperCase(appName), firstLetterToUpperCase(serviceName), "Messages");
-  }, [appName, serviceName, handleHeaderTitle, appName, serviceName]);
+  }, [appName, serviceName, handleHeaderTitle, appName, serviceName, handleCurrentComp]);
 
 
   const response = JSON.stringify(service, undefined, 2);
