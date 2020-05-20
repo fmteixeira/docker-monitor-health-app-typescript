@@ -41,7 +41,7 @@ export default function Navigation(props: Props): JSX.Element {
 
   return service.serviceName !== "" ? (
     <div>
-      <Header kc={kc} title={headerTitle} currentComp={currentComp} />
+      <Header kc={kc} title={headerTitle} currentComp={currentComp} handleBackButtonClick={handleServiceClick} />
       <Container maxWidth="md">
         <Service appName={service.appName} serviceName={service.serviceName} handleBackButtonClick={handleServiceClick} handleHeaderTitle={handleHeaderTitle}
           handleCurrentComp={handleCurrentComp} />
@@ -49,7 +49,7 @@ export default function Navigation(props: Props): JSX.Element {
     </div>
   ) : (
       <div>
-        <Header kc={kc} title={headerTitle} currentComp={currentComp} />
+        <Header kc={kc} title={headerTitle} currentComp={currentComp} handleBackButtonClick={() => null} />
         <Container maxWidth="md">
           <Applications handleServiceClick={handleServiceClick} handleHeaderTitle={handleHeaderTitle} handleCurrentComp={handleCurrentComp} />
         </Container>

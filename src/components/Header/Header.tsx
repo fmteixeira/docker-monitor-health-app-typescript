@@ -20,10 +20,11 @@ interface Props {
   kc: any;
   title: string;
   currentComp: string;
+  handleBackButtonClick: () => void;
 }
 
 export default function Header(props: Props): JSX.Element {
-  const { kc, title, currentComp } = props;
+  const { kc, title, currentComp, handleBackButtonClick } = props;
   const [anchorEl, setAnchorEl] = useState<(EventTarget & Element) | null>(
     null
   );
@@ -60,7 +61,7 @@ export default function Header(props: Props): JSX.Element {
           <Grid container direction="row" justify="flex-start" alignItems="center">
             {currentComp !== "Applications" ? (
               <Grid item xs={1}>
-                <NavigationBar handleBackButtonClick={() => console.log(currentComp)} />
+                <NavigationBar handleBackButtonClick={handleBackButtonClick} />
               </Grid>) :
               <></>
             }

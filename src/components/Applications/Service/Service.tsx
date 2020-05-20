@@ -32,7 +32,6 @@ export default function Service(props: Props): JSX.Element {
   return view ? <ServiceInformation appName={appName} serviceName={serviceName} service={service} handleHeaderTitle={handleHeaderTitle}
     setView={controllView} handleCurrentComp={handleCurrentComp} /> : (
       <>
-        <NavigationBar handleBackButtonClick={handleBackButtonClick} />
         <ServiceHistory appName={appName} serviceName={serviceName} handleHeaderTitle={handleHeaderTitle} handleMessageClick={handleMessageClick}
           handleCurrentComp={handleCurrentComp} />
       </>
