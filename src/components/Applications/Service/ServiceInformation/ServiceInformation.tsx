@@ -3,8 +3,6 @@ import "./ServiceInformation.css";
 //Script
 import { firstLetterToUpperCase } from "../../../../resources/scripts";
 // Material-UI
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
 import GetAppIcon from "@material-ui/icons/GetApp";
 import FindInPageIcon from "@material-ui/icons/FindInPage";
 //Interface
@@ -14,7 +12,6 @@ import {
 } from "../../../../resources/interfaces";
 //Components
 import JsonHTML from "../../../JsonHTML/JsonHTML";
-import NavigationBar from "../../../Navigation/NavigationBar/NavigationBar";
 import ServiceContainerList from "./ServiceContainerList/ServiceContainerList";
 
 interface Props {
@@ -22,12 +19,11 @@ interface Props {
   serviceName: string;
   service: ServiceInterface;
   handleHeaderTitle: (...args: string[]) => void;
-  setView: () => void;
   handleCurrentComp: (currentComp: string) => void;
 }
 
 export default function ServiceInformation(props: Props): JSX.Element {
-  const { appName, serviceName, service, handleHeaderTitle, setView, handleCurrentComp } = props;
+  const { appName, serviceName, service, handleHeaderTitle, handleCurrentComp } = props;
   const [containerView, setOpenContainerView] = useState(false);
   const [title, setTitle] = useState("Containers");
   const [text, setText] = useState("View all in JSON");
@@ -89,7 +85,6 @@ export default function ServiceInformation(props: Props): JSX.Element {
 
   return (
     <>
-      <NavigationBar handleBackButtonClick={setView} />
       <JsonHTML json={serviceInfoJSON} title="Service Information" />
 
       {openContainer && containerView ? (
