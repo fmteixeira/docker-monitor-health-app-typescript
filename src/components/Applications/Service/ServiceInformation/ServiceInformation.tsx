@@ -89,13 +89,14 @@ export default function ServiceInformation(props: Props): JSX.Element {
   return (
     <>
       <NavigationBar handleBackButtonClick={setView} />
-      <JsonHTML json={serviceInfoJSON} title="Service Information" />
+      <JsonHTML json={serviceInfoJSON} title="Service Information" showButtons={false} />
 
       {openContainer && containerView ? (
         <JsonHTML
           title={title}
           json={openContainer}
           closeView={setContainerView}
+          showButtons={true}
         />
       ) : (
           <>

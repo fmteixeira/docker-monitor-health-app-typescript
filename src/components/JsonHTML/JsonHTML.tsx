@@ -9,13 +9,15 @@ interface Props {
   title?: string;
   json: { [key: string]: any };
   closeView?: () => void;
+  showButtons: boolean;
 }
 
 export default function JsonHTML(props: Props) {
-  const { title, json, closeView } = props;
+  const { title, json, closeView, showButtons } = props;
 
   const [isJson, setIsJson] = useState(false);
   const [text, setText] = useState("View in JSON");
+
   const openInJson = () => {
     setIsJson(!isJson);
     setText(text === "View in JSON" ? "View Formatted" : "View in JSON");
@@ -142,7 +144,7 @@ export default function JsonHTML(props: Props) {
           {title ? <h5 id="app-name">{title}</h5> : null}
         </Grid>
         <Grid item xs={4}>
-          <div className="buttons-container">
+          {showButtons ? <div className="buttons-container">
             <button id="json-button" onClick={openInJson}>
               {text}
               <FindInPageIcon fontSize="small" />
@@ -163,7 +165,7 @@ export default function JsonHTML(props: Props) {
             <IconButton>
               <CloseIcon onClick={closeView} fontSize="small" id="close-icon" />
             </IconButton>
-          </div>
+          </div> : null}
         </Grid>
       </Grid>
       <div className="container-div">{isJson ? viewJson() : getRender()}</div>
