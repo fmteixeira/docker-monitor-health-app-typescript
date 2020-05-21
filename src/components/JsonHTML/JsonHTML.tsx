@@ -141,11 +141,11 @@ export default function JsonHTML(props: Props) {
     <>
       <Grid container className="container-info-div">
         <Grid item xs={8}>
-          {title ? <h5 id="app-name">{title}</h5> : null}
+          {title ? <h5 className="title">{title}</h5> : null}
         </Grid>
         <Grid item xs={4}>
           {showButtons ? <div className="buttons-container">
-            <button id="json-button" onClick={openInJson}>
+            <button className="json-button" onClick={openInJson}>
               {text}
               <FindInPageIcon fontSize="small" />
             </button>
@@ -157,7 +157,7 @@ export default function JsonHTML(props: Props) {
               )}
               download={title + "JSON.txt"}
             >
-              <button id="download-button">
+              <button className="download-button">
                 Download
                 <GetAppIcon fontSize="small" />
               </button>

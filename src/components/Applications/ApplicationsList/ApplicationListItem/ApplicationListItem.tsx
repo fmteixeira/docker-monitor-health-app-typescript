@@ -41,7 +41,7 @@ export default function ApplicationListItem(props: Props): JSX.Element {
 
   return (
     <>
-      <Paper className="application">
+      <Paper className="application-item">
         <Grid
           container
           direction="row"
@@ -58,7 +58,7 @@ export default function ApplicationListItem(props: Props): JSX.Element {
           />
         </Grid>
 
-        <Collapse in={open} timeout="auto" unmountOnExit className="max-width">
+        <Collapse in={open} timeout="auto" unmountOnExit>
           <Grid
             container
             direction="column"
@@ -66,7 +66,6 @@ export default function ApplicationListItem(props: Props): JSX.Element {
             alignItems="flex-start"
             item
             xs={12}
-            className={"applications-services max-width"}
           >
             {application.servers.map((server: ServerInterface) => (
               <Grid
@@ -75,7 +74,7 @@ export default function ApplicationListItem(props: Props): JSX.Element {
                 direction="row"
                 justify="center"
                 alignItems="center"
-                className="server-item max-width"
+                className="server-item"
                 onClick={(): void => handleRowClick(server.name)}
               >
                 <ApplicationItemRow

@@ -1,6 +1,5 @@
 .date-picker-container{
-    margin-top: 8rem;
-    margin-bottom: 2rem;
+    margin: 5rem 0 2rem 0;
     padding: 0.5rem;
     background: radial-gradient(
     circle,
@@ -15,7 +14,6 @@
     margin-top: 0.3rem;
 }
 
-
 .status-container{
     padding-top: 0.3rem;
 }
@@ -25,8 +23,7 @@
 }
 
 .clean-filter-button{
-    background: rgb(219,135,135);
-    background: linear-gradient(90deg, rgba(219,135,135,1) 0%, rgba(205,43,43,1) 100%);
+    background-color: rgb(224, 81, 81);
     border: none;
     color: white;
     border-radius: 0.3rem;

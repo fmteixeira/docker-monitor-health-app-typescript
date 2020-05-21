@@ -1,5 +1,5 @@
 .container-info-div{
-    margin-top: 8rem;
+    margin-top: 1rem;
   }
 
 .container-div{
@@ -26,13 +26,9 @@ h6 > span{
     font-weight: lighter;
 }
 
-.buttons-container{
-    margin: 1.65rem 0 1rem 0;
-    text-align: right;
-}
 
-#app-name{
-    margin-top: 2rem;
+.title{
+    margin: 2.5rem 0 1.5rem 0;
 }
 
 .json-container{
@@ -43,7 +39,13 @@ h6 > span{
     margin: 1rem 0;
 }
 
-#json-button, #download-button{
+/* Buttons & Icons */
+.buttons-container{
+    margin: 1.65rem 0 1rem 0;
+    text-align: right;
+}
+
+.json-button, .download-button{
     font-size: 0.8rem;
     border-radius: 0.3rem;
     margin: 0 0.2rem;
@@ -52,19 +54,19 @@ h6 > span{
     color: white;
 }
 
-#json-button{
+.json-button{
     background-color: rgb(100, 134, 207);
 }
 
-#json-button:hover{
+.json-button:hover{
     background-color: rgb(124, 158, 230);
 }
 
-#download-button{
+.download-button{
     background-color: #4CAF50;
 }
 
-#download-button:hover{
+.download-button:hover{
     background-color: rgb(116, 216, 119);;
 }
 

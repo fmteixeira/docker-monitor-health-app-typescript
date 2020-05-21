@@ -1,4 +1,5 @@
 import React from "react";
+import "./ServiceItemRow.css";
 import { firstLetterToUpperCase } from "../../../../../resources/scripts";
 // Material-UI
 import Grid from "@material-ui/core/Grid";
