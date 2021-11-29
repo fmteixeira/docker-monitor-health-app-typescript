@@ -16,6 +16,7 @@ services:
         -f"*,80;no-tls"
         -b"${REACT_APP_HOST:-172.17.0.1},3000;;dns;"
         -b"server,3000;/api/;dns;"
+        -b"statistics,5000;/statistics/;dns;"
         -b"auth,8080;/auth/;dns;"'
   server:
     image: jrofurtado/docker-monitor-health-server:latest
@@ -63,3 +64,11 @@ services:
       - COLLECT_STATS=false
       - MONITORING_URL=http://${REACT_APP_HOST:-172.17.0.1}/api/message
       - MONITORING_DELAY=30
+  statistics:
+    image: fmteixeira/healthcheck-statistics-fo:latest
+    ports:
+      - "5000:80"
+    environment:
+      - "REACT_APP_HOSTNAME=172.17.0.1"
+      - "REACT_APP_REALM_NAME=docker-monitor-health-server"
+      - "REACT_APP_CLIENT_ID=app"

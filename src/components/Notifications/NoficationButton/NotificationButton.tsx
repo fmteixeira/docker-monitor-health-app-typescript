@@ -42,7 +42,7 @@ export default function PushButton(): JSX.Element {
     <button id="push-btn" onClick={handleClick} disabled={isSubscribed}>
       {!isSWActive
         ? "Push Notifications - No Service Worker"
-        : swSupported
+        : swSupported()
         ? isSubscribed
           ? "Disable Push Notifications"
           : "Enable Push Notifications"

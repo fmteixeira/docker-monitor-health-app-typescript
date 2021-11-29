@@ -93,15 +93,15 @@ export default function ServiceInformation(props: Props): JSX.Element {
   };
 
   const serviceInfoJSON = { ...service };
-  delete serviceInfoJSON["containers"];
+  // delete serviceInfoJSON["containers"];
 
   return (
     <>
-        <JsonHTML
-          json={serviceInfoJSON}
-          title="Service Information"
-          showButtons={false}
-        />
+      <JsonHTML
+        json={serviceInfoJSON}
+        title="Service Information"
+        showButtons={false}
+      />
 
       {openContainer && containerView ? (
         <JsonHTML

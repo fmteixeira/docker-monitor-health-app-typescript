@@ -5,24 +5,23 @@ import {
   ServerInterface,
   ServiceInterface,
   ContainerInterface,
-  NotificationStatusInterface
+  NotificationStatusInterface,
 } from "./interfaces";
 /* develblock:start */
 import allMocks from "../mocks/mockResponses";
+import { serviceAPI } from "./authentication/authentication";
 /* develblock:end */
 
-export async function getApplicationNamesList(): Promise<Array<
-  ApplicationInterface
-> | void> {
+export async function getApplicationNamesList(): Promise<Array<ApplicationInterface> | void> {
   /* develblock:start */
   // Mock
-  if (process.env.NODE_ENV !== "production") {
+  if (process.env.REACT_APP_USE_MOCKS === "TRUE") {
     return allMocks.getApplicationStatus();
   }
   /* develblock:end */
   // Fetch
-  return await axios
-    .get("/api/status/readLast")
+  return await serviceAPI.axios
+    .get("/status/readLast")
     .then((response) => {
       // Define the recieved data format
       interface Data {
@@ -71,13 +70,13 @@ export async function getServiceInfo(
 ): Promise<ServiceInterface | void> {
   /* develblock:start */
   // Mock
-  if (process.env.NODE_ENV !== "production") {
+  if (process.env.REACT_APP_USE_MOCKS === "TRUE") {
     return allMocks.getServiceStatus(appName, serverName);
   }
   /* develblock:end */
   // Fetch
-  return await axios
-    .get(`/api/message/readLast?appName=${appName}&serverName=${serverName}`)
+  return await serviceAPI.axios
+    .get(`/message/readLast?appName=${appName}&serverName=${serverName}`)
     .then((response) => {
       const data = {
         serverName: response.data.serverName,
@@ -110,14 +109,14 @@ export async function getServiceHistory(
 ): Promise<Array<ServiceInterface> | void> {
   /* develblock:start */
   // Mock
-  if (process.env.NODE_ENV !== "production") {
+  if (process.env.REACT_APP_USE_MOCKS === "TRUE") {
     return allMocks.getServiceHistory(appName, serverName);
   }
   /* develblock:end */
   // Fetch
-  return await axios
+  return await serviceAPI.axios
     .get(
-      `/api/message/readInterval?appName=${appName}&serverName=${serverName}&from=0&to=2629746`
+      `/message/readInterval?appName=${appName}&serverName=${serverName}&from=0&to=2629746`
     )
     .then((response) => {
       const serviceHistory: Array<ServiceInterface> | any = [];
@@ -152,13 +151,13 @@ export async function getServiceHistory(
 export async function getNotificationInfo(): Promise<NotificationStatusInterface | void> {
   /* develblock:start */
   // Mock
-  if (process.env.NODE_ENV !== "production") {
+  if (process.env.REACT_APP_USE_MOCKS === "TRUE") {
     return allMocks.getNotificationStatus();
   }
   /* develblock:end */
   // Fetch
   return await axios
-    .get("/api/notifications/getStatus")
+    .get("http://172.17.0.1:3001/notifications/getStatus")
     .then((response) => {
       const data = {
         global: response.data.global,

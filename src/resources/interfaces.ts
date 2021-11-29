@@ -1,5 +1,12 @@
 // Define used objects as interfaces
 
+import { Authorization } from "./authentication/types";
+
+export interface Token extends Authorization.Token {
+  expires_date: number;
+  refresh_expires_date: number;
+}
+
 export interface ApplicationInterface {
   name: string;
   healthy: boolean;
